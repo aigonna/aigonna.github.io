@@ -1,0 +1,450 @@
+<!DOCTYPE html><html class="hide-aside" lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>机器学习-白板推导 10. EM 算法 | aigonna</title><meta name="keywords" content="EM算法,ELBO,坐标上升法,Jensen不等式,KL散度"><meta name="author" content="miller"><meta name="copyright" content="miller"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="机器学习-白板推导 10. EM 算法1. EM算法导出本文中所有的参数定义如下：  \begin{align} &amp;X: \text{  observed data  }\\ &amp;Z: \text{  unobserved data  }\\ &amp;(X, Z): \text{  complete data  }\\ &amp;\theta: \text{ parameter  }\\ \end{align}E">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习-白板推导 10. EM 算法">
+<meta property="og:url" content="http://aigonna.com/2020/08/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%2010.%20EM%20%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="aigonna">
+<meta property="og:description" content="机器学习-白板推导 10. EM 算法1. EM算法导出本文中所有的参数定义如下：  \begin{align} &amp;X: \text{  observed data  }\\ &amp;Z: \text{  unobserved data  }\\ &amp;(X, Z): \text{  complete data  }\\ &amp;\theta: \text{ parameter  }\\ \end{align}E">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://aigonna.com/img/imgs/7.jpg">
+<meta property="article:published_time" content="2020-08-05T12:11:31.000Z">
+<meta property="article:modified_time" content="2021-06-15T18:12:33.932Z">
+<meta property="article:author" content="miller">
+<meta property="article:tag" content="EM算法">
+<meta property="article:tag" content="ELBO">
+<meta property="article:tag" content="坐标上升法">
+<meta property="article:tag" content="Jensen不等式">
+<meta property="article:tag" content="KL散度">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://aigonna.com/img/imgs/7.jpg"><link rel="shortcut icon" href="/img/AI.png"><link rel="canonical" href="http://aigonna.com/2020/08/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%2010.%20EM%20%E7%AE%97%E6%B3%95/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-06-16 02:12:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/bg.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/AI.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">63</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">139</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/imgs/7.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">aigonna</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">机器学习-白板推导 10. EM 算法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-08-05T12:11:31.000Z" title="undefined 2020-08-05 20:11:31">2020-08-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="机器学习-白板推导-10-EM-算法"><a href="#机器学习-白板推导-10-EM-算法" class="headerlink" title="机器学习-白板推导 10. EM 算法"></a>机器学习-白板推导 10. EM 算法</h3><h4 id="1-EM算法导出"><a href="#1-EM算法导出" class="headerlink" title="1. EM算法导出"></a>1. EM算法导出</h4><p>本文中所有的参数定义如下：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&X: \text{  observed data  }\\
+&Z: \text{  unobserved data  }\\
+&(X, Z): \text{  complete data  }\\
+&\theta: \text{ parameter  }\\
+\end{align}</script><p>EM是<strong>Expectation Maximization</strong>简写，意为期望最大, 用于含有隐变量的概率模型参数的极大似然估计。我们经常说的极大似然估计是对于概率分布<script type="math/tex">P(X|\theta)</script>,求解使得其最大的算法：</p>
+<script type="math/tex; mode=display">
+\theta_{MLE} = \text{argmax}_{\theta} \log P(X|\theta) \tag{1}</script><p>对于式1如果引入隐变量<script type="math/tex">Z</script>，要满足<script type="math/tex">P(X) = \int_Z P(X|Z)P(Z)</script>.如果是离散量就改成求和。那么可改写成：</p>
+<script type="math/tex; mode=display">
+L(\theta) = \log P(X|\theta) = \log \int_Z P(X, Z|\theta) =\log \left(\int_Z P(X|Z, \theta)P(Z|\theta) \right) \tag{2}</script><p>实际上式2是非常难计算，因为有未观测数据并含有积分的对数。 </p>
+<p>而对<script type="math/tex">\log P(X|\theta)</script>利用条件概率有：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\log P(X|\theta) &= \log \frac{P(X, Z|\theta)}{P(Z|X, \theta)}\\
+&= \log P(X, Z|\theta)- \log P(Z|X, \theta)\\
+&= \left ( \log P(X, Z|\theta) -\log Q(Z)\right )- \left(\log P(Z|X, \theta)-\log Q(Z)\right)\\
+&= \log\frac{ P(X, Z|\theta)}{ Q(Z)} - \log \frac{P(Z|X, \theta)}{Q(Z)}
+\end{align}
+\tag{3}</script><p>其中，引入的<script type="math/tex">Q(Z) \neq 0</script>是关于<script type="math/tex">Z</script>的分布。</p>
+<p>现在对式3左右两边同时求关于<script type="math/tex">Q(Z)</script>的期望：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{左边} &= \int_Z Q(Z) \cdot \log P(X|\theta) dZ\\
+&=  \log P(X|\theta) \int_Z Q(Z) dZ\\
+&=\log P(X|\theta)
+\end{align} 
+\tag{4}</script><p>右边变成：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{右边} &=\color{red}{\underbrace{\int_Z Q(Z) \cdot \log\frac{ P(X, Z|\theta)}{ Q(Z)}dZ}_{ELBO}} \color{green}{\underbrace{-\int_Z Q(Z)  \cdot \log \frac{ P(Z|X, \theta)}{ Q(Z)}dZ}_{KL}}\\
+\end{align} 
+\tag{5}</script><p>其中，前半部分是ELBO，evidence lower bound。后半部分是<script type="math/tex">KL(Q(Z)||P(Z|X, \theta))</script>。</p>
+<blockquote>
+<p>KL散度是用来衡量两个分布相似度(距离)：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\text{KL} (p||q) &=  E_q[ -\text{log}\frac{p(x)}{q(x)}] \ge -\text{log} E_q[\frac{p(x)}{q(x)}]
+\\&=-\text{log} [\int q(x) \frac{p(x)}{q(x)}dx]
+\\&= -\text{log}\int_{x} p(x)dx = -\text{log} 1= 0
+\end{aligned}</script></blockquote>
+<p>因此，<script type="math/tex">KL(Q(Z)||P(Z|X, \theta)) \ge 0, \quad 当且仅当 Q(Z) = P(Z|X, \theta)时取等号</script>。根据式3， 4， 5可知，当KL部分取等号时，<script type="math/tex">\log P(X|\theta) = \text{ELBO}</script>，也就是说ELBO是其下界。</p>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210615171852.png" alt="image-20210615155230999" style="zoom:25%;" /></p>
+<p>如上图所示，<script type="math/tex">L(\theta)</script>和ELBO都是关于<script type="math/tex">\theta</script>的函数，且从定义上看，<script type="math/tex">L(\theta) \ge \text{ELBO}</script>,也就是<script type="math/tex">L(\theta)</script>图像总在ELBO上面。我们用迭代法来寻找最优解，当前仅当<script type="math/tex">Q(Z) = P(Z|X, \theta^t)</script>时，能使得<script type="math/tex">L(\theta) = \text{ELBO}</script>，并且因为迭代法要求<script type="math/tex">\theta^{t+1}</script>使得<script type="math/tex">L(\theta^{t+1}) \ge L(\theta^{t})</script>。实际上，先赋予初值<script type="math/tex">\theta^0</script>,求出ELBO的期望，然后求下一个<script type="math/tex">\theta^1</script>,直到ELBO值大于<script type="math/tex">\theta^0</script>对应的，用<script type="math/tex">\theta^1</script>替换掉<script type="math/tex">\theta^0</script>，直到找到<script type="math/tex">ELBO</script>最大的参数，这时也是<script type="math/tex">L(\theta)</script>最大的参数。其公式就是：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\theta^{t+1} &= \text{argmax}_\theta \text{ ELBO}\\
+&= \text{argmax}_\theta \int_Z Q(Z) \cdot \log \frac{P(X, Z|\theta)}{ Q(Z)}dZ\\
+&= \text{argmax}_\theta \int_Z P(Z|X, \theta^t) \cdot \log \frac{ P(X, Z|\theta)}{ P(Z|X, \theta^t)}dZ\\
+&=\text{argmax}_\theta \int_Z P(Z|X, \theta^t) \cdot \log P(X, Z|\theta) dZ -\underbrace{\text{argmax}_\theta \int_Z P(Z|X, \theta^t) \cdot \log P(Z|X, \theta^t)}_{与\theta无关} dZ\\
+&= \text{argmax}_\theta \int_Z P(Z|X, \theta^t) \cdot \log P(X, Z|\theta) dZ\\
+&= \text{argmax}_\theta E_{P(Z|X, \theta^t)}[\log P(X, Z|\theta)]
+\end{align}
+\tag{6}</script><p>总结：EM算法适用于含有隐变量的极大似然估计，由于含隐变量的的积分和对数难于计算，转化为求ELBO的最大值，<strong>EM算法公式</strong>如下：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\theta^{t+1} &=\text{argmax}_\theta \int_Z \log P(X, Z|\theta) P(Z|X, \theta^t)  dZ\\
+&= \text{argmax}_\theta E_{P(Z|X, \theta^t)}[\log P(X, Z|\theta)]
+\end{align} 
+\tag{7}</script><p>最重要的两步：</p>
+<ol>
+<li>E step： 计算<script type="math/tex">\log P(X,Z|\theta)</script>在概率分布<script type="math/tex">P(Z|X, \theta^t)</script>下的期望。</li>
+<li>M step:  计算使得这个期望最大化的参数<script type="math/tex">\theta</script>。</li>
+</ol>
+<h4 id="2-EM-公式导出另外一种方法-Jensen-不等式"><a href="#2-EM-公式导出另外一种方法-Jensen-不等式" class="headerlink" title="2. EM 公式导出另外一种方法 (Jensen 不等式)"></a>2. EM 公式导出另外一种方法 (Jensen 不等式)</h4><p>对公式2引入隐变量分布<script type="math/tex">Q(Z)</script>:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\log P(X|\theta) &= \log\int_Z P(X, Z|\theta)dZ\\
+&= \log\int_Z \frac{P(X, Z|\theta)}{Q(Z)}Q(Z)dZ\\
+&= \log E_{Q(Z)} [\frac{P(X, Z|\theta)}{Q(Z)}]\\
+&\ge  \underbrace{E_{Q(Z)} [\log\frac{P(X, Z|\theta)}{Q(Z)}]}_{ELBO}\\
+\end{align}
+\tag{8}</script><p>其中，最后一步是利用Jensen不等式，对于凹函数<script type="math/tex">f(x), 有 f(E[x]) \ge E[f(x)])</script>。其实最后结果就是ELBO。当且仅当<script type="math/tex">\frac{P(X, Z|\theta)}{Q(Z)}= C(常数)</script>时，可取等号。</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&\frac{P(X, Z|\theta)}{Q(Z)} = C \\
+&\Longrightarrow Q(Z) = \frac{1}{C} P(X,Z|\theta)\\
+&\Longrightarrow \int_ZQ(Z) dZ= \int_Z\frac{1}{C} P(X,Z|\theta)dZ\\
+&\Longrightarrow 1 = \frac{1}{C}P(X|\theta)\\
+&\Longrightarrow P(X|\theta) = C\\
+&\Longrightarrow Q(Z) = \frac{P(X, Z|\theta)}{P(X|\theta)}=P(Z|X, \theta)
+\end{align}
+\tag{9}</script><p>这表明引入<script type="math/tex">Q(Z)</script>要等于后验分布<script type="math/tex">P(Z|X, \theta)</script>。而这时，优化目标<script type="math/tex">\log P(X|\theta = \text{ELBO}</script>，其它迭代优化过程跟第一小节一样。</p>
+<h4 id="3-EM算法的收敛性"><a href="#3-EM算法的收敛性" class="headerlink" title="3. EM算法的收敛性"></a>3. EM算法的收敛性</h4><p>使用迭代算法来求<script type="math/tex">L(\theta)</script>的最大值，即我们希望新的估计值<script type="math/tex">\theta</script>能使得<script type="math/tex">L(\theta)</script>变大，就是<script type="math/tex">L(\theta^{t+1}) \ge L(\theta^t)</script>,其中<script type="math/tex">L(\theta^t)</script>是t次迭代后的值，这跟第一小节推导非常类似。</p>
+<p>而要证明<script type="math/tex">P(X|\theta^{t+1}) \ge P(X|\theta^{t})</script>，我们先用条件概率公式转换下：</p>
+<script type="math/tex; mode=display">
+L(\theta) = \log P(X|\theta) = \log \frac{P(X, Z|\theta)}{P(Z|X, \theta)} = \log P(X, Z|\theta)- \log P(Z|X, \theta)
+\tag{10}</script><p>我们对式10两边同时求关于<script type="math/tex">P(Z|X, \theta^t)</script>的期望：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{左边} &= \int_Z P(Z|X, \theta^t) \cdot \log P(X|\theta) dZ\\
+&=  \log P(X|\theta) \int_Z P(Z|X, \theta^t) dZ\\
+&=\log P(X|\theta)
+\end{align} 
+\tag{11}</script><p>其中，<script type="math/tex">\int_Z P(Z|X, \theta^t) dZ = 1</script>。而右边有:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{右边} &= \int_Z P(Z|X, \theta^t) \cdot\log P(X, Z|\theta)dZ- \int_Z P(Z|X, \theta^t) \cdot \log P(Z|X, \theta) dZ\\
+\end{align} 
+\tag{12}</script><p>我们将前半部分记为<script type="math/tex">Q(\theta, \theta^t) = \int_Z P(Z|X, \theta^t) \cdot\log P(X, Z|\theta)dZ</script>在EM算法中称为<strong>Q function</strong>, 其实就是上面ELBO，也就是EM算法迭代目标式。</p>
+<p>后半部分记为<script type="math/tex">H(\theta, \theta^t) = \int_Z P(Z|X, \theta^t) \cdot \log P(Z|X, \theta) dZ</script>。那么根据式10、11和式12有：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\log P(X|\theta) &= \int_Z P(Z|X, \theta^t) \cdot\log P(X, Z|\theta)dZ- \int_Z P(Z|X, \theta^t) \cdot \log P(Z|X, \theta) dZ\\
+&=Q(\theta, \theta^t) - H(\theta, \theta^t) 
+\end{align}
+\tag{13}</script><p>对于<script type="math/tex">Q(\theta, \theta^t)</script>，由小节1可知<script type="math/tex">Q(\theta^{t+1}, \theta^{t}) \ge Q(\theta^t, \theta^{t})</script>，那么<script type="math/tex">H(\theta, \theta^t)</script>会怎么变化？</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&H(\theta^{t+1}, \theta^{t})  -  H(\theta^t, \theta^{t})  \\
+ &= \int_Z P(Z|X, \theta^{t}) \cdot \log P(Z|X, \theta^{t+1}) dZ- \int_Z P(Z|X, \theta^t) \cdot \log P(Z|X, \theta^{t}) dZ\\
+ &= \int_Z P(Z|X, \theta^t) \log\frac{ P(Z|X, \theta^{t+1})}{ P(Z|X, \theta^{t})} dZ \\
+ &\le \log \int_Z P(Z|X, \theta^t)\frac{ P(Z|X, \theta^{t+1})}{ P(Z|X, \theta^{t})} dZ\\
+ &= \log  \int_Z  P(Z|X, \theta^{t+1}) dZ\\
+ &= \log 1=0
+ \end{align}
+ \tag{14}</script><p>其中，不等号变换使用Jensen不等式，如下式：</p>
+<script type="math/tex; mode=display">
+\log \sum_{j} \lambda_{j} y_{j} \geq \sum_{j} \lambda_{j} \log y_{j}, \text { 其中 } \lambda_{j} \geq 0, \quad \sum_{j} \lambda_{j}=1 \tag{15}</script><p>如果用KL散度易知， </p>
+<script type="math/tex; mode=display">
+\int_Z P(Z|X, \theta^t) \log\frac{ P(Z|X, \theta^{t+1})}{ P(Z|X, \theta^{t})} dZ\\
+= -\text{KL}(P(Z|X, \theta^t)||P(Z|X, \theta^{t+1})) \le 0 \tag{16}</script><p>那么根据式14可知，<script type="math/tex">H(\theta^{t+1}, \theta^{t}) \le H(\theta^t, \theta^{t})</script>，也就是说<script type="math/tex">H(\theta, \theta^t)</script>是递减的。综上根据式13可知，<script type="math/tex">L(\theta) = \log P(X|\theta)</script>是递增的，即<script type="math/tex">\log P(X|\theta^t) \le \log P(X|\theta^{t+1})</script>,因此EM算法是<strong>收敛</strong>。</p>
+<h4 id="4-广义EM算法"><a href="#4-广义EM算法" class="headerlink" title="4. 广义EM算法"></a>4. 广义EM算法</h4><p>还是回到最开始的问题：最大化似然函数如式1所示。EM算法是为了解决参数估计中的问题，也就是learning问题：</p>
+<script type="math/tex; mode=display">
+\hat \theta = \text{argmax}_\theta P(X|\theta) \tag{17}</script><p>实际过程中，由于难于计算，我们利用条件概率公式将其转化为式3所示。从第一小节，式3， 4， 5可得：</p>
+<script type="math/tex; mode=display">
+L(\theta) = \log P(X|\theta)=\text{ELBO} + KL(Q||P) \tag{18}</script><p>这里我们定义ELBO为：</p>
+<script type="math/tex; mode=display">
+L(Q, \theta) = \text{ELBO} = \int_Z Q(Z) \cdot \log\frac{ P(X, Z|\theta)}{ Q(Z)}dZ = E_{Q(Z)}[\log\frac{ P(X, Z|\theta)}{ Q(Z)}] \tag{19}</script><p>另外，再写出KL散度部分：</p>
+<script type="math/tex; mode=display">
+KL(Q||P) = \int_Z Q(Z)  \cdot \log \frac{ Q(Z)}{ P(Z|X, \theta)}dZ = E_{Q(Z)}[ \log \frac{ Q(Z)}{ P(Z|X, \theta)}] \tag{20}</script><p>前面部分，我们直接假定<script type="math/tex">Q(Z) = P(Z|X, \theta)</script>，实际上这个后验<script type="math/tex">P(Z|X, \theta)</script>也是难以处理的。广义EM算法思路是：</p>
+<ol>
+<li><p>先把<script type="math/tex">\theta</script>固定住，若Q越接近P，KL部分越小，由于<script type="math/tex">\log P(X|\theta)</script>这时是定值，那么ELBO就会越大。即根据下式，求出<script type="math/tex">Q(Z)</script></p>
+<script type="math/tex; mode=display">
+\hat Q(Z) = \text{argmin}_Q \ KL(Q||P) = \text{argmax}_Q \ L(Q, \theta) \tag{21}</script></li>
+<li><p>固定<script type="math/tex">\hat Q(Z)</script>, 就是第一步求解的值，按照求解<script type="math/tex">\hat \theta = \text{argmax}_\theta \ L(\hat Q(Z), \theta)</script>.</p>
+</li>
+</ol>
+<p>综上，广义EM可表示为:</p>
+<ol>
+<li><strong>E-step:</strong>  <script type="math/tex">Q^{t+1} = \text{argmax}_Q L(Q, \theta^t)</script></li>
+<li><strong>M-step:</strong> <script type="math/tex">\theta^{t+1} = \text{argmax}_\theta L(Q^{t+1}, \theta)</script></li>
+</ol>
+<p>对ELBO进一步化简有：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+L(Q, \theta) &= E_{Q}[\log\frac{ P(X, Z|\theta)}{ Q(Z)}] \\
+&= E_Q[\log P(X, Z)] - E_Q[\log Q(Z)]\\
+&= E_Q[\log P(X, Z)] + H[Q(Z)]
+\end{align}
+\tag{22}</script><p>在前面的狭义EM算法中，只对<script type="math/tex">E_Q[\log P(X, Z)]</script>进行迭代优化，是因为我们假定<script type="math/tex">Q(Z)</script>是已知的，优化与<script type="math/tex">H[Q(Z)]</script>部分无关。</p>
+<h5 id="5-EM的变种"><a href="#5-EM的变种" class="headerlink" title="5. EM的变种"></a>5. EM的变种</h5><p>上节介绍了广义EM算法，其中E步和M步都是求极大，也称为MM算法。这两步求解中，<strong>先固定一个参数，再优化另外一个参数；完成后，再固定优化后得到的参数，然后优化开始固定的参数</strong>，这叫做<strong>坐标上升法</strong>。SVM中求解算法SMO就是用该方法求解的。</p>
+<p>实际过程中, <script type="math/tex">P(Z|X, \theta)</script>会采用变分推断(Variable Inference)或MCMC，结合EM算法就变成了VBEM(Variable Bayes)/VEM 和MCEM。</p>
+<blockquote>
+<p><strong>总结：</strong></p>
+<ul>
+<li>狭义EM算法：迭代求解算法目标式即极大似然函数<script type="math/tex">L(\theta)</script>的下界ELBO:</li>
+</ul>
+<script type="math/tex; mode=display">
+\theta^{t+1} =\text{argmax}_\theta \int_Z \log P(X, Z|\theta) P(Z|X, \theta^t)  dZ\\
+= \text{argmax}_\theta E_{P(Z|X, \theta^t)}[\log P(X, Z|\theta)]</script><p>其中，E步是计算<script type="math/tex">\log P(X,Z|\theta)</script>在概率分布<script type="math/tex">P(Z|X, \theta^t)</script>下的期望，M步是最大化该期望。</p>
+<ul>
+<li>广义EM算法：不假定<script type="math/tex">Q(Z)=P(Z|X, \theta)</script>, KL散度部分不可忽略，求解极为困难，我们使用坐标上升法求解E步和M步：<ul>
+<li>E步，固定 <script type="math/tex">\theta</script>,最大化<script type="math/tex">L(Q, \theta)</script>,这时得到Q</li>
+<li>M步，固定Q，再最大化<script type="math/tex">L(Q, \theta)</script>,得到<script type="math/tex">\theta</script>。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="Inference"><a href="#Inference" class="headerlink" title="Inference"></a>Inference</h4><p>[1] <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Wp411R7am?p=3&amp;t=1">EM 算法</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://www.zybuluo.com/galaxy-0/note/1517681">EM算法推导与三硬币模型</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://kexue.fm/archives/5239/comment-page-1">从最大似然到EM算法：一致的理解方式</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/36331115">人人都懂EM算法</a></p>
+<p>[5] <a target="_blank" rel="noopener" href="https://www.zybuluo.com/zsh-o/note/1077331">EM</a></p>
+<p>[6] <a target="_blank" rel="noopener" href="https://ai.stanford.edu/~chuongdo/papers/em_tutorial.pdf">What is the expectation maximization algorithm?</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">miller</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://aigonna.com/2020/08/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%2010.%20EM%20%E7%AE%97%E6%B3%95/">http://aigonna.com/2020/08/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%2010.%20EM%20%E7%AE%97%E6%B3%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://aigonna.com" target="_blank">aigonna</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/EM%E7%AE%97%E6%B3%95/">EM算法</a><a class="post-meta__tags" href="/tags/ELBO/">ELBO</a><a class="post-meta__tags" href="/tags/%E5%9D%90%E6%A0%87%E4%B8%8A%E5%8D%87%E6%B3%95/">坐标上升法</a><a class="post-meta__tags" href="/tags/Jensen%E4%B8%8D%E7%AD%89%E5%BC%8F/">Jensen不等式</a><a class="post-meta__tags" href="/tags/KL%E6%95%A3%E5%BA%A6/">KL散度</a></div><div class="post_share"><div class="social-share" data-image="/img/imgs/7.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/08/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%2011.%20%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B/"><img class="prev-cover" src="/img/imgs/11.jpg" onerror="onerror=null;src='/img/imgs/0.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">机器学习-白板推导 11. 高斯混合模型</div></div></a></div><div class="next-post pull-right"><a href="/2020/07/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC8%20%E6%8C%87%E6%95%B0%E7%B0%87%E5%88%86%E5%B8%83/"><img class="next-cover" src="/img/imgs/16.jpg" onerror="onerror=null;src='/img/imgs/0.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">机器学习-白板推导8 指数簇分布</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/08/06/机器学习-白板推导 11. 高斯混合模型/" title="机器学习-白板推导 11. 高斯混合模型"><img class="cover" src="/img/imgs/11.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-06</div><div class="title">机器学习-白板推导 11. 高斯混合模型</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-10-EM-%E7%AE%97%E6%B3%95"><span class="toc-text">机器学习-白板推导 10. EM 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-EM%E7%AE%97%E6%B3%95%E5%AF%BC%E5%87%BA"><span class="toc-text">1. EM算法导出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-EM-%E5%85%AC%E5%BC%8F%E5%AF%BC%E5%87%BA%E5%8F%A6%E5%A4%96%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95-Jensen-%E4%B8%8D%E7%AD%89%E5%BC%8F"><span class="toc-text">2. EM 公式导出另外一种方法 (Jensen 不等式)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-EM%E7%AE%97%E6%B3%95%E7%9A%84%E6%94%B6%E6%95%9B%E6%80%A7"><span class="toc-text">3. EM算法的收敛性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%B9%BF%E4%B9%89EM%E7%AE%97%E6%B3%95"><span class="toc-text">4. 广义EM算法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#5-EM%E7%9A%84%E5%8F%98%E7%A7%8D"><span class="toc-text">5. EM的变种</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inference"><span class="toc-text">Inference</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021&nbsp;<i style="color:#FF6A6A;animation: announ_animation 0.8s linear infinite;"class="fas fa-heart"></i> By miller</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      //tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'forest',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: '5sVUTO1MTpgoo7pDynh6zYEM-MdYXbMMI',
+      appKey: 'vPUvOT1iP6YqcPPtYSqf8F7A',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script><h4>AIgonna</h4></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script></div></body></html>

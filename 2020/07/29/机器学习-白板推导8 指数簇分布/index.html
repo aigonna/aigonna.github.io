@@ -1,0 +1,494 @@
+<!DOCTYPE html><html class="hide-aside" lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>机器学习-白板推导8 指数簇分布 | aigonna</title><meta name="keywords" content="指数簇分布,对数配分函数,充分统计量,最大熵"><meta name="author" content="miller"><meta name="copyright" content="miller"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="机器学习-白板推导8 指数簇分布1. 指数簇分布背景指数簇分布(Exponential Family Distribution)需要满足以下形式：  p(x|\eta) &#x3D;h(x)\exp(\eta^T\phi(x) - A(\eta)) \tag{1}其中：  \eta : 自然参数(natural parameter，也叫正则参数 canonical parameter)  \phi(x) :">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习-白板推导8 指数簇分布">
+<meta property="og:url" content="http://aigonna.com/2020/07/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC8%20%E6%8C%87%E6%95%B0%E7%B0%87%E5%88%86%E5%B8%83/index.html">
+<meta property="og:site_name" content="aigonna">
+<meta property="og:description" content="机器学习-白板推导8 指数簇分布1. 指数簇分布背景指数簇分布(Exponential Family Distribution)需要满足以下形式：  p(x|\eta) &#x3D;h(x)\exp(\eta^T\phi(x) - A(\eta)) \tag{1}其中：  \eta : 自然参数(natural parameter，也叫正则参数 canonical parameter)  \phi(x) :">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://aigonna.com/img/imgs/16.jpg">
+<meta property="article:published_time" content="2020-07-29T12:11:31.000Z">
+<meta property="article:modified_time" content="2021-06-04T05:52:22.216Z">
+<meta property="article:author" content="miller">
+<meta property="article:tag" content="指数簇分布">
+<meta property="article:tag" content="对数配分函数">
+<meta property="article:tag" content="充分统计量">
+<meta property="article:tag" content="最大熵">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://aigonna.com/img/imgs/16.jpg"><link rel="shortcut icon" href="/img/AI.png"><link rel="canonical" href="http://aigonna.com/2020/07/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC8%20%E6%8C%87%E6%95%B0%E7%B0%87%E5%88%86%E5%B8%83/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-06-04 13:52:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/bg.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/AI.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">63</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">139</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/imgs/16.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">aigonna</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">机器学习-白板推导8 指数簇分布</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-07-29T12:11:31.000Z" title="undefined 2020-07-29 20:11:31">2020-07-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="机器学习-白板推导8-指数簇分布"><a href="#机器学习-白板推导8-指数簇分布" class="headerlink" title="机器学习-白板推导8 指数簇分布"></a>机器学习-白板推导8 指数簇分布</h3><h4 id="1-指数簇分布背景"><a href="#1-指数簇分布背景" class="headerlink" title="1. 指数簇分布背景"></a>1. 指数簇分布背景</h4><p>指数簇分布(Exponential Family Distribution)需要满足以下形式：</p>
+<script type="math/tex; mode=display">
+p(x|\eta) =h(x)\exp(\eta^T\phi(x) - A(\eta)) \tag{1}</script><p>其中：</p>
+<ul>
+<li><p><script type="math/tex">\eta</script> : 自然参数(natural parameter，也叫<strong>正则参数 canonical parameter</strong>)</p>
+</li>
+<li><p><script type="math/tex">\phi(x)</script> : <strong>充分统计量（sufficient statistic）</strong>,常使用的有<script type="math/tex">\phi(x) = x</script>，一般是一个对样本的统计函数表示。</p>
+</li>
+<li><p>接下来会重点介绍的<script type="math/tex">A(\eta)</script> 是一个<strong>对数配分函数（log partition function）</strong>。</p>
+<blockquote>
+<p>​        如<script type="math/tex">P(x| \theta) = \frac{1}{z} \hat P(x|\theta)</script>这里的z就是归一化因子，又叫配分函数。</p>
+<p>​        对两边同时取积分：</p>
+<p>​        </p>
+<script type="math/tex; mode=display">
+\int_{x} P(x \mid \theta)=\int_{x} \frac{1}{z} \hat{P}(x \mid \theta) \Rightarrow 1=\int_{x} \frac{1}{z} \hat{P}(x \mid \theta) \Rightarrow z=\int_{x} \hat{P}(x \mid \theta)</script><p>​        那么<script type="math/tex">A(\eta)</script>为什么叫log配分函数呢？</p>
+<script type="math/tex; mode=display">
+\begin{align}
+P(x|\eta) &= h(x) \exp(\eta^T\phi(x)-A(\eta))
+\\&=h(x) \exp(\eta^T\phi(x))\exp(-A(\eta))
+\\ &=\frac{1}{\exp(A(\eta))}h(x) \exp(\eta^T\phi(x))
+\end{align}</script><p>又因为<script type="math/tex">P(x|\theta) = \frac{1}{z} \hat P(x|\theta)</script></p>
+<p>所以<script type="math/tex">A(\eta) = \log z</script>因此<script type="math/tex">z</script>称为配分函数 ,<script type="math/tex">A(\eta)</script>称为对数配分函数。</p>
+</blockquote>
+<p> <script type="math/tex">\exp(−A(\eta))</script> 本质上扮演了归一化常数（normalization constant）的角色，也就是确保 $p(x| \eta)$ 的和或者积分等于$1$。</p>
+</li>
+</ul>
+<p>如果给定<script type="math/tex">\phi(x)，h(x), A(\eta)</script>那么就定义了被参数$\eta$控制的一个分布簇(或者集)。改变$\eta$，我们能得到这簇中的不同分布。</p>
+<p>指数簇分布有：</p>
+<ul>
+<li>Gaussian 分布</li>
+<li>伯努利分布</li>
+<li>二项分布</li>
+<li>泊松分布</li>
+<li>Beta分布</li>
+<li>Dirichlet分布</li>
+<li>Gamma分布</li>
+</ul>
+<p>指数簇分布有如下性质和应用：</p>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210604131135.png" alt="image-20210602212723792" style="zoom:30%;" /></p>
+<p><strong>性质</strong>：</p>
+<ol>
+<li><p>充分统计量</p>
+<p>举例来说就是，对于一些从高斯分布中抽取出来的样本<script type="math/tex">x_1, x_2, \cdots, x_n</script>,设其充分统计量为,</p>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+\phi(x)=\left(\begin{array}{c}
+&\sum_{i=1}^{N} x_{i} &\\
+&\sum_{i=1}^{N} x_{i}^{2}&
+\end{array}\right)</script><p>​    那么我们就可以通过这个充分统计量来计算出均值和方差，从而明确其分布。这时就可以将样本丢掉，来节省空间，对online learning有重要作用。</p>
+<ol>
+<li><p>共轭：因为贝叶斯公式中分母如下：</p>
+<p>​    </p>
+<script type="math/tex; mode=display">
+P(z|x) = \frac{P(x|z)P(z)}{\int _zP(x|z)P(z)dz}</script><p>计算积分复杂或者得到的<script type="math/tex">P(z|x)</script>形式复杂太难计算，因此求<script type="math/tex">E_{P(z|x)}[f(z)]</script>也是很困难的，所以人们想了很多办法，如近似推断(变分推断，MCMC等)都是因为上述计算难。</p>
+<p>共轭的概念是指给定一个特殊的似然函数<script type="math/tex">P(x|z)</script>的情况下，后验<script type="math/tex">P(z|x)</script>与先验<script type="math/tex">P(z)</script>会有一个形式相同的分布，这就解决了上述积分困难的问题，避免求分母的积分项，在<strong>后验概率正比于似然 × 先验概率</strong>概念下有如<script type="math/tex">\underbrace{P(z \mid x)}_{\text {Beta }} \propto \underbrace{P(x \mid z)}_{\text {二项式分布 }} \underbrace{P(z)}_{\text {Beta }}</script>。  </p>
+</li>
+<li><p>最大熵</p>
+<blockquote>
+<p>​    最大熵原理：</p>
+<p>当给定一个限制条件的情况下，对于未知部分，我们假设它们等可能发生，但我们无法定量分析。而熵可以进行定量分析，我们去求解最大熵，熵越大则随机性越强。</p>
+<p>无信息先验：</p>
+<p>在贝叶斯估计中，我们往往需要给先验一个参数，有如下方法：</p>
+<p>①共轭：为了计算方便</p>
+<p>②利用最大熵思想：从最大熵的角度给予先验的参数（无信息先验）</p>
+<p>③Jeffreys’s prior</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="2-高斯分布指数簇形式"><a href="#2-高斯分布指数簇形式" class="headerlink" title="2. 高斯分布指数簇形式"></a>2. 高斯分布指数簇形式</h4><p>将高斯分布转换成式1指数簇这种形式：</p>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210604134833.png" alt="MommyTalk1622785415491" style="zoom:18%;" /></p>
+<p>由式2中我们可以得到<script type="math/tex">\phi(x), \eta</script>两个式子：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&\phi(x) = \left(\begin{array}{l} 
+x \\
+x^2
+\end{array}\right)\\
+
+&\eta=\left(\begin{array}{l}
+\eta_{1} \\
+\eta_{2}
+\end{array}\right)=\left(\begin{array}{c}
+\frac{\mu}{\sigma^{2}} \\
+-\frac{1}{2 \sigma^{2}}
+\end{array}\right)
+\end{align} \tag{3}</script><p>现在<script type="math/tex">A(\eta)</script>也要用<script type="math/tex">\eta</script>来表示，由式3可得：</p>
+<script type="math/tex; mode=display">
+\sigma^2 = -\frac{1}{2\eta_2} \quad \quad \mu = -\frac{\eta_1}{2\eta_2} \tag{4}</script><p>式4代入到<script type="math/tex">A(\eta)</script>有：</p>
+<script type="math/tex; mode=display">
+A(\eta) = -\frac{\eta_1^2}{4\eta_2} +\frac{1}{2}\log(-\frac{\pi}{\eta_2}) \tag{5}</script><p>现在就得到了高斯分布的指数簇形式：</p>
+<script type="math/tex; mode=display">
+p(x|\eta) = \exp (\eta^T\phi(x)-A(\eta)) \tag{6}</script><p>更进一步来理解指数簇表示就是：<script type="math/tex">e</script>的指数形式的表示，其中前半部分<script type="math/tex">\exp(\eta^T\phi(x))</script>是一个参数和对于该分布的充分统计量，后半部分<script type="math/tex">\exp(-A(\eta))</script>就是再减去一个对数配分函数，并且在1小节中，我们知道如果将其转换到指数外面就是除以一个配分函数，实际上，后半部分本质上是一个归一化因子。</p>
+<h4 id="3-对数配分函数与充分统计量的关系"><a href="#3-对数配分函数与充分统计量的关系" class="headerlink" title="3. 对数配分函数与充分统计量的关系"></a>3. 对数配分函数与充分统计量的关系</h4><p>按照式1中指数簇分布表示有：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&p(x|\eta) = h(x) \exp (\eta^T\phi(x)-A(\eta))  = \frac{h(x) \exp (\eta^T\phi(x))}{\exp(A(\eta))}\\
+ &\Longrightarrow p(x|\eta)\exp(A(\eta)) = h(x) \exp (\eta^T\phi(x))\\
+  &\Longrightarrow \int p(x|\eta)\exp(A(\eta)) dx = \int h(x) \exp (\eta^T\phi(x))dx \\
+&\because \int p(x|\eta) dx = 1 \\
+&\Longrightarrow \exp(A(\eta)) =\int h(x) \exp (\eta^T\phi(x))dx
+\end{align} \tag{7}</script><p>对式7两边变量<script type="math/tex">\eta</script>求导得:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&\frac{\partial \exp(A(\eta))}{\partial \eta} = \frac{\int h(x) \exp (\eta^T\phi(x))dx}{\partial \eta}\\
+&\Longrightarrow \exp(A(\eta)) A^\prime(\eta) = \int h(x) \exp (\eta^T\phi(x))\phi(x)dx\\
+&\Longrightarrow A^\prime(\eta) = \frac{\int h(x) \exp (\eta^T\phi(x))\phi(x)dx}{\exp(A(\eta))}\\
+&\Longrightarrow A^\prime(\eta) = \int h(x) \exp (\eta^T\phi(x)-A(\eta))\phi(x)dx\\
+&\Longrightarrow  A^\prime(\eta) = \int p(x|\eta) \phi(x)dx\\
+&\Longrightarrow  A^\prime(\eta) =  E_{p(x|\eta)} [\phi(x)]
+\end{align} \tag{8}</script><p>那么就得到了对数配分函数<script type="math/tex">A(\eta)</script>和充分统计量的关系：</p>
+<script type="math/tex; mode=display">
+A^\prime(\eta) =  E_{p(x|\eta)} [\phi(x)] = \int p(x|\eta) \phi(x)dx\tag{9}</script><p>继续对式9中的<script type="math/tex">\eta</script>求导得：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+A^{\prime \prime}(\eta)&=\frac{\partial\left(\int h(x) \exp \left\{\eta^{T} \phi(x)-A(\eta)\right\} \phi(x) \mathrm{d} x\right)}{\partial \eta} \\
+&=\int {\color{Red}\underbrace{h(x) \exp \left\{\eta^{T} \phi(x)-A(\eta)\right\}}_{P(x \mid \eta)}}\left(\phi(x)-A^{\prime}(\eta)\right) \phi(x) \mathrm{d} x \\
+&=\int P(x \mid \eta)\left(\phi(x)-E_{P(x \mid \eta)}[\phi(x)]\right) \phi(x) \mathrm{d} x \\
+&=\int P(x \mid \eta) \phi^{2}(x)-E_{P(x \mid \eta)}[\phi(x)] P(x \mid \eta) \phi(x) \mathrm{d} x \\
+&=\int P(x \mid \eta) \phi^{2}(x) \mathrm{d} x-E_{P(x \mid \eta)}[\phi(x)] \int P(x \mid \eta) \phi(x) \mathrm{d} x \\
+&=E_{P(x \mid \eta)}\left[\phi^{2}(x)\right]-E_{P(x \mid \eta)}^{2}[\phi(x)] \\
+&=\operatorname{Var}_{P(x \mid \eta)}[\phi(x)]
+\end{align} \tag{10}</script><p>由于方差不为负，所以<script type="math/tex">A(\eta)</script>是凸函数。</p>
+<hr>
+<p>使用第2小节高斯分布来验证：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\sigma^2 = -\frac{1}{2\eta_2} \quad \quad \mu = -\frac{\eta_1}{2\eta_2} \\
+A(\eta) = -\frac{\eta_1^2}{4\eta_2} +\frac{1}{2}\log(-\frac{\pi}{\eta_2})
+\end{align}</script><p>直接可证明：</p>
+<script type="math/tex; mode=display">
+E(\phi(x))= \left[\begin{array}{cc}
+E(x) \\
+E(x^2)
+\end{array}\right]= \left[\begin{array}{cc}
+\mu \\
+\mu^2+\sigma^2
+\end{array}\right]</script><p>因为<script type="math/tex">E(x^2) = E(x)^2+Var(x)= \mu^2+\sigma^2</script>,<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/64859161">关于方差期望公式</a>。</p>
+<p>而我们对<script type="math/tex">A(\eta)</script>中<script type="math/tex">\eta</script>求导可得:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\partial A(\eta)}{\partial \eta_1} &= -\frac{\eta_1}{2\eta_2} = \mu \\
+\frac{\partial A(\eta)}{\partial \eta_2}&= \frac{\eta_1^2}{4\eta_2^2} - \frac{1}{2\eta_2}  = \mu^2 + \sigma^2
+\end{align}</script><p>这就验证了式8和式10，我们可以看到对数配分函数的一阶导就是充分统计量量中的期望，二阶导就是方差。</p>
+<hr>
+<h4 id="4-极大似然估计与充分统计量"><a href="#4-极大似然估计与充分统计量" class="headerlink" title="4. 极大似然估计与充分统计量"></a>4. 极大似然估计与充分统计量</h4><p>若我们有数据集<script type="math/tex">D</script>如下：</p>
+<script type="math/tex; mode=display">
+D = \{x_1, x_2, \cdots, x_n \}</script><p>那么我们可以用极大似然估计来估计:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\eta_{MLE} &= \text{argmax}_\eta \ \log  P(D|\eta)\\
+&= \text{argmax}_\eta \ \log \prod_{i=1}^N p(x_i|\eta)\\
+&= \text{argmax}_\eta \ \sum_{i=1}^N \log p(x_i|\eta)\\
+&= \text{argmax}_\eta \ \sum_{i=1}^N \log \{h(x_i) \exp [\eta^T\phi(x_i)-A(\eta)] \}\\
+&= \text{argmax}_\eta \ \sum_{i=1}^N  \{\log h(x_i) + \eta^T\phi(x_i)-A(\eta) \} \quad \text{与}\eta\text{无关项可忽略} \\
+&= \text{argmax}_\eta \ \sum_{i=1}^N [\eta^T\phi(x_i)-A(\eta)]
+\end{align} \tag{11}</script><p>对式11最后一步求导得：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&\sum_{i=1}^N [\phi(x_i) - A^{\prime}(\eta)] =0  \\
+\Longrightarrow  &A^{\prime}(\eta_{MLE}) = \frac{1}{N}\sum_{i=1}^N \phi(x_i) 
+\end{align}
+\tag{12}</script><p>那么<script type="math/tex">\eta_{MLE}</script>就可以通过求反函数来实现。这也说明<script type="math/tex">\phi(x)</script>就是充分统计量，我们得到<script type="math/tex">\frac{1}{N}\sum_{i=1}^N \phi(x_i)</script> 就可以求出<script type="math/tex">\eta</script>,进一步就得到所有的需要统计参数。</p>
+<h4 id="5-最大熵"><a href="#5-最大熵" class="headerlink" title="5. 最大熵"></a>5. 最大熵</h4><p>在信息论中，信息量就是概率的导数取对数，即<script type="math/tex">-\log p(x)</script>。熵就是对信息量的期望，因此，</p>
+<script type="math/tex; mode=display">
+\begin{align}
+H[p(x)] &= E_{p(x)}[-\log p(x)] 
+\\&= \int -p(x)\log p(x) dx \quad \quad 连续
+\\&= -\sum_{i=1}^{N}p(x_i) \log p(x_i) \quad \quad 离散
+\end{align} \tag{13}</script><p>我们先看看<strong>离散变量的最大熵</strong>：</p>
+<p>对于离散变量要求其熵最大，即：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\max H[p(x)] &= \max -\sum_{i=1}^{N}p_i \log p_i \\
+&s.t. \quad \sum_{i=1}^N p_i= 1
+\end{align} \tag{14}</script><p>用拉格朗日乘执法求解：</p>
+<script type="math/tex; mode=display">
+\text{argmin } L(p_i, \lambda) = \sum_{i=1}^{N}p_i \log p_i + \lambda(1 - \sum_{i=1}^N p_i) \tag{15}</script><p>对<script type="math/tex">p_i</script>求导得：</p>
+<script type="math/tex; mode=display">
+\frac{\partial L}{\partial p_i} = \log p_i + p_i \frac{1}{p_i} - \lambda = 0</script><p>那么<script type="math/tex">\hat p_i = \exp (\lambda -1)</script>. 其总和概率为1，因此离散概率分布是均匀分布且<script type="math/tex">\hat p_1  = \hat p_2 = \cdots = \hat p_k = \frac{1}{k}</script>.</p>
+<p>从上述推导中看出，在离散随机变量中，均匀分布熵最大。即正在没有任何已知约束的情况下，均匀分布会使得熵最大。</p>
+<p><strong>最大熵原理</strong>：</p>
+<p>上面是没有任何已知信息情况下最大熵的推导，结果是要满足均匀分布。若我们已知数据集呢？比如数据集D：</p>
+<script type="math/tex; mode=display">
+D = \{ x_1, x_2, \cdots, x_N\} \tag{16}</script><p>然后根据数据我们可以得到其经验分布：</p>
+<script type="math/tex; mode=display">
+\hat p(x= n) = \hat p(n) = \frac{\text{count}(n)}{N} \tag{16}</script><p>接下来我们就可以得到其期望<script type="math/tex">E_{\hat p } [x]</script>, 方差<script type="math/tex">\text{Var}_{\hat p} [x]</script>, ….。把情况一般化，变量<script type="math/tex">x</script>推广到函数向量，如：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&E_{\hat{p}}[\mathbf{f}(x)] =\mathbf{\Delta} \\
+&\text { 其中 } \mathbf{f}(x)=\left(\begin{array}{c}
+f_{1}(x) \\
+f_{2}(x) \\
+\vdots \\
+f_{Q}(x)
+\end{array}\right) & \mathbf{\Delta}=\left(\begin{array}{c}
+\Delta_{1} \\
+\Delta_{2} \\
+\vdots \\
+\Delta_{Q}
+\end{array}\right)
+\end{aligned} \tag{17}</script><p>其中，<script type="math/tex">\mathbf{\Delta}</script>是假定的已知量。</p>
+<p>现在，我们就可以在满足上述条件下，求其最大熵，这个优化问题如下：</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{c}
+\min \sum_x p(x) \log p(x)\\
+\text {s.t. } \sum_x p(x)=1 \\
+E_{p}[\mathbf{f}(x)]=E_{\hat{p}}[\mathbf{f}(x)]=\mathbf{\Delta}
+\end{array}\right. \tag{18}</script><p>用拉格朗日乘子法：</p>
+<script type="math/tex; mode=display">
+L(p, \lambda_o, \mathbf{\lambda_1}) = \sum_x p(x) \log p(x) + \lambda_0 (1 - \sum_x p(x)) + \mathbf{\lambda_1}^T(\mathbf{\Delta} - E_{p}[\mathbf{f}(x)]) \tag{19}</script><p>对每个<script type="math/tex">p(x_i)</script>求导， 并且<script type="math/tex">E_{p}[\mathbf{f}(x)] =\sum_x p(x_i)\mathbf{f}(x)</script>,那么：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\partial L}{\partial p(x)} = &\log p(x) + p(x) \frac{1}{p(x)} - \lambda_0 -\mathbf{\lambda_1}^T \mathbf{f}(x) \\
+= &\log p(x) + 1 -\lambda_0 -\mathbf{\lambda_1}^T \mathbf{f}(x) \\
+\Longrightarrow &\log p(x) = \lambda_0 + \mathbf{\lambda}_1^T \mathbf{f}(x)  - 1 \\
+\Longrightarrow  &p(x) = \exp [ \mathbf{\lambda}_1^T \mathbf{f}(x) - (1 - \lambda_0) ]
+\end{align} \tag{19}</script><p>注：在求导时，只是对单独的<script type="math/tex">x_i</script>求导，遇到<script type="math/tex">x_j (i \neq j)</script>时，结果为0， 可忽略。</p>
+<p>式19中，我们看到最大熵要求分布<script type="math/tex">p(x)</script>满足指数簇分布，在满足既定数据的情况下，<strong>最大熵</strong>对应着要求满足<strong>指数簇分布</strong>。</p>
+<h4 id="Inference"><a href="#Inference" class="headerlink" title="Inference"></a>Inference</h4><p>[1] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/56414312">最大熵模型理论及NLP应用总结</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/103854460">“共轭分布”是什么？</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">miller</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://aigonna.com/2020/07/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC8%20%E6%8C%87%E6%95%B0%E7%B0%87%E5%88%86%E5%B8%83/">http://aigonna.com/2020/07/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC8%20%E6%8C%87%E6%95%B0%E7%B0%87%E5%88%86%E5%B8%83/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://aigonna.com" target="_blank">aigonna</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8C%87%E6%95%B0%E7%B0%87%E5%88%86%E5%B8%83/">指数簇分布</a><a class="post-meta__tags" href="/tags/%E5%AF%B9%E6%95%B0%E9%85%8D%E5%88%86%E5%87%BD%E6%95%B0/">对数配分函数</a><a class="post-meta__tags" href="/tags/%E5%85%85%E5%88%86%E7%BB%9F%E8%AE%A1%E9%87%8F/">充分统计量</a><a class="post-meta__tags" href="/tags/%E6%9C%80%E5%A4%A7%E7%86%B5/">最大熵</a></div><div class="post_share"><div class="social-share" data-image="/img/imgs/16.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/08/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%2010.%20EM%20%E7%AE%97%E6%B3%95/"><img class="prev-cover" src="/img/imgs/7.jpg" onerror="onerror=null;src='/img/imgs/0.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">机器学习-白板推导 10. EM 算法</div></div></a></div><div class="next-post pull-right"><a href="/2020/07/27/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC7%20%E6%A0%B8%E6%96%B9%E6%B3%95/"><img class="next-cover" src="/img/imgs/5.jpg" onerror="onerror=null;src='/img/imgs/0.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">机器学习-白板推导 7 核方法</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC8-%E6%8C%87%E6%95%B0%E7%B0%87%E5%88%86%E5%B8%83"><span class="toc-text">机器学习-白板推导8 指数簇分布</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%8C%87%E6%95%B0%E7%B0%87%E5%88%86%E5%B8%83%E8%83%8C%E6%99%AF"><span class="toc-text">1. 指数簇分布背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%E6%8C%87%E6%95%B0%E7%B0%87%E5%BD%A2%E5%BC%8F"><span class="toc-text">2. 高斯分布指数簇形式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%AF%B9%E6%95%B0%E9%85%8D%E5%88%86%E5%87%BD%E6%95%B0%E4%B8%8E%E5%85%85%E5%88%86%E7%BB%9F%E8%AE%A1%E9%87%8F%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">3. 对数配分函数与充分统计量的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E4%B8%8E%E5%85%85%E5%88%86%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="toc-text">4. 极大似然估计与充分统计量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E6%9C%80%E5%A4%A7%E7%86%B5"><span class="toc-text">5. 最大熵</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inference"><span class="toc-text">Inference</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021&nbsp;<i style="color:#FF6A6A;animation: announ_animation 0.8s linear infinite;"class="fas fa-heart"></i> By miller</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      //tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'forest',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: '5sVUTO1MTpgoo7pDynh6zYEM-MdYXbMMI',
+      appKey: 'vPUvOT1iP6YqcPPtYSqf8F7A',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script><h4>AIgonna</h4></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script></div></body></html>

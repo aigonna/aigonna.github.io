@@ -1,0 +1,372 @@
+<!DOCTYPE html><html class="hide-aside" lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RNN， LSTM ， GRU 结构解释和其在Pytorch中的使用 | aigonna</title><meta name="keywords" content="GRU,LSTM,RNN,Pytorch"><meta name="author" content="miller"><meta name="copyright" content="miller"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="RNN， LSTM ， GRU 结构解释和其在Pytorch中的使用1. RNN 结构和内部计算RNN结构示意图  $x$为当前状态下数据的输入， $h$表示接收到的上一个节点的输入。  $y$为当前节点状态下的输出，而 $h^{\prime} $为传递到下一个节点的输出。 真实计算公式为：  \boldsymbol{h}_t &#x3D; \text{tanh} (\boldsymbol{W}_h [\b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RNN， LSTM ， GRU 结构解释和其在Pytorch中的使用">
+<meta property="og:url" content="http://aigonna.com/2020/09/20/4.RNN%EF%BC%8C%20LSTM%20%EF%BC%8C%20GRU%20%E7%BB%93%E6%9E%84%E8%A7%A3%E9%87%8A%E5%92%8C%E5%85%B6%E5%9C%A8Pytorch%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="aigonna">
+<meta property="og:description" content="RNN， LSTM ， GRU 结构解释和其在Pytorch中的使用1. RNN 结构和内部计算RNN结构示意图  $x$为当前状态下数据的输入， $h$表示接收到的上一个节点的输入。  $y$为当前节点状态下的输出，而 $h^{\prime} $为传递到下一个节点的输出。 真实计算公式为：  \boldsymbol{h}_t &#x3D; \text{tanh} (\boldsymbol{W}_h [\b">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://aigonna.com/img/imgs/0.jpg">
+<meta property="article:published_time" content="2020-09-20T13:13:21.000Z">
+<meta property="article:modified_time" content="2021-04-12T13:14:30.109Z">
+<meta property="article:author" content="miller">
+<meta property="article:tag" content="GRU">
+<meta property="article:tag" content="LSTM">
+<meta property="article:tag" content="RNN">
+<meta property="article:tag" content="Pytorch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://aigonna.com/img/imgs/0.jpg"><link rel="shortcut icon" href="/img/AI.png"><link rel="canonical" href="http://aigonna.com/2020/09/20/4.RNN%EF%BC%8C%20LSTM%20%EF%BC%8C%20GRU%20%E7%BB%93%E6%9E%84%E8%A7%A3%E9%87%8A%E5%92%8C%E5%85%B6%E5%9C%A8Pytorch%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-04-12 21:14:30'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/bg.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/AI.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">63</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">139</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/imgs/0.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">aigonna</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">RNN， LSTM ， GRU 结构解释和其在Pytorch中的使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-09-20T13:13:21.000Z" title="undefined 2020-09-20 21:13:21">2020-09-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="RNN，-LSTM-，-GRU-结构解释和其在Pytorch中的使用"><a href="#RNN，-LSTM-，-GRU-结构解释和其在Pytorch中的使用" class="headerlink" title="RNN， LSTM ， GRU 结构解释和其在Pytorch中的使用"></a>RNN， LSTM ， GRU 结构解释和其在Pytorch中的使用</h3><h4 id="1-RNN-结构和内部计算"><a href="#1-RNN-结构和内部计算" class="headerlink" title="1. RNN 结构和内部计算"></a>1. RNN 结构和内部计算</h4><p>RNN结构示意图</p>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210406154245.png" alt="image-20210406154230330" style="zoom: 33%;" /></p>
+<p>$x$为当前状态下数据的输入， $h$表示接收到的上一个节点的输入。</p>
+<p> $y$为当前节点状态下的输出，而 $h^{\prime} $为传递到下一个节点的输出。</p>
+<p>真实计算公式为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{h}_t = \text{tanh} (\boldsymbol{W}_h [\boldsymbol{x}_t, \boldsymbol{h}_{t-1}] + b_t)
+\\ \boldsymbol{y}_t = \text{tanh} (\boldsymbol{W}_0 \boldsymbol{h}_t  + b_t)</script><p>通过上图的公式可以看到，输出$\boldsymbol{h}^{\prime}$与 $\boldsymbol{x}$ 和 $\boldsymbol{h}$的值都相关。</p>
+<p>而 $\boldsymbol{y}$ 则常常使用 $\boldsymbol{h}^{\prime}$投入到一个线性层（主要是进行维度映射）然后使用softmax进行分类得到需要的数据。</p>
+<p>对这里的$\boldsymbol{y}$如何通过  $\boldsymbol{h}^{\prime}$ 计算得到往往看具体模型的使用方式。</p>
+<p>简单使用rnn实例如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#输入尺寸, 隐藏层神经元个数， 层数</span></span><br><span class="line">rnn = nn.RNN(input_size=<span class="number">20</span>,hidden_size=<span class="number">50</span>,num_layers=<span class="number">2</span>)</span><br><span class="line">input_data = Variable(torch.randn(<span class="number">100</span>,<span class="number">32</span>,<span class="number">20</span>))  <span class="comment">#[seq_len, batch_size, word_dim]</span></span><br><span class="line"><span class="comment">#如果传入网络时，不特别注明隐状态，那么输出的隐状态默认参数全是0</span></span><br><span class="line">h_0 = Variable(torch.randn(<span class="number">2</span>,<span class="number">32</span>,<span class="number">50</span>))  <span class="comment">#[lnum_layers*direction, batch_size, hidden_size]</span></span><br><span class="line">output,h_t = rnn(input_data,h_0)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(output.size())  <span class="comment">#seq,batch,hidden_size</span></span><br><span class="line"><span class="built_in">print</span>(h_t.size())   <span class="comment">#layer*direction,batch,hidden_size</span></span><br><span class="line"><span class="built_in">print</span>(rnn.weight_ih_l0.size())</span><br><span class="line">++++++++++++++++++++++++++++++++++++++++++++++</span><br><span class="line">torch.Size([<span class="number">100</span>, <span class="number">32</span>, <span class="number">50</span>])</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">32</span>, <span class="number">50</span>])</span><br><span class="line">torch.Size([<span class="number">50</span>, <span class="number">20</span>])</span><br></pre></td></tr></table></figure>
+<p>通过序列形式的输入，我们能够得到如下形式的RNN。</p>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210406170917.png" alt="image-20210406170914456" style="zoom:33%;" /></p>
+<p>序列模型中RNN的搭建：</p>
+<p>使用 <code>nn.RNN(input_size, hidden_size,  num_layers)</code>中参数解释</p>
+<ul>
+<li><strong>input_size</strong> – The number of expected features in the input x</li>
+<li><strong>hidden_size</strong> – The number of features in the hidden state h</li>
+<li><strong>num_layers</strong> – Number of recurrent layers.</li>
+<li><strong>bidirectional</strong> – <code>If  True, becomes a bidirectional RNN. Default: False</code></li>
+</ul>
+<p>输出是$y_t,  h_t$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RNN</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, input_size, hidden_size, output_size, num_layers=<span class="number">1</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>(RNN, self).__init__()</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        分别代表输入最后一维尺寸</span></span><br><span class="line"><span class="string">        隐藏层最后一维尺寸</span></span><br><span class="line"><span class="string">        输出层最后一维尺寸</span></span><br><span class="line"><span class="string">        层数</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.input_size = input_size</span><br><span class="line">        self.hidden_size = hidden_size</span><br><span class="line">        self.output_size = output_size</span><br><span class="line">        self.num_layers = num_layers</span><br><span class="line"></span><br><span class="line">        <span class="comment">#实例化RNN，参数分别是输入，隐藏层神经元数目，层数</span></span><br><span class="line">        self.rnn = nn.RNN(input_size, hidden_size, num_layers)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#实例化线性层，将RNN输出转化为指定维度</span></span><br><span class="line">        self.linear = nn.Linear(hidden_size, output_size)</span><br><span class="line">        <span class="comment">#实例化softmax将输出变为类别概率</span></span><br><span class="line">        self.softmax = nn.LogSoftmax(dim=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, input1, hidden</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :param input: 输入， 1xn_letters</span></span><br><span class="line"><span class="string">        :param hidden: 隐藏层张量， self.layers x 1 x self.hidden_size</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment">#RNN输入预定义为3为将其拓展一个维度</span></span><br><span class="line">        input1 = input1.unsqueeze(<span class="number">0</span>)</span><br><span class="line">        <span class="comment">#将input, hidden输入rnn，如果layer=1，那么rr恒等于hn</span></span><br><span class="line">        rr, hn = self.rnn(input1, hidden)</span><br><span class="line">        <span class="comment">#将rnn输出通过线性变换和softmax，同时返回hn作为后续RNN输入</span></span><br><span class="line">        <span class="keyword">return</span> self.softmax(self.linear(rr)), hn</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initHidden</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment">#初始化一个self.num_layers, 1, self.hidden_size形状的0张量</span></span><br><span class="line">        <span class="keyword">return</span> torch.zeros(self.num_layers, <span class="number">1</span>, self.hidden_size)</span><br></pre></td></tr></table></figure>
+<h4 id="2-LSTM"><a href="#2-LSTM" class="headerlink" title="2. LSTM"></a>2. LSTM</h4><p>LSTM是long short-term memory,与RNN区别是</p>
+<ul>
+<li>LSTM两个传递状态：$c^t $ cell state,  $h^t$ hidden state </li>
+<li>RNN一个传递状态: $h^t$ </li>
+</ul>
+<p>注： RNN中$h^t$等价于 LSTM中 $c^t$ </p>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210406172805.png" alt="image-20210406172803901" style="zoom: 33%;" /></p>
+<p>而对于input gate, forget gate, output gate中是$[x^t, h^{t-1}]$向量拼接后乘以相应权重矩阵在过sigmoid函数转换为0到1的数值，作为门控状态。</p>
+<p>但z是tanh函数，转换为-1到1，因为是输入数据不是门控状态。</p>
+<p>因此有下面4个公式：（忽略bias）</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{z} &= \text{tanh}(\boldsymbol{W} [\boldsymbol{x}^t, \boldsymbol{h}^{t-1}])
+\\
+\boldsymbol{z}^i &= \sigma(\boldsymbol{W}^i [\boldsymbol{x}^t, \boldsymbol{h}^{t-1}])
+\\
+\boldsymbol{z}^f &= \sigma(\boldsymbol{W}^f [\boldsymbol{x}^t, \boldsymbol{h}^{t-1}])
+\\
+\boldsymbol{z}^o &= \sigma(\boldsymbol{W}^o [\boldsymbol{x}^t, \boldsymbol{h}^{t-1}])
+\end{aligned}</script><p>注：[]表示两个向量拼接，而 $\boldsymbol{W}$四个权重矩阵都是训练学习得到的。</p>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210406173624.png" alt="image-20210406173622441" style="zoom:33%;" /></p>
+<p>然后根据上面四个信号$ \boldsymbol{z}, \boldsymbol{z}^f, \boldsymbol{z}^i, \boldsymbol{z}^o $, 由下列公式得到输出， cell state和隐藏状态。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{c}^t &= \boldsymbol{z}^f \odot \boldsymbol{c}^{t-1} + \boldsymbol{z}^i \odot \boldsymbol{z}
+\\ \boldsymbol{h}^t &= \boldsymbol{z}^o \odot \text{tanh }\boldsymbol{c}^{t}
+\\\boldsymbol{y}^t &= \sigma (\boldsymbol{W}^\prime\boldsymbol{h}^{t})
+\end{aligned}</script><ul>
+<li>cell state ：等于 上一个cell state 与遗忘门信号 $\boldsymbol{z}^f  $ Hadamard product，和 输入门信号 $ \boldsymbol{z}^i  $与输入信号$\boldsymbol{z}$ 的Hadamard product之和</li>
+<li>hidden state: 等于输出门信号 $\boldsymbol{z}^o $ 与 过tanh后的 cell state 的Hadamard product</li>
+<li>输出： 等于上一个时间步后权重矩阵$\boldsymbol{W}$ 与 隐藏状态过sigmoid</li>
+</ul>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210406213742.png" alt="image-20210406213738525" style="zoom:20%;" /></p>
+<p>Pytorch中LSTM实例使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">lstm = nn.LSTM(input_size=<span class="number">20</span>,hidden_size=<span class="number">50</span>,num_layers=<span class="number">2</span>)<span class="comment">#[input_size hidden_size num_layers]</span></span><br><span class="line"><span class="comment">#输入变量</span></span><br><span class="line">input_data = Variable(torch.randn(<span class="number">100</span>,<span class="number">32</span>,<span class="number">20</span>)) <span class="comment">#[seq_len, batch_size, word_dim]</span></span><br><span class="line"><span class="comment">#初始隐状态</span></span><br><span class="line">h_0 = Variable(torch.randn(<span class="number">2</span>,<span class="number">32</span>,<span class="number">50</span>)) <span class="comment">#[num_layers*direction, batch_size, hidden_size]</span></span><br><span class="line"><span class="comment">#输出记忆细胞</span></span><br><span class="line">c_0 = Variable(torch.randn(<span class="number">2</span>,<span class="number">32</span>,<span class="number">50</span>)) <span class="comment">#[num_layers*direction, batch_size, hidden_size]</span></span><br><span class="line"><span class="comment">#输出变量</span></span><br><span class="line">output,(h_t,c_t) = lstm(input_data,(h_0,c_0))</span><br><span class="line"><span class="built_in">print</span>(output.size()) <span class="comment">#[seq_len, batch_size, hidden_size]</span></span><br><span class="line"><span class="built_in">print</span>(h_t.size())</span><br><span class="line"><span class="built_in">print</span>(c_t.size())</span><br><span class="line"><span class="comment">#参数大小为(50x4,20),是RNN的四倍</span></span><br><span class="line"><span class="built_in">print</span>(lstm.weight_ih_l0)</span><br><span class="line"><span class="built_in">print</span>(lstm.weight_ih_l0.size())</span><br><span class="line"></span><br><span class="line">++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span><br><span class="line">torch.Size([<span class="number">100</span>, <span class="number">32</span>, <span class="number">50</span>])</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">32</span>, <span class="number">50</span>])</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">32</span>, <span class="number">50</span>])</span><br><span class="line">Parameter containing:</span><br><span class="line">tensor([[ <span class="number">0.1123</span>, -<span class="number">0.0734</span>, -<span class="number">0.0408</span>,  ..., -<span class="number">0.0715</span>,  <span class="number">0.0920</span>,  <span class="number">0.0409</span>],</span><br><span class="line">        [-<span class="number">0.1310</span>, -<span class="number">0.0566</span>, -<span class="number">0.0761</span>,  ..., -<span class="number">0.0909</span>,  <span class="number">0.0081</span>, -<span class="number">0.0258</span>],</span><br><span class="line">        [ <span class="number">0.0264</span>,  <span class="number">0.0297</span>,  <span class="number">0.0800</span>,  ...,  <span class="number">0.0869</span>, -<span class="number">0.0008</span>, -<span class="number">0.0621</span>],</span><br><span class="line">        ...,</span><br><span class="line">        [-<span class="number">0.0116</span>,  <span class="number">0.0778</span>, -<span class="number">0.1181</span>,  ...,  <span class="number">0.1066</span>,  <span class="number">0.0610</span>,  <span class="number">0.0846</span>],</span><br><span class="line">        [ <span class="number">0.0216</span>, -<span class="number">0.0159</span>,  <span class="number">0.1354</span>,  ...,  <span class="number">0.0726</span>, -<span class="number">0.0238</span>, -<span class="number">0.1158</span>],</span><br><span class="line">        [-<span class="number">0.1081</span>, -<span class="number">0.0760</span>, -<span class="number">0.0722</span>,  ...,  <span class="number">0.0506</span>,  <span class="number">0.0550</span>,  <span class="number">0.1033</span>]],</span><br><span class="line">       requires_grad=<span class="literal">True</span>)</span><br><span class="line">torch.Size([<span class="number">200</span>, <span class="number">20</span>])</span><br></pre></td></tr></table></figure>
+<p>在seq2seq任务中，使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LSTM</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, input_size, hidden_size, output_size, num_layers=<span class="number">1</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>(LSTM, self).__init__()</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        分别代表输入最后一维尺寸</span></span><br><span class="line"><span class="string">        隐藏层最后一维尺寸</span></span><br><span class="line"><span class="string">        输出层最后一维尺寸</span></span><br><span class="line"><span class="string">        层数</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.input_size = input_size</span><br><span class="line">        self.hidden_size = hidden_size</span><br><span class="line">        self.output_size = output_size</span><br><span class="line">        self.num_layers = num_layers</span><br><span class="line"></span><br><span class="line">        <span class="comment">#实例化RNN，参数分别是输入，隐藏层神经元数目，层数</span></span><br><span class="line">        self.lstm = nn.LSTM(input_size, hidden_size, num_layers)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#实例化线性层，将RNN输出转化为指定维度</span></span><br><span class="line">        self.linear = nn.Linear(hidden_size, output_size)</span><br><span class="line">        <span class="comment">#实例化softmax将输出变为类别概率</span></span><br><span class="line">        self.softmax = nn.LogSoftmax(dim=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, input1, hidden, c</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        LSTM输入有3个</span></span><br><span class="line"><span class="string">        :param input1: 输入， 1xn_letters</span></span><br><span class="line"><span class="string">        :param hidden: 隐藏层张量， self.layers x 1 x self.hidden_size</span></span><br><span class="line"><span class="string">        :param c 张量， self.layers x 1 x self.hidden_size</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment">#RNN输入预定义为3为将其拓展一个维度</span></span><br><span class="line">        input1 = input1.unsqueeze(<span class="number">0</span>)</span><br><span class="line">        <span class="comment">#将input, hidden输入rnn，如果layer=1，那么rr恒等于hn</span></span><br><span class="line">        rr, (hn, cn) = self.lstm(input1, (hidden, c))</span><br><span class="line">        <span class="comment">#将rnn输出通过线性变换和softmax，同时返回hn作为后续RNN输入</span></span><br><span class="line">        <span class="keyword">return</span> self.softmax(self.linear(rr)), hn, cn</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initHidden</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment">#初始化一个self.num_layers, 1, self.hidden_size形状的0张量</span></span><br><span class="line">        c = hidden = torch.zeros(self.num_layers, <span class="number">1</span>, self.hidden_size)</span><br><span class="line">        <span class="keyword">return</span> hidden, c</span><br></pre></td></tr></table></figure>
+<h4 id="3-GRU"><a href="#3-GRU" class="headerlink" title="3. GRU"></a>3. GRU</h4><p>GRU(Gate Recurrent Unit)结构示意图如下：</p>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210407123605.png" alt="image-20210407123554544" style="zoom:33%;" /></p>
+<p>最重要的是，两个门控reset gate 和 update gate:</p>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210407123633.jpg" alt="v2-7fff5d817530dada1b279c7279d73b8a_r" style="zoom:33%;" /></p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{r}^t &= \sigma(\boldsymbol{W}^r [\boldsymbol{x}^t, \boldsymbol{h}^{t-1}]) \\
+\boldsymbol{z}^t &= \sigma(\boldsymbol{W}^z [\boldsymbol{x}^t, \boldsymbol{h}^{t-1}])
+\end{aligned}</script><p>然后得到重置的隐藏层状态${\boldsymbol{h}^{t-1}}^\prime= \boldsymbol{h}^{t-1} \odot\boldsymbol{r}^{t} $. 将这个隐藏状态与$\boldsymbol{x}^t$ 拼接再过tanh将重置的隐藏状态缩放为-1~1.得到${\boldsymbol{h}^{t}}^\prime$</p>
+<p> 即</p>
+<script type="math/tex; mode=display">
+{\boldsymbol{h}^{t}}^\prime= \text{tanh }(\boldsymbol{W}[\boldsymbol{x}^t, {\boldsymbol{h}^{t-1}}^\prime])=\text{tanh }(\boldsymbol{W}[\boldsymbol{x}^t,  \boldsymbol{h}^{t-1} \odot\boldsymbol{r}^{t})</script><p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210407150630.png" alt="v2-390781506bbebbef799f1a12acd7865b_r" style="zoom:33%;" /></p>
+<p>这里${\boldsymbol{h}^{t}}^\prime$ 主要包含了当前输入$ {\boldsymbol{x}^{t}} $数据, 还有有选择地添加上一个时间隐藏状态，这里主要是重置门信号作用(你可以理解为乘以一个0~1的数来控制添加隐藏状态的多少)。</p>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210407151243.png" alt="image-20210407151241968" style="zoom:20%;" /></p>
+<p>最后一步是$\boldsymbol{h}^{t}$，也是输出。计算公式为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{y}^{t}  =\boldsymbol{h}^{t} = (1-\boldsymbol{z}^t ) \odot \boldsymbol{h}^{t-1} + \boldsymbol{z}^t \odot {\boldsymbol{h}^{t}}^\prime</script><ul>
+<li><p>${\boldsymbol{h}^{t}}^\prime$  相当于LSTM中的hidden state : $  \boldsymbol{h}^t = \boldsymbol{z}^o \odot \text{tanh }\boldsymbol{c}^{t} $</p>
+</li>
+<li><p>而$\boldsymbol{h}^{t} $ 相当于cell state</p>
+</li>
+</ul>
+<p>实际上，GRU是用一个update gate来替换LSTM的input gate 和 forget gate. </p>
+<p>在 LSTM 中这两个门分别是</p>
+<ul>
+<li>控制输入多少(输入是上一个时间状态和当前输入总的信息量)</li>
+<li>控制遗忘信息量的多少</li>
+</ul>
+<p>而update gate就是上面的$\boldsymbol{z}^t$ ,是一个0~1的控制信号。那么：</p>
+<ul>
+<li>$\boldsymbol{z}^t  $理解等价于input gate 控制信号，  $\boldsymbol{z}^t \odot {\boldsymbol{h}^{t}}^\prime$ 就等效于经过input gate后的信息</li>
+<li>$(1-\boldsymbol{z}^t )$ 等价于 forget gate 控制信号， $(1-\boldsymbol{z}^t ) \odot \boldsymbol{h}^{t-1}$ 等效于 经过 forget gate后的信息</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">gru = nn.GRU(input_size=<span class="number">20</span>,hidden_size=<span class="number">50</span>,num_layers=<span class="number">2</span>)</span><br><span class="line"><span class="comment">#输入变量</span></span><br><span class="line">input_data = Variable(torch.randn(<span class="number">100</span>,<span class="number">32</span>,<span class="number">20</span>)) <span class="comment">#[seq_len, batch_size, word_dim]</span></span><br><span class="line"><span class="comment">#初始隐状态</span></span><br><span class="line">h_0 = Variable(torch.randn(<span class="number">2</span>,<span class="number">32</span>,<span class="number">50</span>)) <span class="comment">#[num_layers*direction, batch_size, hidden_size]</span></span><br><span class="line"><span class="comment">#输出变量</span></span><br><span class="line">output,(h_n,c_n) = gru(input_data)  </span><br><span class="line"><span class="built_in">print</span>(output.size()) <span class="comment">#[seq_len, batch_size, word_dim]</span></span><br><span class="line"><span class="built_in">print</span>(h_n.size()) <span class="comment">#[batch_size, word_dim]</span></span><br><span class="line"><span class="built_in">print</span>(gru.weight_ih_l0)</span><br><span class="line"><span class="built_in">print</span>(gru.weight_ih_l0.size()) <span class="comment">#[hidden_size+seq_len, word_dim]</span></span><br><span class="line"></span><br><span class="line">+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span><br><span class="line">torch.Size([<span class="number">100</span>, <span class="number">32</span>, <span class="number">50</span>])</span><br><span class="line">torch.Size([<span class="number">32</span>, <span class="number">50</span>])</span><br><span class="line">Parameter containing:</span><br><span class="line">tensor([[ <span class="number">0.0465</span>,  <span class="number">0.0917</span>,  <span class="number">0.1357</span>,  ..., -<span class="number">0.1283</span>,  <span class="number">0.1264</span>, -<span class="number">0.0320</span>],</span><br><span class="line">        [ <span class="number">0.1384</span>,  <span class="number">0.1072</span>,  <span class="number">0.0073</span>,  ..., -<span class="number">0.0772</span>, -<span class="number">0.1295</span>,  <span class="number">0.0233</span>],</span><br><span class="line">        [-<span class="number">0.0627</span>, -<span class="number">0.1012</span>, -<span class="number">0.0415</span>,  ...,  <span class="number">0.1311</span>,  <span class="number">0.1374</span>, -<span class="number">0.0566</span>],</span><br><span class="line">        ...,</span><br><span class="line">        [-<span class="number">0.0131</span>,  <span class="number">0.0995</span>,  <span class="number">0.0054</span>,  ..., -<span class="number">0.0350</span>, -<span class="number">0.1220</span>,  <span class="number">0.1143</span>],</span><br><span class="line">        [-<span class="number">0.0836</span>,  <span class="number">0.1239</span>,  <span class="number">0.0860</span>,  ...,  <span class="number">0.0837</span>,  <span class="number">0.0172</span>, -<span class="number">0.0170</span>],</span><br><span class="line">        [ <span class="number">0.0637</span>,  <span class="number">0.0501</span>,  <span class="number">0.0091</span>,  ..., -<span class="number">0.1201</span>,  <span class="number">0.0788</span>,  <span class="number">0.0468</span>]],</span><br><span class="line">       requires_grad=<span class="literal">True</span>)</span><br><span class="line">torch.Size([<span class="number">150</span>, <span class="number">20</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>seq2seq中使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GRU</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, input_size, hidden_size, output_size, num_layers=<span class="number">1</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>(GRU, self).__init__()</span><br><span class="line">        self.input_size = input_size</span><br><span class="line">        self.hidden_size = hidden_size</span><br><span class="line">        self.num_layers = num_layers</span><br><span class="line">        self.output_size = output_size</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Instantiate the predefined nn.GRU, its three parameters are input_size, hidden_size, num_layers</span></span><br><span class="line">        self.gru = nn.GRU(input_size, hidden_size, num_layers)</span><br><span class="line">        self.linear = nn.Linear(hidden_size, output_size)</span><br><span class="line">        self.softmax = nn.LogSoftmax(dim=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, <span class="built_in">input</span>, hidden</span>):</span></span><br><span class="line">        <span class="built_in">input</span> = <span class="built_in">input</span>.unsqueeze(<span class="number">0</span>)</span><br><span class="line">        rr, hn = self.gru(<span class="built_in">input</span>, hidden)</span><br><span class="line">        <span class="keyword">return</span> self.softmax(self.linear(rr)), hn</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initHidden</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> torch.zeros(self.num_layers, <span class="number">1</span>, self.hidden_size)</span><br></pre></td></tr></table></figure>
+<h3 id="Inference"><a href="#Inference" class="headerlink" title="Inference"></a>Inference</h3><p>[1] <a target="_blank" rel="noopener" href="https://speech.ee.ntu.edu.tw/~tlkagk/courses/MLDS_2018/Lecture/Seq%20(v2">Seq-to-seq Learning</a>.pdf )</p>
+<p>[2] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32085405">人人都能看懂的LSTM</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">miller</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://aigonna.com/2020/09/20/4.RNN%EF%BC%8C%20LSTM%20%EF%BC%8C%20GRU%20%E7%BB%93%E6%9E%84%E8%A7%A3%E9%87%8A%E5%92%8C%E5%85%B6%E5%9C%A8Pytorch%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/">http://aigonna.com/2020/09/20/4.RNN%EF%BC%8C%20LSTM%20%EF%BC%8C%20GRU%20%E7%BB%93%E6%9E%84%E8%A7%A3%E9%87%8A%E5%92%8C%E5%85%B6%E5%9C%A8Pytorch%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://aigonna.com" target="_blank">aigonna</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/GRU/">GRU</a><a class="post-meta__tags" href="/tags/LSTM/">LSTM</a><a class="post-meta__tags" href="/tags/RNN/">RNN</a><a class="post-meta__tags" href="/tags/Pytorch/">Pytorch</a></div><div class="post_share"><div class="social-share" data-image="/img/imgs/0.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/09/21/2.%20skip-gram-ns%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0/"><img class="prev-cover" src="/img/imgs/7.jpg" onerror="onerror=null;src='/img/imgs/0.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">skip-gram 负采样代码笔记</div></div></a></div><div class="next-post pull-right"><a href="/2020/09/14/NLP%20Paper%201.Mikolov%E8%AE%BA%E6%96%87Efficient%20Estimation%20ofWord%20Representations%20in%20Vector%20Space%20%E7%AC%94%E8%AE%B0/"><img class="next-cover" src="/img/imgs/15.jpg" onerror="onerror=null;src='/img/imgs/0.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">1.Efficient Estimation ofWord Representations in Vector Space——Mikolov论文笔记</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/12/12/CS224N Lecture 6 Vanishing Gradients, Fancy RNNs, Seq2Seq/" title="CS224N Lecture 6 Vanishing Gradients, Fancy RNNs, Seq2Seq"><img class="cover" src="/img/imgs/6.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-12</div><div class="title">CS224N Lecture 6 Vanishing Gradients, Fancy RNNs, Seq2Seq</div></div></a></div><div><a href="/2020/09/25/ML_shap/" title="2. shap 解释模型"><img class="cover" src="/img/imgs/9.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-25</div><div class="title">2. shap 解释模型</div></div></a></div><div><a href="/2020/12/10/CS224N Lecture 5 Recurrent Neural Networks and Language Models/" title="CS224N Lecture 5 Recurrent Neural Networks and Language Models"><img class="cover" src="/img/imgs/5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-10</div><div class="title">CS224N Lecture 5 Recurrent Neural Networks and Language Models</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#RNN%EF%BC%8C-LSTM-%EF%BC%8C-GRU-%E7%BB%93%E6%9E%84%E8%A7%A3%E9%87%8A%E5%92%8C%E5%85%B6%E5%9C%A8Pytorch%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">RNN， LSTM ， GRU 结构解释和其在Pytorch中的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-RNN-%E7%BB%93%E6%9E%84%E5%92%8C%E5%86%85%E9%83%A8%E8%AE%A1%E7%AE%97"><span class="toc-text">1. RNN 结构和内部计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-LSTM"><span class="toc-text">2. LSTM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-GRU"><span class="toc-text">3. GRU</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Inference"><span class="toc-text">Inference</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021&nbsp;<i style="color:#FF6A6A;animation: announ_animation 0.8s linear infinite;"class="fas fa-heart"></i> By miller</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      //tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'forest',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: '5sVUTO1MTpgoo7pDynh6zYEM-MdYXbMMI',
+      appKey: 'vPUvOT1iP6YqcPPtYSqf8F7A',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script><h4>AIgonna</h4></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script></div></body></html>

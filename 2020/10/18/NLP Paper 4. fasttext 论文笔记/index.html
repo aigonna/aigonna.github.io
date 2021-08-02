@@ -1,0 +1,315 @@
+<!DOCTYPE html><html class="hide-aside" lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>4.1 Fasttext 分类器论文Bag of Tricks for Efficient Text Classification | aigonna</title><meta name="keywords" content="fastText,n-grams,char CNN,char CRNN"><meta name="author" content="miller"><meta name="copyright" content="miller"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="4.1 Fasttext 分类器论文Bag of Tricks for Efficient Text Classification 原文链接  Abstract本文意在探索一种简单又有效的文本分类基准。实验证明了fast text 分类器 fastText在准确率上表现几乎与一些深度学习模型不相上下，并且在训练和评估上快很多。fastText可以使用标准多核cpu上训练大于10亿词汇，训练时间小于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4.1 Fasttext 分类器论文Bag of Tricks for Efficient Text Classification">
+<meta property="og:url" content="http://aigonna.com/2020/10/18/NLP%20Paper%204.%20fasttext%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="aigonna">
+<meta property="og:description" content="4.1 Fasttext 分类器论文Bag of Tricks for Efficient Text Classification 原文链接  Abstract本文意在探索一种简单又有效的文本分类基准。实验证明了fast text 分类器 fastText在准确率上表现几乎与一些深度学习模型不相上下，并且在训练和评估上快很多。fastText可以使用标准多核cpu上训练大于10亿词汇，训练时间小于">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://aigonna.com/img/imgs/13.jpg">
+<meta property="article:published_time" content="2020-10-18T15:13:31.000Z">
+<meta property="article:modified_time" content="2021-05-09T17:35:17.639Z">
+<meta property="article:author" content="miller">
+<meta property="article:tag" content="fastText">
+<meta property="article:tag" content="n-grams">
+<meta property="article:tag" content="char CNN">
+<meta property="article:tag" content="char CRNN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://aigonna.com/img/imgs/13.jpg"><link rel="shortcut icon" href="/img/AI.png"><link rel="canonical" href="http://aigonna.com/2020/10/18/NLP%20Paper%204.%20fasttext%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-05-10 01:35:17'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/bg.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/AI.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">63</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">139</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/imgs/13.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">aigonna</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">4.1 Fasttext 分类器论文Bag of Tricks for Efficient Text Classification</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-10-18T15:13:31.000Z" title="undefined 2020-10-18 23:13:31">2020-10-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/NLP-paper/">NLP paper</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="4-1-Fasttext-分类器论文Bag-of-Tricks-for-Efficient-Text-Classification"><a href="#4-1-Fasttext-分类器论文Bag-of-Tricks-for-Efficient-Text-Classification" class="headerlink" title="4.1 Fasttext 分类器论文Bag of Tricks for Efficient Text Classification"></a>4.1 Fasttext 分类器论文Bag of Tricks for Efficient Text Classification</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1607.01759.pdf">原文链接</a></li>
+</ul>
+<h4 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h4><p>本文意在探索一种简单又有效的文本分类基准。实验证明了fast text 分类器 <code>fastText</code>在准确率上表现几乎与一些深度学习模型不相上下，并且在训练和评估上快很多。fastText可以使用标准多核cpu上训练大于10亿词汇，训练时间小于10分钟，并且区分312K类别的50w条句子用时少于1min。</p>
+<h4 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h4><p>文本分类在NLP许多应用上是非常重要的任务，如搜索，信息检索，排序和文档分类。近来，基于神经网络建模变得越来越受欢迎。虽然，在实际中这些模型取得不错的表现，它们在训练和测试时，变得相对较慢，限制在于其使用非常大的数据集。</p>
+<p>与此同时，线性分类器经常被看作文本分类任务的baseline。尽管它们很简单，如果特征使用合适的话也能取得非常好的表现。其也有潜力拓展到非常大的语料上。</p>
+<p>在本文中，探索如何将这些baseline，在文本分类的上下文中，拓展到有巨大输出空间的非常大的语料库上。受到近期成果，有效词表示学习启发，我们证明了有等级约束和快速损失近似的线性模型在10亿词汇上能10分钟内训练完，并且跟最小成果取得相当的表现。在两个不同任务上评估fastText的质量，分别是命名标注预测和情感分析。</p>
+<h4 id="2-模型架构"><a href="#2-模型架构" class="headerlink" title="2. 模型架构"></a>2. 模型架构</h4><p>简单和句子分类的有效基准是表示句子为BoW并训练为一个线性分类器，如logistic 回归或SVM。然而， 线性分类器不共享类别间的特征参数。当一些类别只有少量样本时，这可能限制其生成大的输出空间的上下文。该问题的通用解决方案分解线性分类器为第等级矩阵和使用多层神经网络。</p>
+<p>图1展示一个简单的有等级约束线性模型。第一个权重矩阵A是所有词汇的查询表。词表示经过平均后得到文本表示，接着喂进线性分类器。文本表示是一个隐藏能潜在被利用的变量。该架构类似于MIkolov的cbow, 不过这里中间词被标签代替。(就是预测中心变成了预测文本标签)。 使用softmax <script type="math/tex">f</script> 来计算所有预定义类别的概率分布。对应<script type="math/tex">N</script> 个文档集，最小化所有类别负的对数似然：</p>
+<script type="math/tex; mode=display">
+-\frac{1}{N} \sum_{n=1}^N y_n \text{log}(f(BAx_n))</script><p>其中， <script type="math/tex">x_n</script>是标准化后 n个文档的特征 (词向量)， <script type="math/tex">y_n</script>是标签， <script type="math/tex">A, B</script>是权重矩阵， <script type="math/tex">f</script>是softmax函数。 这个模型异步地训练在多个CPU上，使用线性衰减学习率的SGD。</p>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210509210906.png" alt="image-20210509210903912" style="zoom:33%;" /></p>
+<h5 id="2-1-层次softmax"><a href="#2-1-层次softmax" class="headerlink" title="2.1 层次softmax"></a>2.1 层次softmax</h5><p>当类别数目很大时，计算线性分类器非常昂贵。更具体地，计算复杂度是<script type="math/tex">O(kh)</script>，其中<script type="math/tex">k</script>是类别数目， <script type="math/tex">h</script>是文本表示的维度。为了减少计算时间，使用基于哈夫曼编码树的层次softmax。</p>
+<p>在训练时， 计算复杂度将掉到<script type="math/tex">O(h\text{log}_2(k))</script>.</p>
+<p>在测试时搜索大部分可能的类别，层次softmax也具有优势。每个节点分配一个概率，表示从根到该节点的路径的概率。如果节点在深度<script type="math/tex">l+1</script>, 父节点为<script type="math/tex">n_1, \cdots, n_l</script>，其可能的概率是:</p>
+<script type="math/tex; mode=display">
+P(n_{n+1}) = \prod_{i=1}^lP(n_i)</script><p>这意味着节点概率总是小于其父节点。用深度优先搜索树，并追踪叶子间最大的概率，使得我们能抛弃任何与相关小概率的分支。实际上，我们在测试时观察到复杂度降为<script type="math/tex">O(h\text{log}_2(k))</script>。 该方法使用二叉堆进一步拓展，计算前T个目标计算代价为<script type="math/tex">O(\text{log(T)})</script>。</p>
+<h5 id="2-2-N-gram-features"><a href="#2-2-N-gram-features" class="headerlink" title="2.2 N-gram features"></a>2.2 N-gram features</h5><p>词袋忽略词的顺序，但是考虑词的顺序往往计算代价高昂。而本文使用n-grams集合作为附加的特征来获取一些局部的词的顺序信息。实际中这非常有效也取得了跟直接使用词序差不多的结果。</p>
+<p>通过使用hashing trick方法，实现了一种快速且空间利用率高的n-grams空间映射。</p>
+<h4 id="3-实验"><a href="#3-实验" class="headerlink" title="3. 实验"></a>3. 实验</h4><p>在两个不同任务上评估fastText.</p>
+<ol>
+<li>在情感分析问题上，拿它和已存在的文本分类器比较</li>
+<li>评估其容量以便拓展到标注预测数据集的大的输出空间上。这里，模型可以使用<code>Vowpal Wabbit</code> 库实现，但在实际观察中，专门实现可以快2-5倍。</li>
+</ol>
+<h5 id="3-1-情感分析"><a href="#3-1-情感分析" class="headerlink" title="3.1 情感分析"></a>3.1 情感分析</h5><p><strong>数据集和baselines</strong>  使用了8个数据集并按照Zhang的评估指标。选取了来自Zhang的n-grams和TFIDF baselines ，也有<code>character level convolutional model (char-CNN)</code>字符级卷积模型，字符级卷积循环网络 char-CRNN，<code>very deep convolutional network (VDCNN)</code>非常深的卷积网络作为对比模型。</p>
+<p>表1是：在8个数据集上测试准确率的比较。</p>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210510005200.png" alt="image-20210510005117097" style="zoom:30%;" /></p>
+<p>表2：训练一轮时间比较，fastText和 char-CNN、VDCNN</p>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210510005504.png" alt="image-20210510005501465" style="zoom:30%;" /></p>
+<p>表3：测试准确性比较</p>
+<blockquote>
+<p>our method is competitive with the methods presented in Tang et al. (2015). We tune the hyperparameters on the validation set and observe that using n-grams up to 5 leads to the best performance. Unlike Tang et al. (2015), fastText does not use pre-trained word embeddings, which can be explained the 1% difference in accuracy.</p>
+<p>fastText跟Tang的模型方法比较。在验证集上，调试超参数n-gram为5时表现最好。不像Tang，fastText不使用预训练词嵌入，准确性只有1%的差。</p>
+</blockquote>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210510005646.png" alt="image-20210510005644575" style="zoom:30%;" /></p>
+<h5 id="3-2-标注预测"><a href="#3-2-标注预测" class="headerlink" title="3.2 标注预测"></a>3.2 标注预测</h5><p>在YFCC100M数据集上，结果如下：</p>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210510010658.png" alt="image-20210510010657030" style="zoom:30%;" /></p>
+<p>实验结果如下：比较小的隐藏层效果就差不多，加上bigram效果会好点</p>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210510010746.png" alt="image-20210510010744181" style="zoom:25%;" /></p>
+<h4 id="4-讨论和结果"><a href="#4-讨论和结果" class="headerlink" title="4. 讨论和结果"></a>4. 讨论和结果</h4><p>提出了一种简单的文本分类方法。不像非监督的word2vec训练词向量，我们的词特征能平均后合在一起构成良好的句子表示。在几个任务中， fastText获得了跟受深度学习启发提出的方法差不多的效果，而且更快。尽管深度神经网络在理论上有比浅层模型更强的表示能力，不清楚如果简单的文本分类问题像情感分析是合适的任务来评估它们。我们公开了代码以便研究机构能在我们工作上面轻松搭建。</p>
+<h3 id="Inference"><a href="#Inference" class="headerlink" title="Inference"></a>Inference</h3><p>[1] <a target="_blank" rel="noopener" href="https://www.jiqizhixin.com/articles/2020-07-03-14">Word Embedding Papers | 经典再读之fastText</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://blog.csdn.net/tingkr/article/details/84023813">fasttext论文</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">miller</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://aigonna.com/2020/10/18/NLP%20Paper%204.%20fasttext%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">http://aigonna.com/2020/10/18/NLP%20Paper%204.%20fasttext%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://aigonna.com" target="_blank">aigonna</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/fastText/">fastText</a><a class="post-meta__tags" href="/tags/n-grams/">n-grams</a><a class="post-meta__tags" href="/tags/char-CNN/">char CNN</a><a class="post-meta__tags" href="/tags/char-CRNN/">char CRNN</a></div><div class="post_share"><div class="social-share" data-image="/img/imgs/13.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/10/21/1.%20NLP%20%E7%94%A8python%E5%A4%84%E7%90%86/"><img class="prev-cover" src="/img/imgs/1.jpg" onerror="onerror=null;src='/img/imgs/0.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">1. 用python处理NLP</div></div></a></div><div class="next-post pull-right"><a href="/2020/09/25/ML_shap/"><img class="next-cover" src="/img/imgs/9.jpg" onerror="onerror=null;src='/img/imgs/0.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">2. shap 解释模型</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/12/10/CS224N Lecture 5 Recurrent Neural Networks and Language Models/" title="CS224N Lecture 5 Recurrent Neural Networks and Language Models"><img class="cover" src="/img/imgs/5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-10</div><div class="title">CS224N Lecture 5 Recurrent Neural Networks and Language Models</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-Fasttext-%E5%88%86%E7%B1%BB%E5%99%A8%E8%AE%BA%E6%96%87Bag-of-Tricks-for-Efficient-Text-Classification"><span class="toc-text">4.1 Fasttext 分类器论文Bag of Tricks for Efficient Text Classification</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Introduction"><span class="toc-text">1. Introduction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84"><span class="toc-text">2. 模型架构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-%E5%B1%82%E6%AC%A1softmax"><span class="toc-text">2.1 层次softmax</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-N-gram-features"><span class="toc-text">2.2 N-gram features</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%AE%9E%E9%AA%8C"><span class="toc-text">3. 实验</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90"><span class="toc-text">3.1 情感分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-%E6%A0%87%E6%B3%A8%E9%A2%84%E6%B5%8B"><span class="toc-text">3.2 标注预测</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E8%AE%A8%E8%AE%BA%E5%92%8C%E7%BB%93%E6%9E%9C"><span class="toc-text">4. 讨论和结果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Inference"><span class="toc-text">Inference</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021&nbsp;<i style="color:#FF6A6A;animation: announ_animation 0.8s linear infinite;"class="fas fa-heart"></i> By miller</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      //tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'forest',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: '5sVUTO1MTpgoo7pDynh6zYEM-MdYXbMMI',
+      appKey: 'vPUvOT1iP6YqcPPtYSqf8F7A',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script><h4>AIgonna</h4></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script></div></body></html>

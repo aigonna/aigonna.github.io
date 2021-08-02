@@ -1,0 +1,382 @@
+<!DOCTYPE html><html class="hide-aside" lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>机器学习-白板推导 3. 线性回归 | aigonna</title><meta name="keywords" content="线性回归,最小二乘法,Ridge,Lasso"><meta name="author" content="miller"><meta name="copyright" content="miller"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="机器学习-白板推导 3. 线性回归1. 线性回归矩阵表示假定数据集：  \mathcal{D}&#x3D;\{(x_1, y_1),(x_2, y_2),\cdots,(x_N, y_N)\}, \ 其中x_i\in\mathbb{R}^{p}，y_i\in\mathbb{R}，i&#x3D;1, \ 2,\cdots,\ N。数据矩阵为：(这样可以保证每一行为一个数据点)  \begin{equation}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习-白板推导 3. 线性回归">
+<meta property="og:url" content="http://aigonna.com/2020/07/14/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%203%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/index.html">
+<meta property="og:site_name" content="aigonna">
+<meta property="og:description" content="机器学习-白板推导 3. 线性回归1. 线性回归矩阵表示假定数据集：  \mathcal{D}&#x3D;\{(x_1, y_1),(x_2, y_2),\cdots,(x_N, y_N)\}, \ 其中x_i\in\mathbb{R}^{p}，y_i\in\mathbb{R}，i&#x3D;1, \ 2,\cdots,\ N。数据矩阵为：(这样可以保证每一行为一个数据点)  \begin{equation}">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://aigonna.com/img/imgs/4.jpg">
+<meta property="article:published_time" content="2020-07-14T15:03:31.000Z">
+<meta property="article:modified_time" content="2021-05-26T05:44:19.675Z">
+<meta property="article:author" content="miller">
+<meta property="article:tag" content="线性回归">
+<meta property="article:tag" content="最小二乘法">
+<meta property="article:tag" content="Ridge">
+<meta property="article:tag" content="Lasso">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://aigonna.com/img/imgs/4.jpg"><link rel="shortcut icon" href="/img/AI.png"><link rel="canonical" href="http://aigonna.com/2020/07/14/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%203%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-05-26 13:44:19'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/bg.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/AI.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">63</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">139</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/imgs/4.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">aigonna</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">机器学习-白板推导 3. 线性回归</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-07-14T15:03:31.000Z" title="undefined 2020-07-14 23:03:31">2020-07-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="机器学习-白板推导-3-线性回归"><a href="#机器学习-白板推导-3-线性回归" class="headerlink" title="机器学习-白板推导 3. 线性回归"></a>机器学习-白板推导 3. 线性回归</h3><h4 id="1-线性回归矩阵表示"><a href="#1-线性回归矩阵表示" class="headerlink" title="1. 线性回归矩阵表示"></a>1. 线性回归矩阵表示</h4><p>假定数据集：</p>
+<script type="math/tex; mode=display">
+\mathcal{D}=\{(x_1, y_1),(x_2, y_2),\cdots,(x_N, y_N)\}, \ 其中x_i\in\mathbb{R}^{p}，y_i\in\mathbb{R}，i=1, \ 2,\cdots,\ N。</script><p>数据矩阵为：(这样可以保证每一行为一个数据点)</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+    X=(x_1, x_2, \cdots, x_N)^T=
+    \begin{pmatrix}
+    x_1^T \\ 
+    x_2^T \\
+    \vdots\\
+    x_N^T \\
+    \end{pmatrix} =
+    \begin{pmatrix}
+    x_{11} & x_{12} & \dots & x_{1p}\\
+    x_{21} & x_{32} & \dots & x_{2p}\\
+    \vdots & \vdots & \ddots & \vdots\\
+    x_{N1} & x_{N2} & \dots & x_{Np}\\
+    \end{pmatrix}_{N\times P}
+\end{equation}</script><script type="math/tex; mode=display">
+\begin{equation}
+    Y=
+    \begin{pmatrix}
+    y_1 \\ 
+    y_2 \\
+    \vdots\\
+    y_N \\
+    \end{pmatrix}_{N\times 1}
+\end{equation}</script><p>设拟合的函数为：<script type="math/tex">f(x)=W^T x</script></p>
+<p>如下图所示，</p>
+<p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210521173505.png" alt="image-20210521173503596" style="zoom:25%;" /></p>
+<p>对于每个样本点，比如<script type="math/tex">(x_3, y_3)</script>的残差就是红色部分的距离：<script type="math/tex">\lVert w^Tx_3 - y_3 \rVert^2</script>.因此总的损失为：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+     L(w) = & \sum_{i=1}^{N}\lVert w^T x_i-y_i\rVert^2 \\
+          = & (w^T x_1-y_1, w^T x_2-y_2, \dots, w^T x_N-y_N)
+          \begin{pmatrix}
+            w^T x_1-y_1\\
+            w^T x_2-y_2\\
+            \vdots\\
+            w^T x_N-y_N\\
+          \end{pmatrix}                      
+\end{align}</script><p>写成矩阵形式就是：</p>
+<script type="math/tex; mode=display">
+ \begin{align}
+        L(W) = & (W^TX^T-Y^T)(W^TX^T-Y^T)^T \\
+        = & (W^TX^T-Y^T)(XW-Y) \\
+        = & W^TX^TXW - W^TX^TY - Y^TXW + Y^TY\\
+        = & W^TX^TXW - 2W^TX^TY + Y^TY
+ \end{align}</script><p>对 <script type="math/tex">W</script>求导得：</p>
+<script type="math/tex; mode=display">
+\frac{\partial L(W)}{\partial W} = 2X^TXW-2X^TY = 0 \Longrightarrow W=(X^TX)^{-1}X^TY</script><p>这里要求<script type="math/tex">（X^TX）^{-1}</script>满秩，也就是<script type="math/tex">X^TX \in \mathbb{R}^{p \times p}</script>是满秩的即<script type="math/tex">X</script>矩阵列向量都是独立的，即<script type="math/tex">X</script>特征列都不相关。</p>
+<h4 id="2-最小二乘估计的几何意义"><a href="#2-最小二乘估计的几何意义" class="headerlink" title="2. 最小二乘估计的几何意义"></a>2. 最小二乘估计的几何意义</h4><p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/20210521183839.png" alt="image-20210521183837745" style="zoom:25%;" /></p>
+<p>如上图，假设样本<script type="math/tex">\mathbf{x}_1, \mathbf{x}_2</script>张成空间为平面<script type="math/tex">\alpha</script>。 那么其通过拟合得到的函数为:</p>
+<script type="math/tex; mode=display">
+\hat {\mathbf{y}}= w_1x_i + w_2x_2</script><p>当我们拟合得到的<script type="math/tex">\hat {\mathbf{y}}</script>正好是真实值<script type="math/tex">\mathbf{y}</script>在平面<script type="math/tex">\alpha</script>内的投影时，可以使得d最小。即<script type="math/tex">r \perp 平面\alpha</script>那么有：</p>
+<script type="math/tex; mode=display">
+X^T(Y - X^TW) = 0</script><p>因此<script type="math/tex">W = (X^TX)^{-1}X^TY</script>.</p>
+<h4 id="3-从概率视角看最小二乘法"><a href="#3-从概率视角看最小二乘法" class="headerlink" title="3. 从概率视角看最小二乘法"></a>3. 从概率视角看最小二乘法</h4><p>假设<script type="math/tex">\mathbf{y} = \mathbf{w}^T\mathbf{x} + \mathbf{\epsilon}</script>, 其中<script type="math/tex">\mathbf{\epsilon} \sim \mathcal{N}(0, \sigma^2)</script>。那么有<script type="math/tex">\mathbf{y} \sim \mathcal{N}(\mathbf{w}^T\mathbf{x} , \sigma^2)</script>。在该条件下，目标是求<script type="math/tex">\mathbf{w}</script>使得观察值<script type="math/tex">\mathbf{y}</script>出现的概率最大，使用MLE求解下式：</p>
+<script type="math/tex; mode=display">
+ P(y|x;w)=\frac{1}{\sqrt{2\pi}\sigma} \text{ exp}\left(-\frac{(y-w^Tx)^2}{2\sigma^2}\right)</script><p>即对于每个样本<script type="math/tex">\mathbf{x}_i</script>都能式上面概率最大：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+    L(w) = & \text{ ln}\ p(y|x;w) = \text{ ln}\prod_{i=1}^Np(y_i|x_i;w) \\
+         = & \sum_{i=1}^N\text{ ln}\ p(y_i|x_i;w) \\ 
+         = & \sum_{i=1}^N \left( \text{ ln}\frac{1}{\sqrt{2\pi}\sigma} + \text{ ln}\ \text{ exp}\left( -\frac{(y_i - w^Tx)^2}{2\sigma^2} \right) \right)\\
+         = &\sum_{i=1}^N \left( \text{ ln}\frac{1}{\sqrt{2\pi}\sigma} +  -\frac{(y_i - w^Tx)^2}{2\sigma^2} \right) 
+\end{align}</script><p>因此，只要<script type="math/tex">(y_i - w^Tx)^2</script>最大即可。这与矩阵求解表达式一样，因此，最小二乘法隐含着一个条件，噪声符合高斯分布。</p>
+<h4 id="4-正则化"><a href="#4-正则化" class="headerlink" title="4. 正则化"></a>4. 正则化</h4><p>对损失函数正则化后，表达式变为<script type="math/tex">L(w)+\lambda P(w)</script>。</p>
+<ol>
+<li>Lasso，其中<script type="math/tex">P(w) = \lVert w \rVert_1 = \sum_{i=1}^Nw_i</script></li>
+<li>Ridge，岭回归，也就是<script type="math/tex">P(w)=\lVert w\lVert_2^2=\sum_{i=1}^Nw_i^2</script></li>
+</ol>
+<h5 id="岭回归频率派角度"><a href="#岭回归频率派角度" class="headerlink" title="岭回归频率派角度"></a>岭回归频率派角度</h5><p>损失函数改写为 <script type="math/tex">L(W)=\sum_{i=1}^N\lVert w^Tx_i-y_i \rVert^2 + \lambda W^TW</script></p>
+<script type="math/tex; mode=display">
+\begin{align}
+    L(W) = & \sum_{i=1}^N \lVert w^Tx_i-y_i \rVert^2 + \lambda W^TW \\
+    \nonumber = & (W^TX^T - Y^T)(XW-Y)+\lambda W^TW \\
+    \nonumber = & W^TX^TXW - W^TX^TY - Y^TXW - Y^TY + \lambda W^TW \\ 
+    \nonumber = & W^TX^TXW - 2W^TX^TY - Y^TY + \lambda W^TW \\
+    \nonumber = & W^T(X^TX + \lambda I)W - 2W^TX^TY - Y^TY 
+\end{align}</script><p>然后 <script type="math/tex">L(W)</script>对<script type="math/tex">W</script>求导得：</p>
+<script type="math/tex; mode=display">
+\frac{\partial J(W)}{\partial W} = 2(X^TX + \lambda I)W - 2X^TY = 0</script><p>可得： </p>
+<script type="math/tex; mode=display">
+W = (X^TX + \lambda I)^{-1}X^TY</script><p>这里，因为<script type="math/tex">X^T X</script>是半正定矩阵,  <script type="math/tex">X^TX + \lambda I</script>必然可逆。</p>
+<h5 id="岭回归Bayes估计角度"><a href="#岭回归Bayes估计角度" class="headerlink" title="岭回归Bayes估计角度"></a>岭回归Bayes估计角度</h5><p>根据第3小节所说， <script type="math/tex">\mathbf{\epsilon} \sim \mathcal{N}(0, \sigma^2)，\  \mathbf{y} \sim \mathcal{N}(\mathbf{w}^T\mathbf{x} , \sigma^2)</script> 可以得到 <script type="math/tex">P(w), P(y|w)</script>:</p>
+<script type="math/tex; mode=display">
+P(y|w) = \frac{1}{\sqrt{2\pi}\sigma} \text{ exp}\left( -\frac{(y - w^Tx)^2}{2\sigma^2} \right) \\
+P(w) = \frac{1}{\sqrt{2\pi}\sigma_0}\text{ exp}\left( -\frac{\lVert w\rVert^2}{2\sigma_0^2} \right)</script><p>目标是求<script type="math/tex">w</script>的最大后验估计MAP, 也就是<script type="math/tex">\hat{w} = \text{ argmax}_w  \ P(w|y)</script>。由bayes公式得：</p>
+<script type="math/tex; mode=display">
+P(w|y) = \frac{P(y|w)P(w)}{P(y)}</script><p>因为<script type="math/tex">y</script>是由数据集给定的，可以看做常量，再加入对数操作简化计算，可以简化成：</p>
+<script type="math/tex; mode=display">
+\text{ argmax}_w \ P(w|y)= \log P(y|w)P(w)</script><p>即：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+    \text{ argmax}_w \ P(w|y) = & \sum_{i=1}^{N}\log \frac{1}{\sqrt{2\pi}\sigma}\text{ exp}\left( -\frac{(y_i - w^Tx_i)^2}{2\sigma^2}  \right) \frac{1}{\sqrt{2\pi}\sigma_0}\text{ exp}\left( -\frac{||w||^2}{2\sigma_0^2} \right) \\
+    = & \sum_{i=1}^{N}\log \frac{1}{2\pi\sigma\sigma_0}\text{ exp}\left( -\frac{(y_i - w^Tx_i)^2}{2\sigma^2}  -\frac{||w||^2}{2\sigma_0^2} \right) \\
+    = & \sum_{i=1}^{N} \log \frac{1}{2\pi\sigma\sigma_0} + \log \text{ exp}\left( -\frac{(y_i - w^Tx_i)^2}{2\sigma^2}  -\frac{||w||^2}{2\sigma_0^2} \right) 
+\end{align}</script><p>因为<script type="math/tex">\log \frac{1}{2\pi\sigma\sigma_0}</script>与 最大化<script type="math/tex">P(w|y)</script>无关，可以舍去，即：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+    \text{ argmax}_w \ P(w|y) 
+    = & \sum_{i=1}^{N}  \log \text{ exp}\left( -\frac{(y_i - w^Tx_i)^2}{2\sigma^2}  -\frac{||w||^2}{2\sigma_0^2} \right) \\
+    = & \sum_{i=1}^{N}  -\frac{(y_i - w^Tx_i)^2}{2\sigma^2}  -\frac{||w||^2}{2\sigma_0^2} \\
+\end{align}</script><p>进一步简化的：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+    \text{ argmax}_w  P(w|y) =  \sum_{i=1}^{N} (y_i - w^Tx_i)^2  + \frac{\sigma^2}{\sigma_0^2}||w||^2
+\end{equation}</script><p>这样跟从频率角度得到的岭回归结果一样。即最小二乘估计中隐藏一个假设：噪声服从高斯分布。即正则化的最小二乘法等价于最大后验估计MAP，其中噪声为高斯分布，并且假定<script type="math/tex">w</script>也服从高斯分布。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">miller</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://aigonna.com/2020/07/14/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%203%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">http://aigonna.com/2020/07/14/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%203%20%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://aigonna.com" target="_blank">aigonna</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">线性回归</a><a class="post-meta__tags" href="/tags/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95/">最小二乘法</a><a class="post-meta__tags" href="/tags/Ridge/">Ridge</a><a class="post-meta__tags" href="/tags/Lasso/">Lasso</a></div><div class="post_share"><div class="social-share" data-image="/img/imgs/4.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/07/17/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%204.1%20%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/"><img class="prev-cover" src="/img/imgs/0.jpg" onerror="onerror=null;src='/img/imgs/0.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">机器学习-白板推导 4.1 线性分类</div></div></a></div><div class="next-post pull-right"><a href="/2020/07/12/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%202%20%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83/"><img class="next-cover" src="/img/imgs/8.jpg" onerror="onerror=null;src='/img/imgs/0.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">机器学习-白板推导 2 高斯分布</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/06/11/机器学习的数学基础Lecture4/" title="Lecture 4 Least squares and  Optimization"><img class="cover" src="/img/imgs/12.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-11</div><div class="title">Lecture 4 Least squares and  Optimization</div></div></a></div><div><a href="/2020/06/10/机器学习的数学基础Lecture3/" title="Lecture 3 Least squares and geometry"><img class="cover" src="/img/ach.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-10</div><div class="title">Lecture 3 Least squares and geometry</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC-3-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="toc-text">机器学习-白板推导 3. 线性回归</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="toc-text">1. 线性回归矩阵表示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E4%BC%B0%E8%AE%A1%E7%9A%84%E5%87%A0%E4%BD%95%E6%84%8F%E4%B9%89"><span class="toc-text">2. 最小二乘估计的几何意义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E4%BB%8E%E6%A6%82%E7%8E%87%E8%A7%86%E8%A7%92%E7%9C%8B%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95"><span class="toc-text">3. 从概率视角看最小二乘法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-text">4. 正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B2%AD%E5%9B%9E%E5%BD%92%E9%A2%91%E7%8E%87%E6%B4%BE%E8%A7%92%E5%BA%A6"><span class="toc-text">岭回归频率派角度</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B2%AD%E5%9B%9E%E5%BD%92Bayes%E4%BC%B0%E8%AE%A1%E8%A7%92%E5%BA%A6"><span class="toc-text">岭回归Bayes估计角度</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021&nbsp;<i style="color:#FF6A6A;animation: announ_animation 0.8s linear infinite;"class="fas fa-heart"></i> By miller</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      //tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'forest',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: '5sVUTO1MTpgoo7pDynh6zYEM-MdYXbMMI',
+      appKey: 'vPUvOT1iP6YqcPPtYSqf8F7A',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script><h4>AIgonna</h4></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script></div></body></html>

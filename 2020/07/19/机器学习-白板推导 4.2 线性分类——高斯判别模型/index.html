@@ -1,0 +1,447 @@
+<!DOCTYPE html><html class="hide-aside" lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>机器学习-白板推导4.2 线性分类——高斯判别模型 | aigonna</title><meta name="keywords" content="线性分类,高斯判别分析"><meta name="author" content="miller"><meta name="copyright" content="miller"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="机器学习-白板推导4.2 线性分类——高斯判别模型1. 高斯判别模型描述Gaussian Discriminate Analysis——GDA 模型描述。 假定数据集：  \mathcal{D}&#x3D;\{(x_1, y_1),(x_2, y_2),\cdots,(x_N, y_N)\}, \ 其中x_i\in\mathbb{R}^{p}，y_i\in\mathbb{R}，i&#x3D;1, \ 2,\cdots">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习-白板推导4.2 线性分类——高斯判别模型">
+<meta property="og:url" content="http://aigonna.com/2020/07/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%204.2%20%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E2%80%94%E2%80%94%E9%AB%98%E6%96%AF%E5%88%A4%E5%88%AB%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:site_name" content="aigonna">
+<meta property="og:description" content="机器学习-白板推导4.2 线性分类——高斯判别模型1. 高斯判别模型描述Gaussian Discriminate Analysis——GDA 模型描述。 假定数据集：  \mathcal{D}&#x3D;\{(x_1, y_1),(x_2, y_2),\cdots,(x_N, y_N)\}, \ 其中x_i\in\mathbb{R}^{p}，y_i\in\mathbb{R}，i&#x3D;1, \ 2,\cdots">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://aigonna.com/img/imgs/15.jpg">
+<meta property="article:published_time" content="2020-07-19T15:11:31.000Z">
+<meta property="article:modified_time" content="2021-05-26T14:44:00.491Z">
+<meta property="article:author" content="miller">
+<meta property="article:tag" content="线性分类">
+<meta property="article:tag" content="高斯判别分析">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://aigonna.com/img/imgs/15.jpg"><link rel="shortcut icon" href="/img/AI.png"><link rel="canonical" href="http://aigonna.com/2020/07/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%204.2%20%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E2%80%94%E2%80%94%E9%AB%98%E6%96%AF%E5%88%A4%E5%88%AB%E6%A8%A1%E5%9E%8B/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-05-26 22:44:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/bg.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/AI.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">63</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">139</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/imgs/15.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">aigonna</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">机器学习-白板推导4.2 线性分类——高斯判别模型</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-07-19T15:11:31.000Z" title="undefined 2020-07-19 23:11:31">2020-07-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="机器学习-白板推导4-2-线性分类——高斯判别模型"><a href="#机器学习-白板推导4-2-线性分类——高斯判别模型" class="headerlink" title="机器学习-白板推导4.2 线性分类——高斯判别模型"></a>机器学习-白板推导4.2 线性分类——高斯判别模型</h3><h4 id="1-高斯判别模型描述"><a href="#1-高斯判别模型描述" class="headerlink" title="1. 高斯判别模型描述"></a>1. 高斯判别模型描述</h4><p><strong>Gaussian Discriminate Analysis</strong>——GDA 模型描述。</p>
+<p>假定数据集：</p>
+<script type="math/tex; mode=display">
+\mathcal{D}=\{(x_1, y_1),(x_2, y_2),\cdots,(x_N, y_N)\}, \ 其中x_i\in\mathbb{R}^{p}，y_i\in\mathbb{R}，i=1, \ 2,\cdots,\ N。</script><p>数据矩阵为：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+    X=(x_1, x_2, \cdots, x_N)^T=
+    \begin{pmatrix}
+    x_1^T \\ 
+    x_2^T \\
+    \vdots\\
+    x_N^T \\
+    \end{pmatrix} =
+    \begin{pmatrix}
+    x_{11} & x_{12} & \dots & x_{1p}\\
+    x_{21} & x_{32} & \dots & x_{2p}\\
+    \vdots & \vdots & \ddots & \vdots\\
+    x_{N1} & x_{N2} & \dots & x_{Np}\\
+    \end{pmatrix}_{N\times P}
+\end{equation}</script><script type="math/tex; mode=display">
+\begin{equation}
+    Y=
+    \begin{pmatrix}
+    y_1 \\ 
+    y_2 \\
+    \vdots\\
+    y_N \\
+    \end{pmatrix}_{N\times 1}
+\end{equation}</script><p>这里讨论高斯判别分析解决二分类问题，那么对于数据集<script type="math/tex">\{ (x_i, y_i)\}</script>, 有。数据集分成+1, -1两部分并增加以下约定：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}
+            C_1 = \left\{ x_i|y_i=1, i=1,2,\cdots,N_1 \right\} & \\
+            C_2 = \left\{ x_i|y_i=0, i=1,2,\cdots,N_2 \right\} & \\
+        \end{array}</script><p>其中，<script type="math/tex">|C_1|=N_1，|C_2|=N_2，且N_1+N_2=N</script>。</p>
+<p>现在用bayes公式来生成模型：</p>
+<script type="math/tex; mode=display">
+p(y|x)=\frac{p(x|y)p(y)}{p(x)}=\frac{p(x,y)}{p(x)}\propto p(x,y)</script><p>其中，<script type="math/tex">p(y)</script>是先验Prior， <script type="math/tex">p(y|x)</script>是后验Posterior。</p>
+<script type="math/tex; mode=display">
+\hat y = \text{argmax }_{y \in {0, 1}} p(x|y)p(y)</script><h4 id="2-高斯判别模型建立"><a href="#2-高斯判别模型建立" class="headerlink" title="2. 高斯判别模型建立"></a>2. 高斯判别模型建立</h4><p>因为是二分类问题，可以假定先验概率符合伯努利分布，<script type="math/tex">p(y)\sim \text{Bernoulli Distribution}</script>.</p>
+<script type="math/tex; mode=display">
+\begin{array}{c|cc}
+\mathrm{y} & 1 & 0 \\
+\hline \mathrm{p} & \varphi & 1-\varphi
+\end{array}</script><p>所以，其表达式为：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+    p(y)=
+    \left\{
+        \begin{array}{ll}
+            \varphi^y & y=1 \\
+            (1-\varphi)^{1-y} & y=0
+        \end{array}
+    \right.
+    \Longrightarrow
+    \varphi^y(1-\varphi)^{1-y}
+\end{equation}</script><p>我们假设两类别数据<script type="math/tex">p(x|y)</script>都符合高斯分布，其均值不同，但不同变量间的协方差矩阵一样，(其实协方差不一样结论也一样，只是计算复杂)因此有：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+    p(x|y)=
+    \left\{
+        \begin{array}{ll}
+            p(x|y=1)\sim \mathcal{N}(\mu_1, \Sigma) & \\
+            p(x|y=0)\sim \mathcal{N}(\mu_2, \Sigma) & \\
+        \end{array}
+    \right.
+    \Longrightarrow
+    \mathcal{N}(\mu_1, \Sigma)^y\mathcal{N}(\mu_2, \Sigma)^{1-y}
+\end{equation}</script><p>后验估计函数为：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+    \begin{split}
+        \mathcal{L}(\theta) = & \log\prod_{i=1}^Np(x_i,y_i) \\
+         = & \sum_{i=1}^N\log p(x_i,y_i) \\
+         = & \sum_{i=1}^N\log p(x_i|y_i)p(y_i) \\
+         = & \sum_{i=1}^N\left[ \log p(x_i|y_i)+ \log p(y_i) \right]\\
+         = & \sum_{i=1}^N\left[ \log \mathcal{N}(\mu_1, \Sigma)^{y_i}\mathcal{N}(\mu_2, \Sigma)^{1-y_i}+ \log \varphi^y_i(1-\varphi)^{1-y_i} \right]\\
+         = & \sum_{i=1}^N \log \mathcal{N}(\mu_1, \Sigma)^y_i + \sum_{i=1}^N \log \mathcal{N}(\mu_2, \Sigma)^{1-y_i}+ \sum_{i=1}^N \log \varphi^{y_i} + \sum_{i=1}^N \log (1-\varphi)^{1-y_i} \\
+    \end{split}
+\end{equation} \tag{1}</script><p>为了推导方便，记：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\mathcal{L}_1&  = \sum_{i=1}^N \log \mathcal{N}(\mu_1, \Sigma)^{y_i} \\
+\mathcal{L}_2&  =\sum_{i=1}^N \log \mathcal{N}(\mu_2, \Sigma)^{1-y_i} \\
+\mathcal{L}_3&  =\sum_{i=1}^N \log \varphi^{y_i} + \sum_{i=1}^N \log (1-\varphi)^{1-y_i}
+\end{align} \tag{2}</script><p>那么上述函数可以表示为：</p>
+<script type="math/tex; mode=display">
+\theta = (\mu_1,\mu_2,\Sigma,\varphi) \qquad \hat{\theta} = \text{argmax }_{\theta} \mathcal{L}(\theta) \tag{3}</script><h4 id="3-参数求解"><a href="#3-参数求解" class="headerlink" title="3. 参数求解"></a>3. 参数求解</h4><h5 id="1-求解-varphi"><a href="#1-求解-varphi" class="headerlink" title="1. 求解\varphi"></a>1. 求解<script type="math/tex">\varphi</script></h5><p>只有<script type="math/tex">\mathcal{L}_3</script>跟参数<script type="math/tex">\varphi</script>有关，对其求导得：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+    \frac{\partial   \mathcal{L}_3}{\partial \varphi} &= \sum_{i=1}^Ny_i\frac{1}{\varphi} + \sum_{i=1}^N (1-y_i)\frac{1}{1-\varphi} = 0 \\
+  \Longrightarrow&  \sum_{i=1}^N y_i(1-\varphi) - (1-y_i)\varphi = 0 \\
+    \Longrightarrow&  \sum_{i=1}^N (y_i-\varphi) = 0\\
+    \Longrightarrow& \hat{\varphi} = \frac{1}{N} \sum_{i=1}^N y_i
+\end{align} \tag{4}</script><p>因为只有类别为<script type="math/tex">C_1</script>中<script type="math/tex">y_i = 1</script>, 式4可以简化成：</p>
+<script type="math/tex; mode=display">
+\hat{\varphi} = \frac{1}{N} \sum_{i=1}^{N_1} y_i = \frac{N_1}{N} \tag{5}</script><h5 id="2-求解-mu"><a href="#2-求解-mu" class="headerlink" title="2. 求解\mu"></a>2. 求解<script type="math/tex">\mu</script></h5><p>因为<script type="math/tex">\mu_1</script>只跟<script type="math/tex">\mathcal{L}_1</script>部分有关, 展开后得：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+&\sum_{i=1}^N\log \mathcal{N}(\mu_1,\Sigma)^{y_i} \\\\
+    = &\sum_{i=1}^Ny_i\log \frac{1}{(2\pi)^{\frac{p}{2}}|\Sigma|^{\frac{1}{2}}} \text{exp }\left\{ -\frac{1}{2}(x_i-\mu_1)^T\Sigma^{-1}(x_i-\mu_1) \right\}\\
+
+    = &\sum_{i=1}^Ny_i\log \frac{1}{(2\pi)^{\frac{p}{2}}|\Sigma|^{\frac{1}{2}}} - \sum_{i=1}^Ny_i (\frac{1}{2}(x_i-\mu_1)^T\Sigma^{-1}(x_i-\mu_1))\\\\
+
+    \end{align} \tag{6}</script><p>式6只有后半部分跟<script type="math/tex">\mu_1</script>有关，剔除前面部分并化简：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\mathcal{L}_{\mu_1} &= \sum_{i=1}^Ny_i (\frac{1}{2}(x_i-\mu_1)^T\Sigma^{-1}(x_i-\mu_1))\\
+ &= \frac{1}{2}\sum_{i=1}^Ny_i (x_i^T\Sigma^{-1} - \mu_1^T\Sigma^{-1})(x_i-\mu_1)\\
+ &= \frac{1}{2}\sum_{i=1}^N  y_i( x_i^T\Sigma^{-1}x_i - x_i^T\Sigma^{-1}\mu_1 - \mu_1^T\Sigma^{-1}x_i +\mu_1^T\Sigma^{-1}\mu_1 )\\
+
+
+ \end{align} \tag{7}</script><p>因为<script type="math/tex">x_i</script>是<script type="math/tex">p \times 1</script>的，那么<script type="math/tex">\Sigma^{-1}</script>是<script type="math/tex">p \times p</script>， 所以<script type="math/tex">x_i^T\Sigma^{-1}\mu_1 = \mu_1^T\Sigma^{-1}x_i</script> （都是实数）。并且<script type="math/tex">x_i^T\Sigma^{-1}x_i</script>跟<script type="math/tex">\mu_1</script>无关</p>
+<p>进一步简化得：</p>
+<script type="math/tex; mode=display">
+\Delta = \frac{1}{2}\sum_{i=1}^Ny_i (- 2\mu_1^T\Sigma^{-1}x_i + \mu_1^T\Sigma^{-1}\mu_1) \tag{8}</script><p>对<script type="math/tex">\mu_1</script>求导得：</p>
+<script type="math/tex; mode=display">
+\frac{\partial   \Delta}{\partial \mu_1} = \sum_{i=1}^N(-y_i\Sigma^{-1}x_i + y_i\Sigma^{-1}\mu_1)\tag{9}</script><p>令式9为0得：</p>
+<script type="math/tex; mode=display">
+\sum_{i=1}^N y_i\mu_1 = \sum_{i=1}^Ny_ix_i \Longrightarrow \hat{\mu_1}= \frac{\sum_{i=1}^Ny_ix_i}{\sum_{i=1}^Ny_i} =\frac{\sum_{i=1}^{N_1}x_i}{N_1}\tag{10}</script><p>式10最后简化原因：<script type="math/tex">y_i \in \{0, 1\}</script>，只有当<script type="math/tex">y_i=1</script>时，累加才有用，所以</p>
+<script type="math/tex; mode=display">
+\sum_{i=1}^Ny_ix_i =\sum_{i=1}^{N_1}x_i</script><p>因为对称性，同理可得<script type="math/tex">\hat{\mu_2} = \frac{\sum_{i=1}^{N_2}x_i}{N_2}</script></p>
+<h5 id="3-求解-Sigma"><a href="#3-求解-Sigma" class="headerlink" title="3. 求解 \Sigma"></a>3. 求解 <script type="math/tex">\Sigma</script></h5><p>跟<script type="math/tex">\Sigma</script>有关的只有<script type="math/tex">\mathcal{L}_1, \mathcal{L}_2</script>, 即：</p>
+<script type="math/tex; mode=display">
+\Omega = \sum_{i=1}^N \log \mathcal{N}(\mu_1, \Sigma)^{y_i} +\sum_{i=1}^N \log \mathcal{N}(\mu_2, \Sigma)^{1-y_i}\\
+=  \sum_{i=1}^N ({y_i}\log \mathcal{N}(\mu_1, \Sigma) + (1-y_i)\log \mathcal{N}(\mu_2, \Sigma)) \tag{11}</script><p>同样因为<script type="math/tex">y_i</script>要么0， 要么1，式11可以简化为：</p>
+<script type="math/tex; mode=display">
+\Omega =  \sum_{i=1}^{N_1} \log \mathcal{N}(\mu_1, \Sigma) + \sum_{i=1}^{N_2} \log \mathcal{N}(\mu_2, \Sigma) \tag{12}</script><p>为了简化计算，我们先计算下：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\hat\Omega &= 
+\sum_{i=1}^{N} \log \mathcal{N}(\mu, \Sigma) \\&= \sum_{i=1}^{N} \log \frac{1}{(2\pi)^{\frac{p}{2}} |\Sigma|^{\frac{1}{2}}} \exp  (-\frac{1}{2}(x_i -\mu)^T \Sigma^{-1}(x_i-\mu)) \\
+&= \sum_{i=1}^{N} \left [ \log \frac{1}{(2\pi)^{\frac{p}{2}} } -\frac{1}{2} \log |\Sigma|  -\frac{1}{2}(x_i-\mu)^T\Sigma^{-1}(x_i-\mu) \right]
+\\&= \sum_{i=1}^{N}\log \frac{1}{(2\pi)^{\frac{p}{2}}} + \sum_{i=1}^{N}(-\frac{1}{2} \log |\Sigma|  -\frac{1}{2}(x_i-\mu)^T\Sigma^{-1}(x_i-\mu)) 
+\\&= C + \sum_{i=1}^{N}(-\frac{1}{2} \log |\Sigma|  -\frac{1}{2}(x_i-\mu)^T\Sigma^{-1}(x_i-\mu)  \\
+&= C  -\frac{1}{2} N \log |\Sigma| -\frac{1}{2}\sum_{i=1}^{N}(x_i-\mu)^T\Sigma^{-1}(x_i-\mu)\\
+\end{align}
+\tag{13}</script><p>其中<script type="math/tex">\sum_{i=1}^{N}\log \frac{1}{(2\pi)^{\frac{p}{2}}} = C</script>, 简化计算。</p>
+<p>首先，有下列公式：</p>
+<script type="math/tex; mode=display">
+\begin{gather}
+    \text{tr}(AB) = tr(BA) \tag{14}\\
+    \text{tr} (ABC) = \text{tr}(CAB) = \text{tr}(BCA)\tag{15}\\
+    \frac{\partial tr(AB)}{\partial A} = B^T \tag{16}\\
+    \frac{\partial|A|}{\partial A} = |A|A^{-1} \tag{17}\\
+
+\end{gather}</script><p>式16证明：<a target="_blank" rel="noopener" href="https://math.stackexchange.com/questions/2573030/gradient-of-mboxtrab">Gradient of tr(AB)</a></p>
+<p>式13对<script type="math/tex">\Sigma</script>求导得：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\partial \hat \Omega}{\partial \Sigma} &= -\frac{1}{2} N\frac{1}{|\Sigma|}|\Sigma| \Sigma^{-1} - \frac{1}{2} \frac{\sum_{i=1}^{N}\text{ tr} [ (x_i-\mu)^T\Sigma^{-1}(x_i-\mu) ] }{\partial \Sigma} \\
+&= -\frac{1}{2} N  \Sigma^{-1}-\frac{1}{2} \frac{\sum_{i=1}^{N}\text{ tr} [ (x_i-\mu)^T(x_i-\mu) \Sigma^{-1}] }{\partial \Sigma} \\
+&=-\frac{1}{2} N  \Sigma^{-1}-\frac{1}{2} \frac{\text{ tr} \sum_{i=1}^{N}[ (x_i-\mu)^T(x_i-\mu) \Sigma^{-1}] }{\partial \Sigma} \\
+&= -\frac{1}{2} N  \Sigma^{-1}-\frac{1}{2} \frac{\text{ tr} (NS \Sigma^{-1})}{\partial \Sigma}  
+\end{align}
+\tag{18}</script><p>其中<script type="math/tex">S = \frac{1}{N}\sum_{i=1}^{N}(x_i-\mu)^T(x_i-\mu)</script>是协方差矩阵。</p>
+<p>由式18写出式12：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\partial  \Omega}{\partial \Sigma}
+&= -\frac{1}{2} N_1 \Sigma^{-1} - \frac{1}{2} \frac{\text{ tr} (N_1S \Sigma^{-1})}{\partial \Sigma} -\frac{1}{2} N_2 \Sigma^{-1} - \frac{1}{2} \frac{\text{ tr} (N_2S \Sigma^{-1})}{\partial \Sigma} \\
+&= -\frac{1}{2}N \Sigma^{-1}-\frac{1}{2}(N_1S_1^T(-1)\Sigma^{-2} + N_2S_2^T(-1)\Sigma^{-2})\\
+&=\frac{1}{2}(N_1S_1^T\Sigma^{-2} +N_2S_2^T\Sigma^{-2} -N \Sigma^{-1} )
+\end{align} \tag{19}</script><p>令其为0得两边同乘以<script type="math/tex">\Sigma^{-2}</script>得：</p>
+<script type="math/tex; mode=display">
+N_1S_1 + N_2S_2 = N\Sigma \Longrightarrow \Sigma = \frac{N_1S_1 + N_2S_2 }{N}</script><p>可以理解为协方差矩阵等于各自协方差矩阵的加权和。</p>
+<p><strong>高斯判别分析总结</strong>：</p>
+<ol>
+<li>首先假设先验<script type="math/tex">p(y)</script> 服从伯努利分布和似然 <script type="math/tex">p(x|y)</script>服从高斯分布，利用贝叶斯公式得到条件概率<script type="math/tex">p(y|x)</script>函数。</li>
+<li>利用极大似然估计求解最大值参数。</li>
+</ol>
+<script type="math/tex; mode=display">
+\begin{align}
+\hat{\varphi} &=\frac{N_1}{N} \\
+\hat{\mu_1} &= \frac{\sum_{i=1}^{N_1}x_i}{N_1}\\
+\hat{\mu_2} &= \frac{\sum_{i=1}^{N_2}x_i}{N_2}\\
+\Sigma &= \frac{N_1S_1 + N_2S_2 }{N}
+\end{align}</script></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">miller</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://aigonna.com/2020/07/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%204.2%20%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E2%80%94%E2%80%94%E9%AB%98%E6%96%AF%E5%88%A4%E5%88%AB%E6%A8%A1%E5%9E%8B/">http://aigonna.com/2020/07/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%204.2%20%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E2%80%94%E2%80%94%E9%AB%98%E6%96%AF%E5%88%A4%E5%88%AB%E6%A8%A1%E5%9E%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://aigonna.com" target="_blank">aigonna</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/">线性分类</a><a class="post-meta__tags" href="/tags/%E9%AB%98%E6%96%AF%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90/">高斯判别分析</a></div><div class="post_share"><div class="social-share" data-image="/img/imgs/15.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/07/20/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%204.3%20%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E2%80%94%E2%80%94%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/"><img class="prev-cover" src="/img/imgs/13.jpg" onerror="onerror=null;src='/img/imgs/0.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">机器学习-白板推导4.3 线性分类——朴素贝叶斯</div></div></a></div><div class="next-post pull-right"><a href="/2020/07/17/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%204.1%20%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB/"><img class="next-cover" src="/img/imgs/0.jpg" onerror="onerror=null;src='/img/imgs/0.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">机器学习-白板推导 4.1 线性分类</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/07/17/机器学习-白板推导 4.1 线性分类/" title="机器学习-白板推导 4.1 线性分类"><img class="cover" src="/img/imgs/0.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-17</div><div class="title">机器学习-白板推导 4.1 线性分类</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC4-2-%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E2%80%94%E2%80%94%E9%AB%98%E6%96%AF%E5%88%A4%E5%88%AB%E6%A8%A1%E5%9E%8B"><span class="toc-text">机器学习-白板推导4.2 线性分类——高斯判别模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%AB%98%E6%96%AF%E5%88%A4%E5%88%AB%E6%A8%A1%E5%9E%8B%E6%8F%8F%E8%BF%B0"><span class="toc-text">1. 高斯判别模型描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%AB%98%E6%96%AF%E5%88%A4%E5%88%AB%E6%A8%A1%E5%9E%8B%E5%BB%BA%E7%AB%8B"><span class="toc-text">2. 高斯判别模型建立</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%8F%82%E6%95%B0%E6%B1%82%E8%A7%A3"><span class="toc-text">3. 参数求解</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%B1%82%E8%A7%A3-varphi"><span class="toc-text">1. 求解\varphi</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%B1%82%E8%A7%A3-mu"><span class="toc-text">2. 求解\mu</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E6%B1%82%E8%A7%A3-Sigma"><span class="toc-text">3. 求解 \Sigma</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021&nbsp;<i style="color:#FF6A6A;animation: announ_animation 0.8s linear infinite;"class="fas fa-heart"></i> By miller</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      //tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'forest',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: '5sVUTO1MTpgoo7pDynh6zYEM-MdYXbMMI',
+      appKey: 'vPUvOT1iP6YqcPPtYSqf8F7A',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script><h4>AIgonna</h4></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script></div></body></html>
