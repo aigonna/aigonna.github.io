@@ -74,9 +74,9 @@
       
         <tags>
             
-            <tag> RoBERTa </tag>
-            
             <tag> BERT </tag>
+            
+            <tag> RoBERTa </tag>
             
             <tag> PTMs </tag>
             
@@ -270,11 +270,11 @@
             
             <tag> Backpropagation </tag>
             
-            <tag> CS224n </tag>
-            
             <tag> gradient </tag>
             
             <tag> Automatic Differentiation </tag>
+            
+            <tag> CS224n </tag>
             
         </tags>
       
@@ -332,13 +332,13 @@
             
             <tag> negative sampling </tag>
             
+            <tag> CS224n </tag>
+            
             <tag> Word2vec </tag>
             
             <tag> Skip-Gram </tag>
             
             <tag> Glove </tag>
-            
-            <tag> CS224n </tag>
             
             <tag> 词向量评价 </tag>
             
@@ -396,11 +396,11 @@
       
         <tags>
             
+            <tag> CS224n </tag>
+            
             <tag> Word2vec </tag>
             
             <tag> Skip-Gram </tag>
-            
-            <tag> CS224n </tag>
             
             <tag> CBOW </tag>
             
@@ -427,11 +427,11 @@
       
         <tags>
             
-            <tag> BERT </tag>
-            
             <tag> PTM </tag>
             
             <tag> Tansformer </tag>
+            
+            <tag> BERT </tag>
             
         </tags>
       
@@ -1775,11 +1775,11 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> Mathematic for machine learning 笔记 </tag>
-            
             <tag> 微积分 </tag>
             
             <tag> 矩阵求导 </tag>
+            
+            <tag> Mathematic for machine learning 笔记 </tag>
             
         </tags>
       
@@ -1806,11 +1806,11 @@
             
             <tag> 机器学习 </tag>
             
+            <tag> Mathematic for machine learning 笔记 </tag>
+            
             <tag> 矩阵论 </tag>
             
             <tag> Linear mapping </tag>
-            
-            <tag> Mathematic for machine learning 笔记 </tag>
             
         </tags>
       
