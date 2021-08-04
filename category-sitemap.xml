@@ -9,22 +9,22 @@
 
 
     <url>
+        <loc>http://aigonna.com/categories/NLP-paper/</loc>
+        <lastmod>2021-08-04T16:31:42.256Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/categories/%25E6%259D%2582%25E9%25A1%25B9/</loc>
+        <lastmod>2021-08-02T17:58:07.881Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/categories/%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584%25E4%25B8%258E%25E7%25AE%2597%25E6%25B3%2595/</loc>
         <lastmod>2021-08-02T17:29:14.257Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/categories/NLP-paper/</loc>
-        <lastmod>2021-08-01T14:25:17.689Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/categories/%25E5%2589%258D%25E7%25AB%25AF/</loc>
-        <lastmod>2021-07-23T03:55:37.440Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

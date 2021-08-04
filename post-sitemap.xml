@@ -9,6 +9,30 @@
 
 
     <url>
+        <loc>http://aigonna.com/2020/12/23/NLP%20Paper%2011.%20Reformer%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-08-04T16:31:42.256Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/12/14/hexo+matery%20blog%E6%90%AD%E5%BB%BA/</loc>
+        <lastmod>2021-08-02T17:58:07.881Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2021/01/28/hexo+butterfly/</loc>
+        <lastmod>2021-08-02T17:57:58.671Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://aigonna.com/2020/03/06/DS_7.%20%E5%93%88%E5%B8%8C%E8%A1%A8/</loc>
         <lastmod>2021-08-02T17:29:14.257Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -51,14 +75,6 @@
     <url>
         <loc>http://aigonna.com/2020/12/05/NLP%20Paper%207.2%20GPT-2%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
         <lastmod>2021-07-28T14:07:55.906Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2021/01/28/hexo+butterfly/</loc>
-        <lastmod>2021-07-23T03:55:37.440Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -499,14 +515,6 @@
     <url>
         <loc>http://aigonna.com/2020/06/02/1.VGG%20%E7%BD%91%E7%BB%9C/</loc>
         <lastmod>2021-02-22T02:54:40.925Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/12/14/hexo+matery%20blog%E6%90%AD%E5%BB%BA/</loc>
-        <lastmod>2021-01-27T13:12:18.193Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
