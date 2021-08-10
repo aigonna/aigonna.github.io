@@ -3,6 +3,34 @@
 
 
     <url>
+        <loc>http://aigonna.com/tags/pairplot/</loc>
+        <lastmod>2021-08-10T16:33:50.179Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/seaborn/</loc>
+        <lastmod>2021-08-10T16:33:50.179Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/subplot/</loc>
+        <lastmod>2021-08-10T16:33:50.179Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%8A%80%E8%83%BD/</loc>
+        <lastmod>2021-08-10T16:33:50.179Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/Hash/</loc>
         <lastmod>2021-08-04T16:31:42.256Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -556,13 +584,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/CMSC35300-Mathematics-Foundations-of-ML/</loc>
-        <lastmod>2021-05-24T14:35:56.318Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://aigonna.com/tags/Ridge-Regression/</loc>
         <lastmod>2021-05-24T14:35:56.318Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -571,6 +592,13 @@
 
     <url>
         <loc>http://aigonna.com/tags/PageRank/</loc>
+        <lastmod>2021-05-24T14:35:56.318Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/CMSC35300-Mathematics-Foundations-of-ML/</loc>
         <lastmod>2021-05-24T14:35:56.318Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
