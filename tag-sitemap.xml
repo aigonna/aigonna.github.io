@@ -3,6 +3,62 @@
 
 
     <url>
+        <loc>http://aigonna.com/tags/quantile-normalize/</loc>
+        <lastmod>2021-08-21T10:23:11.063Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/PCA/</loc>
+        <lastmod>2021-08-21T10:23:11.063Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/denoise/</loc>
+        <lastmod>2021-08-21T10:23:11.063Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Autoencoder/</loc>
+        <lastmod>2021-08-21T10:23:11.063Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/kaggle/</loc>
+        <lastmod>2021-08-21T10:23:11.063Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/%E5%90%8E%E5%89%AA%E6%9E%9D/</loc>
+        <lastmod>2021-08-21T03:11:01.774Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/booster/</loc>
+        <lastmod>2021-08-21T03:11:01.774Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/XGboost/</loc>
+        <lastmod>2021-08-21T03:11:01.774Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/Hash/</loc>
         <lastmod>2021-08-21T03:06:37.855Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -26,55 +82,6 @@
     <url>
         <loc>http://aigonna.com/tags/Reformer/</loc>
         <lastmod>2021-08-21T03:06:37.855Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/PCA/</loc>
-        <lastmod>2021-08-21T02:59:38.138Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/denoise/</loc>
-        <lastmod>2021-08-21T02:59:38.138Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Autoencoder/</loc>
-        <lastmod>2021-08-21T02:59:38.138Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/kaggle/</loc>
-        <lastmod>2021-08-21T02:59:38.138Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/%E5%90%8E%E5%89%AA%E6%9E%9D/</loc>
-        <lastmod>2021-08-21T02:55:35.975Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/booster/</loc>
-        <lastmod>2021-08-21T02:55:35.975Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/XGboost/</loc>
-        <lastmod>2021-08-21T02:55:35.975Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -199,14 +206,14 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/PTM/</loc>
+        <loc>http://aigonna.com/tags/Tansformer/</loc>
         <lastmod>2021-07-31T07:06:57.269Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/Tansformer/</loc>
+        <loc>http://aigonna.com/tags/PTM/</loc>
         <lastmod>2021-07-31T07:06:57.269Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
