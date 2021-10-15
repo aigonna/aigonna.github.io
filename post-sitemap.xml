@@ -9,8 +9,112 @@
 
 
     <url>
+        <loc>http://aigonna.com/2020/12/19/NLP%20Paper%2015.%20RoBERTa%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-10-15T18:36:09.700Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/12/23/NLP%20Paper%2016.%20Reformer%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-10-15T18:35:45.805Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/12/05/NLP%20Paper%2012.2%20GPT-2%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-10-15T18:35:05.722Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/12/03/NLP%20Paper%2012.1%20GPT-1%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-10-15T18:34:39.015Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/11/29/NLP%20Paper%2011.%20BERT%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-10-15T18:33:19.101Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/11/20/NLP%20Paper%2010.2%20Transformer_code/</loc>
+        <lastmod>2021-10-15T18:32:46.535Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/11/18/NLP%20Paper%2010.1%20Transformer%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/</loc>
+        <lastmod>2021-10-15T18:31:49.725Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/10/14/NLP%20Paper%205.%20HAN%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-10-15T18:31:36.035Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/10/18/NLP%20Paper%204.%20fasttext%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-10-15T18:31:18.838Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/09/14/NLP%20Paper%201.Efficient%20Estimation%20ofWord%20Representations%20in%20Vector%20Space%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-10-15T18:25:00.347Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/09/20/4.RNN%EF%BC%8C%20LSTM%20%EF%BC%8C%20GRU%20%E7%BB%93%E6%9E%84%E8%A7%A3%E9%87%8A%E5%92%8C%E5%85%B6%E5%9C%A8Pytorch%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+        <lastmod>2021-10-14T03:15:57.985Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://aigonna.com/2021/08/26/Kaggle_2.Kaggle%E6%AF%94%E8%B5%9B%20Optiver%20Realized%20Volatility%20Prediction/</loc>
-        <lastmod>2021-09-04T08:03:26.380Z</lastmod>
+        <lastmod>2021-09-26T07:07:47.175Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2021/08/20/Kaggle_1.kaggle%20Tabular%20Playground%20Series%20%E9%9D%9E%E5%B8%B8%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%8E%BB%E5%99%AA%E6%80%9D%E8%B7%AF/</loc>
+        <lastmod>2021-09-23T11:25:10.319Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2021/08/26/ML_2.Kaggle%E6%AF%94%E8%B5%9B%20Optiver%20Realized%20Volatility%20Prediction/</loc>
+        <lastmod>2021-09-04T18:15:16.139Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -33,24 +137,8 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/2021/08/20/Kaggle_1.kaggle%20Tabular%20Playground%20Series%20%E9%9D%9E%E5%B8%B8%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%8E%BB%E5%99%AA%E6%80%9D%E8%B7%AF/</loc>
-        <lastmod>2021-08-21T10:23:11.063Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://aigonna.com/2021/08/19/ML_1.%20XGboost%20%E4%B8%8A%E5%8E%9F%E7%90%86/</loc>
         <lastmod>2021-08-21T03:11:01.774Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/12/23/NLP%20Paper%2011.%20Reformer%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-08-21T03:06:37.855Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -99,54 +187,6 @@
     <url>
         <loc>http://aigonna.com/2020/03/04/DS_601%E5%8D%95%E9%93%BE%E8%A1%A8/</loc>
         <lastmod>2021-08-02T17:28:37.847Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/11/20/NLP%20Paper%205.2%20Transformer_code/</loc>
-        <lastmod>2021-08-01T14:25:17.689Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/11/18/NLP%20Paper%20%205.1%20Transformer/</loc>
-        <lastmod>2021-08-01T11:47:56.227Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/11/29/NLP%20Paper%206.%20BERT%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-07-31T07:06:57.269Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/12/05/NLP%20Paper%207.2%20GPT-2%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-07-28T14:07:55.906Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/12/19/NLP%20Paper%20%2010.%20RoBERTa%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-07-20T14:57:37.662Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/12/03/NLP%20Paper%207.1%20GPT-1%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-07-19T08:48:57.117Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -409,22 +449,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/2020/09/14/NLP%20Paper%201.Mikolov%E8%AE%BA%E6%96%87Efficient%20Estimation%20ofWord%20Representations%20in%20Vector%20Space%20%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-05-09T17:36:05.696Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/10/18/NLP%20Paper%204.%20fasttext%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-05-09T17:35:17.639Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://aigonna.com/2020/10/21/1.%20NLP%20%E7%94%A8python%E5%A4%84%E7%90%86/</loc>
         <lastmod>2021-04-23T07:30:45.213Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -435,14 +459,6 @@
     <url>
         <loc>http://aigonna.com/2021/04/21/1.%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA/</loc>
         <lastmod>2021-04-21T09:50:45.916Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/09/20/4.RNN%EF%BC%8C%20LSTM%20%EF%BC%8C%20GRU%20%E7%BB%93%E6%9E%84%E8%A7%A3%E9%87%8A%E5%92%8C%E5%85%B6%E5%9C%A8Pytorch%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
-        <lastmod>2021-04-12T13:14:30.109Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
