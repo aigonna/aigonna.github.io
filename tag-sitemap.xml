@@ -66,14 +66,14 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/RoBERTa/</loc>
+        <loc>http://aigonna.com/tags/BERT/</loc>
         <lastmod>2021-10-15T18:36:09.700Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/BERT/</loc>
+        <loc>http://aigonna.com/tags/RoBERTa/</loc>
         <lastmod>2021-10-15T18:36:09.700Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -108,6 +108,13 @@
     </url>
 
     <url>
+        <loc>http://aigonna.com/tags/PTM/</loc>
+        <lastmod>2021-10-15T18:35:05.722Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/fine-tuning/</loc>
         <lastmod>2021-10-15T18:35:05.722Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -123,13 +130,6 @@
 
     <url>
         <loc>http://aigonna.com/tags/GPT/</loc>
-        <lastmod>2021-10-15T18:35:05.722Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/PTM/</loc>
         <lastmod>2021-10-15T18:35:05.722Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -829,6 +829,13 @@
     </url>
 
     <url>
+        <loc>http://aigonna.com/tags/CMSC35300-Mathematics-Foundations-of-ML/</loc>
+        <lastmod>2021-05-24T14:35:56.318Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/Ridge-Regression/</loc>
         <lastmod>2021-05-24T14:35:56.318Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -837,13 +844,6 @@
 
     <url>
         <loc>http://aigonna.com/tags/PageRank/</loc>
-        <lastmod>2021-05-24T14:35:56.318Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/CMSC35300-Mathematics-Foundations-of-ML/</loc>
         <lastmod>2021-05-24T14:35:56.318Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
