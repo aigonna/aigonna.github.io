@@ -9,6 +9,22 @@
 
 
     <url>
+        <loc>http://aigonna.com/2021/10/19/NLP%20Paper%206.Capsule%20Net%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-10-19T12:27:13.232Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/10/02/NLP%20Paper%204.%20fasttext%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-10-18T10:02:38.670Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://aigonna.com/2020/12/19/NLP%20Paper%2015.%20RoBERTa%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
         <lastmod>2021-10-15T18:36:09.700Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -73,14 +89,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/2020/10/18/NLP%20Paper%204.%20fasttext%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-10-15T18:31:18.838Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://aigonna.com/2020/09/14/NLP%20Paper%201.Efficient%20Estimation%20ofWord%20Representations%20in%20Vector%20Space%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
         <lastmod>2021-10-15T18:25:00.347Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -107,14 +115,6 @@
     <url>
         <loc>http://aigonna.com/2021/08/20/Kaggle_1.kaggle%20Tabular%20Playground%20Series%20%E9%9D%9E%E5%B8%B8%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%8E%BB%E5%99%AA%E6%80%9D%E8%B7%AF/</loc>
         <lastmod>2021-09-23T11:25:10.319Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2021/08/26/ML_2.Kaggle%E6%AF%94%E8%B5%9B%20Optiver%20Realized%20Volatility%20Prediction/</loc>
-        <lastmod>2021-09-04T18:15:16.139Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

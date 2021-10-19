@@ -3,6 +3,55 @@
 
 
     <url>
+        <loc>http://aigonna.com/tags/squash/</loc>
+        <lastmod>2021-10-19T12:27:13.232Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95/</loc>
+        <lastmod>2021-10-19T12:27:13.232Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Capsule/</loc>
+        <lastmod>2021-10-19T12:27:13.232Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/char-CRNN/</loc>
+        <lastmod>2021-10-18T10:02:38.670Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/char-CNN/</loc>
+        <lastmod>2021-10-18T10:02:38.670Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/n-grams/</loc>
+        <lastmod>2021-10-18T10:02:38.670Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/fastText/</loc>
+        <lastmod>2021-10-18T10:02:38.670Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/BPE/</loc>
         <lastmod>2021-10-15T18:36:09.700Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -124,34 +173,6 @@
     <url>
         <loc>http://aigonna.com/tags/Attention/</loc>
         <lastmod>2021-10-15T18:31:36.035Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/char-CRNN/</loc>
-        <lastmod>2021-10-15T18:31:18.838Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/char-CNN/</loc>
-        <lastmod>2021-10-15T18:31:18.838Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/n-grams/</loc>
-        <lastmod>2021-10-15T18:31:18.838Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/fastText/</loc>
-        <lastmod>2021-10-15T18:31:18.838Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -808,6 +829,13 @@
     </url>
 
     <url>
+        <loc>http://aigonna.com/tags/CMSC35300-Mathematics-Foundations-of-ML/</loc>
+        <lastmod>2021-05-24T14:35:56.318Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/Ridge-Regression/</loc>
         <lastmod>2021-05-24T14:35:56.318Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -816,13 +844,6 @@
 
     <url>
         <loc>http://aigonna.com/tags/PageRank/</loc>
-        <lastmod>2021-05-24T14:35:56.318Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/CMSC35300-Mathematics-Foundations-of-ML/</loc>
         <lastmod>2021-05-24T14:35:56.318Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
