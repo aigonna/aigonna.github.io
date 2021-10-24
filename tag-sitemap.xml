@@ -3,36 +3,64 @@
 
 
     <url>
+        <loc>http://aigonna.com/tags/SOP/</loc>
+        <lastmod>2021-10-24T10:18:25.926Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Cross-layer-parameter-sharing/</loc>
+        <lastmod>2021-10-24T10:18:25.926Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Factorized-embedding-parameterization/</loc>
+        <lastmod>2021-10-24T10:18:25.926Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/ALBERT/</loc>
+        <lastmod>2021-10-24T10:18:25.926Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/LAMB/</loc>
-        <lastmod>2021-10-23T19:10:31.979Z</lastmod>
+        <lastmod>2021-10-24T08:10:44.365Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/tags/Mixed-Precision-Training/</loc>
-        <lastmod>2021-10-23T19:10:31.979Z</lastmod>
+        <lastmod>2021-10-24T08:10:44.365Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/tags/WWM/</loc>
-        <lastmod>2021-10-23T19:10:31.979Z</lastmod>
+        <lastmod>2021-10-24T08:10:44.365Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/tags/FRPE/</loc>
-        <lastmod>2021-10-23T19:10:31.979Z</lastmod>
+        <lastmod>2021-10-24T08:10:44.365Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/tags/NEZHA/</loc>
-        <lastmod>2021-10-23T19:10:31.979Z</lastmod>
+        <lastmod>2021-10-24T08:10:44.365Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
