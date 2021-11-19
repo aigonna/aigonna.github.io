@@ -9,8 +9,32 @@
 
 
     <url>
+        <loc>http://aigonna.com/2020/08/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%2011.%20%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B/</loc>
+        <lastmod>2021-10-29T17:27:14.242Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/12/19/NLP%20Paper%2015.%20RoBERTa%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-10-29T17:17:28.789Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2021/08/21/ML_3.lightAutoML/</loc>
+        <lastmod>2021-10-26T18:32:08.336Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://aigonna.com/2021/08/12/NLP%20Paper%2024.ALBERT%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-10-24T10:18:25.926Z</lastmod>
+        <lastmod>2021-10-24T10:22:03.100Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -35,14 +59,6 @@
     <url>
         <loc>http://aigonna.com/2020/10/02/NLP%20Paper%204.%20fasttext%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
         <lastmod>2021-10-18T10:02:38.670Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/12/19/NLP%20Paper%2015.%20RoBERTa%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-10-15T18:36:09.700Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -137,14 +153,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/2021/08/21/ML_3.lightAutoML/</loc>
-        <lastmod>2021-08-28T14:30:23.713Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://aigonna.com/2020/08/19/ML_F1%20AUC%20ROC%E8%A7%A3%E9%87%8A/</loc>
         <lastmod>2021-08-25T15:20:42.665Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -203,14 +211,6 @@
     <url>
         <loc>http://aigonna.com/2020/03/04/DS_601%E5%8D%95%E9%93%BE%E8%A1%A8/</loc>
         <lastmod>2021-08-02T17:28:37.847Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/08/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%2011.%20%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B/</loc>
-        <lastmod>2021-06-16T10:35:48.581Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
