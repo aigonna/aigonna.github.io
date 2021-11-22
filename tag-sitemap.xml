@@ -3,6 +3,41 @@
 
 
     <url>
+        <loc>http://aigonna.com/tags/quantile-normalize/</loc>
+        <lastmod>2021-11-22T14:35:47.783Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/PCA/</loc>
+        <lastmod>2021-11-22T14:35:47.783Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/denoise/</loc>
+        <lastmod>2021-11-22T14:35:47.783Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Autoencoder/</loc>
+        <lastmod>2021-11-22T14:35:47.783Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/kaggle/</loc>
+        <lastmod>2021-11-22T14:35:47.783Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/plot/</loc>
         <lastmod>2021-11-22T14:29:01.691Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -17,14 +52,14 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/seaborn/</loc>
+        <loc>http://aigonna.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%8A%80%E8%83%BD/</loc>
         <lastmod>2021-11-22T14:29:01.691Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%8A%80%E8%83%BD/</loc>
+        <loc>http://aigonna.com/tags/seaborn/</loc>
         <lastmod>2021-11-22T14:29:01.691Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -59,14 +94,14 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/BERT/</loc>
+        <loc>http://aigonna.com/tags/RoBERTa/</loc>
         <lastmod>2021-10-29T17:17:28.789Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/RoBERTa/</loc>
+        <loc>http://aigonna.com/tags/BERT/</loc>
         <lastmod>2021-10-29T17:17:28.789Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -341,41 +376,6 @@
     <url>
         <loc>http://aigonna.com/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/</loc>
         <lastmod>2021-09-26T07:07:47.175Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/kaggle/</loc>
-        <lastmod>2021-09-26T07:07:47.175Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/quantile-normalize/</loc>
-        <lastmod>2021-09-23T11:25:10.319Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/PCA/</loc>
-        <lastmod>2021-09-23T11:25:10.319Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/denoise/</loc>
-        <lastmod>2021-09-23T11:25:10.319Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Autoencoder/</loc>
-        <lastmod>2021-09-23T11:25:10.319Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
