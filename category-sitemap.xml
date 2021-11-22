@@ -9,6 +9,13 @@
 
 
     <url>
+        <loc>http://aigonna.com/categories/%25E6%25B7%25B1%25E5%25BA%25A6%25E5%25AD%25A6%25E4%25B9%25A0%25E6%258A%2580%25E8%2583%25BD/</loc>
+        <lastmod>2021-11-22T14:29:01.691Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/categories/%25E6%259C%25BA%25E5%2599%25A8%25E5%25AD%25A6%25E4%25B9%25A0/</loc>
         <lastmod>2021-10-29T17:27:14.242Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -32,13 +39,6 @@
     <url>
         <loc>http://aigonna.com/categories/Competition/</loc>
         <lastmod>2021-09-26T07:07:47.175Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/categories/%25E6%25B7%25B1%25E5%25BA%25A6%25E5%25AD%25A6%25E4%25B9%25A0%25E6%258A%2580%25E8%2583%25BD/</loc>
-        <lastmod>2021-08-14T07:31:34.522Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
