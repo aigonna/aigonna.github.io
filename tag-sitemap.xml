@@ -122,14 +122,14 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/BERT/</loc>
+        <loc>http://aigonna.com/tags/RoBERTa/</loc>
         <lastmod>2021-10-29T17:17:28.789Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/RoBERTa/</loc>
+        <loc>http://aigonna.com/tags/BERT/</loc>
         <lastmod>2021-10-29T17:17:28.789Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -934,13 +934,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/CMSC35300-Mathematics-Foundations-of-ML/</loc>
-        <lastmod>2021-05-24T14:35:56.318Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://aigonna.com/tags/Ridge-Regression/</loc>
         <lastmod>2021-05-24T14:35:56.318Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -949,6 +942,13 @@
 
     <url>
         <loc>http://aigonna.com/tags/PageRank/</loc>
+        <lastmod>2021-05-24T14:35:56.318Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/CMSC35300-Mathematics-Foundations-of-ML/</loc>
         <lastmod>2021-05-24T14:35:56.318Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
