@@ -9,8 +9,112 @@
 
 
     <url>
-        <loc>http://aigonna.com/2021/09/03/NLP%20Paper%2017.Transformer-XL%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-11-24T18:14:29.034Z</lastmod>
+        <loc>http://aigonna.com/2021/03/17/NLP%20Paper%209.%20ELMO%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-12-02T16:43:37.873Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/10/17/NLP%20Paper%206.Capsule%20Net%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-12-02T16:42:21.915Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2021/03/13/NLP%20Paper%2017.Transformer-XL%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-12-02T16:25:51.768Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/12/23/NLP%20Paper%2016.%20Reformer%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-12-01T14:26:58.642Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/12/19/NLP%20Paper%2015.%20RoBERTa%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-12-01T14:26:43.126Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/12/05/NLP%20Paper%2012.2%20GPT-2%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-12-01T14:26:31.713Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/12/03/NLP%20Paper%2012.1%20GPT-1%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-12-01T14:26:15.390Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/11/29/NLP%20Paper%2011.%20BERT%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-12-01T14:26:01.765Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/11/18/NLP%20Paper%2010.1%20Transformer%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/</loc>
+        <lastmod>2021-12-01T14:25:44.199Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/11/20/NLP%20Paper%2010.2%20Transformer_code/</loc>
+        <lastmod>2021-12-01T14:25:26.321Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2021/08/23/NLP%20Paper%2025.%20NEZHA%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-12-01T14:25:09.052Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/10/02/NLP%20Paper%204.%20fasttext%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-12-01T14:24:40.915Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/10/14/NLP%20Paper%205.%20HAN%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-12-01T14:24:34.767Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/09/14/NLP%20Paper%201.Efficient%20Estimation%20ofWord%20Representations%20in%20Vector%20Space%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2021-12-01T14:23:41.317Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -18,7 +122,7 @@
 
     <url>
         <loc>http://aigonna.com/2021/11/22/%E6%8A%80%E8%83%BD_3.seaborn%20notes/</loc>
-        <lastmod>2021-11-23T13:49:39.458Z</lastmod>
+        <lastmod>2021-11-24T18:33:28.801Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -41,14 +145,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/2020/12/19/NLP%20Paper%2015.%20RoBERTa%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-10-29T17:17:28.789Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://aigonna.com/2021/08/21/ML_3.lightAutoML/</loc>
         <lastmod>2021-10-26T18:32:08.336Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -59,94 +155,6 @@
     <url>
         <loc>http://aigonna.com/2021/08/12/NLP%20Paper%2024.ALBERT%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
         <lastmod>2021-10-24T10:22:03.100Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2021/08/23/NLP%20Paper%2025.%20NEZHA%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-10-24T08:10:44.365Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/10/17/NLP%20Paper%206.Capsule%20Net%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-10-19T12:30:56.009Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/10/02/NLP%20Paper%204.%20fasttext%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-10-18T10:02:38.670Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/12/23/NLP%20Paper%2016.%20Reformer%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-10-15T18:35:45.805Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/12/05/NLP%20Paper%2012.2%20GPT-2%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-10-15T18:35:05.722Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/12/03/NLP%20Paper%2012.1%20GPT-1%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-10-15T18:34:39.015Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/11/29/NLP%20Paper%2011.%20BERT%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-10-15T18:33:19.101Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/11/20/NLP%20Paper%2010.2%20Transformer_code/</loc>
-        <lastmod>2021-10-15T18:32:46.535Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/11/18/NLP%20Paper%2010.1%20Transformer%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/</loc>
-        <lastmod>2021-10-15T18:31:49.725Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/10/14/NLP%20Paper%205.%20HAN%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-10-15T18:31:36.035Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/09/14/NLP%20Paper%201.Efficient%20Estimation%20ofWord%20Representations%20in%20Vector%20Space%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-10-15T18:25:00.347Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
