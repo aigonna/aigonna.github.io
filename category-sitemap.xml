@@ -9,8 +9,29 @@
 
 
     <url>
+        <loc>http://aigonna.com/categories/Competition/</loc>
+        <lastmod>2022-01-09T19:33:21.127Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/categories/%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584%25E4%25B8%258E%25E7%25AE%2597%25E6%25B3%2595/</loc>
+        <lastmod>2021-12-20T16:53:40.037Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/categories/CV/</loc>
+        <lastmod>2021-12-02T17:13:32.776Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/categories/NLP-paper/</loc>
-        <lastmod>2021-12-02T16:43:37.873Z</lastmod>
+        <lastmod>2021-12-02T16:49:59.540Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -37,13 +58,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/categories/Competition/</loc>
-        <lastmod>2021-09-26T07:07:47.175Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://aigonna.com/categories/%25E6%259D%2582%25E9%25A1%25B9/</loc>
         <lastmod>2021-08-02T17:58:07.881Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -51,22 +65,8 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/categories/%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584%25E4%25B8%258E%25E7%25AE%2597%25E6%25B3%2595/</loc>
-        <lastmod>2021-08-02T17:29:14.257Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://aigonna.com/categories/NLP/</loc>
         <lastmod>2021-05-18T12:23:28.997Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/categories/CV/</loc>
-        <lastmod>2021-04-21T09:50:45.916Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
