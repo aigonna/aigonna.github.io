@@ -157,13 +157,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/RoBERTa/</loc>
-        <lastmod>2021-12-01T14:26:43.126Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://aigonna.com/tags/BERT/</loc>
         <lastmod>2021-12-01T14:26:43.126Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -171,8 +164,8 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/PTM/</loc>
-        <lastmod>2021-12-01T14:26:31.713Z</lastmod>
+        <loc>http://aigonna.com/tags/RoBERTa/</loc>
+        <lastmod>2021-12-01T14:26:43.126Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -193,6 +186,13 @@
 
     <url>
         <loc>http://aigonna.com/tags/GPT/</loc>
+        <lastmod>2021-12-01T14:26:31.713Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/PTM/</loc>
         <lastmod>2021-12-01T14:26:31.713Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -332,14 +332,14 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%8A%80%E8%83%BD/</loc>
+        <loc>http://aigonna.com/tags/seaborn/</loc>
         <lastmod>2021-11-24T18:33:28.801Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/seaborn/</loc>
+        <loc>http://aigonna.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%8A%80%E8%83%BD/</loc>
         <lastmod>2021-11-24T18:33:28.801Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
