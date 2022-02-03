@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>http://aigonna.com/tags/biLM/</loc>
+        <lastmod>2022-01-20T15:35:23.027Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/ELMo/</loc>
+        <lastmod>2022-01-20T15:35:23.027Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/</loc>
         <lastmod>2022-01-09T19:33:21.127Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -47,20 +61,6 @@
     <url>
         <loc>http://aigonna.com/tags/CNN/</loc>
         <lastmod>2021-12-02T17:13:32.776Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/biLM/</loc>
-        <lastmod>2021-12-02T16:49:59.540Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/ELMo/</loc>
-        <lastmod>2021-12-02T16:49:59.540Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -332,14 +332,14 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%8A%80%E8%83%BD/</loc>
+        <loc>http://aigonna.com/tags/seaborn/</loc>
         <lastmod>2021-11-24T18:33:28.801Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/seaborn/</loc>
+        <loc>http://aigonna.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%8A%80%E8%83%BD/</loc>
         <lastmod>2021-11-24T18:33:28.801Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

@@ -20,9 +20,9 @@
       
         <tags>
             
-            <tag> seaborn </tag>
-            
             <tag> 深度学习技能 </tag>
+            
+            <tag> seaborn </tag>
             
             <tag> heatmap </tag>
             
@@ -347,11 +347,11 @@
       
         <tags>
             
+            <tag> seaborn </tag>
+            
             <tag> 机器学习技能 </tag>
             
             <tag> subplot </tag>
-            
-            <tag> seaborn </tag>
             
             <tag> pairplot </tag>
             
@@ -966,6 +966,33 @@
     
     
     <entry>
+      <title>9.ELMO 论文笔记</title>
+      <link href="2020/10/19/NLP%20Paper%209.%20ELMO%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+      <url>2020/10/19/NLP%20Paper%209.%20ELMO%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<h3 id="9-ELMO-论文笔记"><a href="#9-ELMO-论文笔记" class="headerlink" title="9.ELMO 论文笔记"></a>9.ELMO 论文笔记</h3><p>本文是 <a href="https://arxiv.org/pdf/1802.05365.pdf">Deep contextualized word representations</a>笔记.ELMO是Embeddings from Language Models的简称。</p><p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/202112012207322.png" alt="image-20211201220735638" style="zoom:20%;" /></p><h4 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h4><p>本文作者引入了一种新的深层的上下文词表示，该模型能:</p><ol><li>使用词的复杂特征</li><li>在不同语境下词的多义性</li></ol><p>本文的词向量是学习深层双向语言模型的内部状态的功能得到的。作者发现这些表示能轻松加到已存在的模型上，并且在6大NLP问题上有显著的提升，像QA，文本蕴含，情感分析。还分析了暴露预训练网络的深层内部是至关重要的，这允许下游模型来混合不同类型的半监督信号。</p><h4 id="3-1-Bidirectional-language-models"><a href="#3-1-Bidirectional-language-models" class="headerlink" title="3.1 Bidirectional language models"></a>3.1 Bidirectional language models</h4><p>给定N个token的序列，<script type="math/tex">(t_1, t_2, \cdots, t_n)</script>，前馈语言模型在给定前<script type="math/tex">(t_1, t_2, \cdots, t_{n-1})</script>的情况下来计算<script type="math/tex">t_k</script>的概率:(LM就是一个预测下一个词的任务)</p><script type="math/tex; mode=display">p(t_1, t_2, \cdots, t_N) = \prod_{k=1}^Np(t_k|t_1, t_2, \cdots, t_{k-1}) \tag{1}</script><p>如果通过token embeddings 或 字符卷积后再输入到L层的前向LSTMs.在位置k,每层LSTM输出一个上下独立的表示为<script type="math/tex">\overrightarrow{\mathbf{h}}_{k,j}^{LM}</script>，其中<script type="math/tex">j=1, \cdots L.</script>(表示第几层)。最上面一层LSTM的输出<script type="math/tex">\overrightarrow{\mathbf{h}}_{k,j}^{LM}</script>被用来给softmax层预测下一个token<script type="math/tex">t_{k+1}</script>。</p><p>反向的LM类似于前向LM,除了将输入序列反向，目标也变成预测前一个词:</p><script type="math/tex; mode=display">p(t_1, t_2, \cdots, t_N) = \prod_{k=1}^Np(t_k|t_1, t_2, \cdots, t_{N}) \tag{2}</script><p>这可以用类似的前向LM实现，对于反向LSTM层，给定<script type="math/tex">(t_{k+1}, \cdots,t_N)</script>生成的<script type="math/tex">t_k</script></p><p>表征为 <script type="math/tex">\overleftarrow{\mathbf{h}}_{k,j}^{LM}</script>.</p><p>这样双向LM结合了前向和反向的LM特点。目标就是最大化两者联合的对数似然函数:</p><script type="math/tex; mode=display">\begin{array}{l}\sum_{k=1}^{N}\left(\log p\left(t_{k} \mid t_{1}, \ldots, t_{k-1} ; \Theta_{x}, \vec{\Theta}_{L S T M}, \Theta_{s}\right)\right. \\\left.\quad+\log p\left(t_{k} \mid t_{k+1}, \ldots, t_{N} ; \Theta_{x}, \overleftarrow{\Theta}_{L S T M}, \Theta_{s}\right)\right)\end{array} \tag{3}</script><p>作者将前、后向的token表征<script type="math/tex">\Theta_x</script>和softmax层<script type="math/tex">\Theta_s</script>参数联系起来，同时保持每个方向的LSTM参数分开。但在方向间共享些权重而不是使用完全独立的参数。</p><h4 id="3-2-ELMo"><a href="#3-2-ELMo" class="headerlink" title="3.2 ELMo"></a>3.2 ELMo</h4><p>ELMo是biLM中中间层表征的任务特定的组合。对于每个token<script type="math/tex">t_k</script>,L层biLM计算<script type="math/tex">2L+1</script>表征的集合：</p><script type="math/tex; mode=display">\begin{aligned}R_{k} &=\left\{\mathbf{x}_{k}^{L M}, \overrightarrow{\mathbf{h}}_{k, j}^{L M}, \overleftarrow{\mathbf{h}}_{k, j}^{L M} \mid j=1, \ldots, L\right\} \\&=\left\{\mathbf{h}_{k, j}^{L M} \mid j=0, \ldots, L\right\}\end{aligned} \tag{4}</script><p>其中<script type="math/tex">\mathbf{h}_{k, j}^{L M} = \left[\overrightarrow{\mathbf{h}}_{k, j}^{L M}, \overleftarrow{\mathbf{h}}_{k, j}^{LM} \right]</script>.当<script type="math/tex">j=0</script>时，就是token层，因此可以简写为式4中第二行。</p><p>ELMo将所有层的<script type="math/tex">\mathbf{R}</script>(式4)压缩成单一向量,<script type="math/tex">\mathbf{ELMo}_k = E(\mathbf{R}_k; \Theta)</script>.最简单的就只选择最上面一层作为token的表示,<script type="math/tex">\mathbf{h}_{k, L}^{LM}</script>.更通用做法是，对所有层求权重和:</p><script type="math/tex; mode=display">\mathbf{E L M o}_{k}^{t a s k}=E\left(R_{k} ; \Theta^{t a s k}\right)=\gamma^{t a s k} \sum_{j=0}^{L} s_{j}^{t a s k} \mathbf{h}_{k, j}^{L M} \tag{1}</script><p>在(1)中，(按论文标号)<script type="math/tex">s^{task}</script>表示经过softmax-normalized权重和放缩参数<script type="math/tex">\gamma^{task}</script>允许任务模型放缩ELMo向量。这是个经验参数，也能帮助优化过程。</p><h4 id="3-3-Using-biLMs-for-supervised-NLP-tasks"><a href="#3-3-Using-biLMs-for-supervised-NLP-tasks" class="headerlink" title="3.3 Using biLMs for supervised NLP tasks"></a>3.3 Using biLMs for supervised NLP tasks</h4><p>给定一个预训练双向语言模型和对目标NLP任务的监督架构，这是使用双向biLM来提升任务模型是非常简单的。就是运行biLM并记录每层的每个词的表征。然后，让终端任务模型学习这些表征的线性组合。如下所述。</p><p>首先,考虑没有biLM的监督模型底层是差不多的架构，这就允许ELMo以一种固定的规则加到上面。给定一个token<script type="math/tex">(t_1, \cdots, t_N)</script>，使用预训练的词嵌入和选择基于character的表征形成一个上下文无关的token表征是标准的。然后，模型形成一个上下文敏感的表征<script type="math/tex">\mathbf{h}_k</script>，通常使用双向RNNs，CNNs或者前馈神经网络得到。(就是拿这些网络得到token表征输入到biLMs中)。</p><p>为了添加ELMo到监督模型，首先固定biLM的权重，token表征<script type="math/tex">\mathbf{x}_k</script>然后跟ELMo向量<script type="math/tex">\mathbf{ELMo}_k^{task}</script>合并，将这个增强的表征<script type="math/tex">[\mathbf{x}_k; \mathbf{ELMo}_k^{task}]</script>输入到具体任务的RNN中。像SNLI,SquaD，NLP推理和问答任务。作者观察到通过引入针对具体任务的线性权重和用这个增强表征<script type="math/tex">[\mathbf{x}_k; \mathbf{ELMo}_k^{task}]</script>能进一步提升表现。</p><p>最后，加入dropout和<script type="math/tex">\lambda||\mathbf{W}||^2_2</script>到ELMo中，.</p><h4 id="3-4-Pre-trained-bidirectional-language-model-architecture"><a href="#3-4-Pre-trained-bidirectional-language-model-architecture" class="headerlink" title="3.4 Pre-trained bidirectional language model architecture"></a>3.4 Pre-trained bidirectional language model architecture</h4><p>为了在保持纯粹的基于character的输入表征的同时，平衡语言模型整体的复杂度与模型大小和下游任务的计算需求，将单个最佳模型CNN-BIG-LSTM中的embedding和隐藏层维度都减半。最后模型使用L=2的biLSTM，含有4096个units和512维度映射和一个残差连接第一层和第二层。上下文不敏感类型表征用2048character n-gram卷积后接两个高速层和一个线性映射到512的表征。结果上，biLM给每个输入token提供了3个表征，包括那些外部训练集得到的纯粹的character input。对比而言，传统词嵌入方法在固定词表上只提供一层token的表征。</p><h4 id="4-Evalution"><a href="#4-Evalution" class="headerlink" title="4. Evalution"></a>4. Evalution</h4><p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/202112022354044.png" alt="image-20211202235427126" style="zoom:20%;" /></p><p>ELMo在大部分任务上都有大的提升。</p><p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/202112030008164.png" alt="image-20211203000814840" style="zoom:20%;" /></p><p>ELMo的低层侧重于词性等语法特征，高层侧重于语义特征。上表5中是语义消歧任务，第二层要好与第一层。上表6中是POS任务，第一层要好于第二层。如下图，来自于[4].</p><p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/202112030032810.png" alt="image-20211203003146790" style="zoom: 25%;" /></p><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>ELMo的优点:</p><ol><li>利用双向的LSTM抽取word embedding，能有效解决一定程度上的一词多义。</li><li>基于字符：ELMo表示纯粹基于字符，然后经过CharCNN之后再作为词的表示，解决了OOV问题，而且输入的词表也很小。</li><li>通用性强，如文中在6大任务中都有比较好的表现。</li></ol><p>缺点:</p><ol><li>使用LSTM抽取特征，效果不如后来的Transformer。</li><li>使用拼接的方式来融合上下文特征，效果有限。</li><li>训练耗时长，RNN要等上一步隐藏状态计算完后才能开始下一步计算。</li></ol><h4 id="Inference"><a href="#Inference" class="headerlink" title="Inference"></a>Inference</h4><p>[1] <a href="https://blog.csdn.net/Magical_Bubble/article/details/89160032">ELMo解读（论文 + PyTorch源码</a></p><p>[2] <a href="https://zhuanlan.zhihu.com/p/63115885">NAACL2018:高级词向量(ELMo)详解(超详细) 经典</a></p><p>[3] <a href="https://www.cnblogs.com/wwj99/p/12295999.html">论文翻译——Deep contextualized word representations</a></p><p>[4] <a href="https://zhuanlan.zhihu.com/p/49271699">从Word Embedding到Bert模型—自然语言处理中的预训练技术发展史</a></p><p>[5] <a href="https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/ELMo.html">EMLo</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> NLP paper </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ELMo </tag>
+            
+            <tag> biLM </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>6. Capsule net 论文笔记</title>
       <link href="2020/10/17/NLP%20Paper%206.Capsule%20Net%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
       <url>2020/10/17/NLP%20Paper%206.Capsule%20Net%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</url>
@@ -987,33 +1014,6 @@
             <tag> 动态路由算法 </tag>
             
             <tag> squash </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>9.ELMO 论文笔记</title>
-      <link href="2020/10/17/NLP%20Paper%209.%20ELMO%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-      <url>2020/10/17/NLP%20Paper%209.%20ELMO%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</url>
-      
-        <content type="html"><![CDATA[<h3 id="9-ELMO-论文笔记"><a href="#9-ELMO-论文笔记" class="headerlink" title="9.ELMO 论文笔记"></a>9.ELMO 论文笔记</h3><p>本文是 <a href="https://arxiv.org/pdf/1802.05365.pdf">Deep contextualized word representations</a>笔记.ELMO是Embeddings from Language Models的简称。</p><p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/202112012207322.png" alt="image-20211201220735638" style="zoom:20%;" /></p><h4 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h4><p>本文作者引入了一种新的深层的上下文词表示，该模型能:</p><ol><li>使用词的复杂特征</li><li>在不同语境下词的多义性</li></ol><p>本文的词向量是学习深层双向语言模型的内部状态的功能得到的。作者发现这些表示能轻松加到已存在的模型上，并且在6大NLP问题上有显著的提升，像QA，文本蕴含，情感分析。还分析了暴露预训练网络的深层内部是至关重要的，这允许下游模型来混合不同类型的半监督信号。</p><h4 id="3-1-Bidirectional-language-models"><a href="#3-1-Bidirectional-language-models" class="headerlink" title="3.1 Bidirectional language models"></a>3.1 Bidirectional language models</h4><p>给定N个token的序列，<script type="math/tex">(t_1, t_2, \cdots, t_n)</script>，前馈语言模型在给定前<script type="math/tex">(t_1, t_2, \cdots, t_{n-1})</script>的情况下来计算<script type="math/tex">t_k</script>的概率:(LM就是一个预测下一个词的任务)</p><script type="math/tex; mode=display">p(t_1, t_2, \cdots, t_N) = \prod_{k=1}^Np(t_k|t_1, t_2, \cdots, t_{k-1}) \tag{1}</script><p>如果通过token embeddings 或 字符卷积后再输入到L层的前向LSTMs.在位置k,每层LSTM输出一个上下独立的表示为<script type="math/tex">\overrightarrow{\mathbf{h}}_{k,j}^{LM}</script>，其中<script type="math/tex">j=1, \cdots L.</script>(表示第几层)。最上面一层LSTM的输出<script type="math/tex">\overrightarrow{\mathbf{h}}_{k,j}^{LM}</script>被用来给softmax层预测下一个token<script type="math/tex">t_{k+1}</script>。</p><p>反向的LM类似于前向LM,除了将输入序列反向，目标也变成预测前一个词:</p><script type="math/tex; mode=display">p(t_1, t_2, \cdots, t_N) = \prod_{k=1}^Np(t_k|t_1, t_2, \cdots, t_{N}) \tag{2}</script><p>这可以用类似的前向LM实现，对于反向LSTM层，给定<script type="math/tex">(t_{k+1}, \cdots,t_N)</script>生成的<script type="math/tex">t_k</script></p><p>表征为 <script type="math/tex">\overleftarrow{\mathbf{h}}_{k,j}^{LM}</script>.</p><p>这样双向LM结合了前向和反向的LM特点。目标就是最大化两者联合的对数似然函数:</p><script type="math/tex; mode=display">\begin{array}{l}\sum_{k=1}^{N}\left(\log p\left(t_{k} \mid t_{1}, \ldots, t_{k-1} ; \Theta_{x}, \vec{\Theta}_{L S T M}, \Theta_{s}\right)\right. \\\left.\quad+\log p\left(t_{k} \mid t_{k+1}, \ldots, t_{N} ; \Theta_{x}, \overleftarrow{\Theta}_{L S T M}, \Theta_{s}\right)\right)\end{array} \tag{3}</script><p>作者将前、后向的token表征<script type="math/tex">\Theta_x</script>和softmax层<script type="math/tex">\Theta_s</script>参数联系起来，同时保持每个方向的LSTM参数分开。但在方向间共享些权重而不是使用完全独立的参数。</p><h4 id="3-2-ELMo"><a href="#3-2-ELMo" class="headerlink" title="3.2 ELMo"></a>3.2 ELMo</h4><p>ELMo是biLM中中间层表征的任务特定的组合。对于每个token<script type="math/tex">t_k</script>,L层biLM计算<script type="math/tex">2L+1</script>表征的集合：</p><script type="math/tex; mode=display">\begin{aligned}R_{k} &=\left\{\mathbf{x}_{k}^{L M}, \overrightarrow{\mathbf{h}}_{k, j}^{L M}, \overleftarrow{\mathbf{h}}_{k, j}^{L M} \mid j=1, \ldots, L\right\} \\&=\left\{\mathbf{h}_{k, j}^{L M} \mid j=0, \ldots, L\right\}\end{aligned} \tag{4}</script><p>其中<script type="math/tex">\mathbf{h}_{k, j}^{L M} = \left[\overrightarrow{\mathbf{h}}_{k, j}^{L M}, \overleftarrow{\mathbf{h}}_{k, j}^{LM} \right]</script>.当<script type="math/tex">j=0</script>时，就是token层，因此可以简写为式4中第二行。</p><p>ELMo将所有层的<script type="math/tex">\mathbf{R}</script>(式4)压缩成单一向量,<script type="math/tex">\mathbf{ELMo}_k = E(\mathbf{R}_k; \Theta)</script>.最简单的就只选择最上面一层作为token的表示,<script type="math/tex">\mathbf{h}_{k, L}^{LM}</script>.更通用做法是，对所有层求权重和:</p><script type="math/tex; mode=display">\mathbf{E L M o}_{k}^{t a s k}=E\left(R_{k} ; \Theta^{t a s k}\right)=\gamma^{t a s k} \sum_{j=0}^{L} s_{j}^{t a s k} \mathbf{h}_{k, j}^{L M} \tag{1}</script><p>在(1)中，(按论文标号)<script type="math/tex">s^{task}</script>表示经过softmax-normalized权重和放缩参数<script type="math/tex">\gamma^{task}</script>允许任务模型放缩ELMo向量。这是个经验参数，也能帮助优化过程。</p><h4 id="3-3-Using-biLMs-for-supervised-NLP-tasks"><a href="#3-3-Using-biLMs-for-supervised-NLP-tasks" class="headerlink" title="3.3 Using biLMs for supervised NLP tasks"></a>3.3 Using biLMs for supervised NLP tasks</h4><p>给定一个预训练双向语言模型和对目标NLP任务的监督架构，这是使用双向biLM来提升任务模型是非常简单的。就是运行biLM并记录每层的每个词的表征。然后，让终端任务模型学习这些表征的线性组合。如下所述。</p><p>首先,考虑没有biLM的监督模型底层是差不多的架构，这就允许ELMo以一种固定的规则加到上面。给定一个token<script type="math/tex">(t_1, \cdots, t_N)</script>，使用预训练的词嵌入和选择基于character的表征形成一个上下文无关的token表征是标准的。然后，模型形成一个上下文敏感的表征<script type="math/tex">\mathbf{h}_k</script>，通常使用双向RNNs，CNNs或者前馈神经网络得到。(就是拿这些网络得到token表征输入到biLMs中)。</p><p>为了添加ELMo到监督模型，首先固定biLM的权重，token表征<script type="math/tex">\mathbf{x}_k</script>然后跟ELMo向量<script type="math/tex">\mathbf{ELMo}_k^{task}</script>合并，将这个增强的表征<script type="math/tex">[\mathbf{x}_k; \mathbf{ELMo}_k^{task}]</script>输入到具体任务的RNN中。像SNLI,SquaD，NLP推理和问答任务。作者观察到通过引入针对具体任务的线性权重和用这个增强表征<script type="math/tex">[\mathbf{x}_k; \mathbf{ELMo}_k^{task}]</script>能进一步提升表现。</p><p>最后，加入dropout和<script type="math/tex">\lambda||\mathbf{W}||^2_2</script>到ELMo中，.</p><h4 id="3-4-Pre-trained-bidirectional-language-model-architecture"><a href="#3-4-Pre-trained-bidirectional-language-model-architecture" class="headerlink" title="3.4 Pre-trained bidirectional language model architecture"></a>3.4 Pre-trained bidirectional language model architecture</h4><p>为了在保持纯粹的基于character的输入表征的同时，平衡语言模型整体的复杂度与模型大小和下游任务的计算需求，将单个最佳模型CNN-BIG-LSTM中的embedding和隐藏层维度都减半。最后模型使用L=2的biLSTM，含有4096个units和512维度映射和一个残差连接第一层和第二层。上下文不敏感类型表征用2048character n-gram卷积后接两个高速层和一个线性映射到512的表征。结果上，biLM给每个输入token提供了3个表征，包括那些外部训练集得到的纯粹的character input。对比而言，传统词嵌入方法在固定词表上只提供一层token的表征。</p><h4 id="4-Evalution"><a href="#4-Evalution" class="headerlink" title="4. Evalution"></a>4. Evalution</h4><p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/202112022354044.png" alt="image-20211202235427126" style="zoom:20%;" /></p><p>ELMo在大部分任务上都有大的提升。</p><p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/202112030008164.png" alt="image-20211203000814840" style="zoom:20%;" /></p><p>ELMo的低层侧重于词性等语法特征，高层侧重于语义特征。上表5中是语义消歧任务，第二层要好与第一层。上表6中是POS任务，第一层要好于第二层。如下图，来自于[4].</p><p><img src="https://gitee.com/miller999999/bpic/raw/master/img/blog/202112030032810.png" alt="image-20211203003146790" style="zoom: 25%;" /></p><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>ELMo的优点:</p><ol><li>利用双向的LSTM抽取word embedding，能有效解决一定程度上的一词多义。</li><li>基于字符：ELMo表示纯粹基于字符，然后经过CharCNN之后再作为词的表示，解决了OOV问题，而且输入的词表也很小。</li><li>通用性强，如文中在6大任务中都有比较好的表现。</li></ol><p>缺点:</p><ol><li>使用LSTM抽取特征，效果不如后来的Transformer。</li><li>使用拼接的方式来融合上下文特征，效果有限。</li><li>训练耗时长，RNN要等上一步隐藏状态计算完后才能开始下一步计算。</li></ol><h4 id="Inference"><a href="#Inference" class="headerlink" title="Inference"></a>Inference</h4><p>[1] <a href="https://blog.csdn.net/Magical_Bubble/article/details/89160032">ELMo解读（论文 + PyTorch源码</a></p><p>[2] <a href="https://zhuanlan.zhihu.com/p/63115885">NAACL2018:高级词向量(ELMo)详解(超详细) 经典</a></p><p>[3] <a href="https://www.cnblogs.com/wwj99/p/12295999.html">论文翻译——Deep contextualized word representations</a></p><p>[4] <a href="https://zhuanlan.zhihu.com/p/49271699">从Word Embedding到Bert模型—自然语言处理中的预训练技术发展史</a></p><p>[5] <a href="https://paddlepedia.readthedocs.io/en/latest/tutorials/pretrain_model/ELMo.html">EMLo</a></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> NLP paper </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> ELMo </tag>
-            
-            <tag> biLM </tag>
             
         </tags>
       

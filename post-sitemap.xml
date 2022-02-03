@@ -9,6 +9,14 @@
 
 
     <url>
+        <loc>http://aigonna.com/2020/10/19/NLP%20Paper%209.%20ELMO%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2022-01-20T15:35:23.027Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://aigonna.com/2021/08/26/Kaggle%20Kaggle%E6%AF%94%E8%B5%9B%20Optiver%20Realized%20Volatility%20Prediction/</loc>
         <lastmod>2022-01-09T19:33:21.127Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -27,14 +35,6 @@
     <url>
         <loc>http://aigonna.com/2020/06/02/1.VGG%20%E7%BD%91%E7%BB%9C/</loc>
         <lastmod>2021-12-02T17:13:32.776Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/10/17/NLP%20Paper%209.%20ELMO%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-12-02T16:49:59.540Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
