@@ -20,9 +20,9 @@
       
         <tags>
             
-            <tag> 深度学习技能 </tag>
-            
             <tag> seaborn </tag>
+            
+            <tag> 深度学习技能 </tag>
             
             <tag> heatmap </tag>
             
@@ -347,11 +347,11 @@
       
         <tags>
             
-            <tag> seaborn </tag>
-            
             <tag> 机器学习技能 </tag>
             
             <tag> subplot </tag>
+            
+            <tag> seaborn </tag>
             
             <tag> pairplot </tag>
             
@@ -605,11 +605,11 @@
             
             <tag> Backpropagation </tag>
             
-            <tag> CS224n </tag>
-            
             <tag> gradient </tag>
             
             <tag> Automatic Differentiation </tag>
+            
+            <tag> CS224n </tag>
             
         </tags>
       
@@ -667,13 +667,13 @@
             
             <tag> negative sampling </tag>
             
+            <tag> CS224n </tag>
+            
             <tag> Word2vec </tag>
             
             <tag> Skip-Gram </tag>
             
             <tag> Glove </tag>
-            
-            <tag> CS224n </tag>
             
             <tag> 词向量评价 </tag>
             
@@ -731,11 +731,11 @@
       
         <tags>
             
+            <tag> CS224n </tag>
+            
             <tag> Word2vec </tag>
             
             <tag> Skip-Gram </tag>
-            
-            <tag> CS224n </tag>
             
             <tag> CBOW </tag>
             
@@ -1847,9 +1847,9 @@
             
             <tag> CMSC35300 Mathematics Foundations of ML </tag>
             
-            <tag> 正交基 </tag>
-            
             <tag> 子空间 </tag>
+            
+            <tag> 正交基 </tag>
             
         </tags>
       
@@ -2228,11 +2228,11 @@
             
             <tag> 机器学习 </tag>
             
+            <tag> Mathematic for machine learning 笔记 </tag>
+            
             <tag> 微积分 </tag>
             
             <tag> 矩阵求导 </tag>
-            
-            <tag> Mathematic for machine learning 笔记 </tag>
             
         </tags>
       
@@ -2259,11 +2259,11 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> Mathematic for machine learning 笔记 </tag>
-            
             <tag> 矩阵论 </tag>
             
             <tag> Linear mapping </tag>
+            
+            <tag> Mathematic for machine learning 笔记 </tag>
             
         </tags>
       
