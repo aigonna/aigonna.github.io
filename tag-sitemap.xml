@@ -4,70 +4,217 @@
 
     <url>
         <loc>http://aigonna.com/tags/plot/</loc>
-        <lastmod>2022-03-26T11:13:47.664Z</lastmod>
+        <lastmod>2022-03-28T03:25:51.384Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/tags/heatmap/</loc>
-        <lastmod>2022-03-26T11:13:47.664Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
-        <lastmod>2022-03-26T11:13:47.664Z</lastmod>
+        <lastmod>2022-03-28T03:25:51.384Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/tags/seaborn/</loc>
-        <lastmod>2022-03-26T11:13:47.664Z</lastmod>
+        <lastmod>2022-03-28T03:25:51.384Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/pairplot/</loc>
-        <lastmod>2022-03-26T11:13:07.138Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/subplot/</loc>
-        <lastmod>2022-03-26T11:13:07.138Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
-        <lastmod>2022-03-26T11:13:07.138Z</lastmod>
+        <loc>http://aigonna.com/tags/code-snippet/</loc>
+        <lastmod>2022-03-28T03:25:51.384Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/tags/confusion-matrix/</loc>
-        <lastmod>2022-03-26T11:12:35.508Z</lastmod>
+        <lastmod>2022-03-28T03:25:39.678Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/tags/TPU/</loc>
-        <lastmod>2022-03-26T11:12:35.508Z</lastmod>
+        <lastmod>2022-03-28T03:25:39.678Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/tags/VGG/</loc>
-        <lastmod>2022-03-26T11:12:35.508Z</lastmod>
+        <lastmod>2022-03-28T03:25:39.678Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/pairplot/</loc>
+        <lastmod>2022-03-28T03:25:25.902Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/subplot/</loc>
+        <lastmod>2022-03-28T03:25:25.902Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+        <lastmod>2022-03-28T03:25:25.902Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Anonymous-Walk-Embeddings/</loc>
+        <lastmod>2022-03-28T03:22:46.749Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Biased-Random-Walks/</loc>
+        <lastmod>2022-03-28T03:22:46.749Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Negative-Sampling/</loc>
+        <lastmod>2022-03-28T03:22:46.749Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Random-Walk-Embeddings/</loc>
+        <lastmod>2022-03-28T03:22:46.749Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Random-Walk/</loc>
+        <lastmod>2022-03-28T03:22:46.749Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/node2vec/</loc>
+        <lastmod>2022-03-28T03:22:46.749Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/DeepWalk/</loc>
+        <lastmod>2022-03-28T03:22:46.749Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Node-embedding/</loc>
+        <lastmod>2022-03-28T03:22:46.749Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/CS224W/</loc>
+        <lastmod>2022-03-28T03:22:46.749Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Color-Refinement/</loc>
+        <lastmod>2022-03-28T03:18:54.571Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Weisfeiler-Lehman-Kernel/</loc>
+        <lastmod>2022-03-28T03:18:54.571Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Graphlet-Kernel/</loc>
+        <lastmod>2022-03-28T03:18:54.571Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Katz-index/</loc>
+        <lastmod>2022-03-28T03:18:54.571Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Isomorphism/</loc>
+        <lastmod>2022-03-28T03:18:54.571Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Graphlet/</loc>
+        <lastmod>2022-03-28T03:18:54.571Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Cluster-Coefficient/</loc>
+        <lastmod>2022-03-28T03:18:54.571Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/centrality/</loc>
+        <lastmod>2022-03-28T03:18:54.571Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Degree/</loc>
+        <lastmod>2022-03-28T03:14:51.080Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Edge/</loc>
+        <lastmod>2022-03-28T03:14:51.080Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Node/</loc>
+        <lastmod>2022-03-28T03:14:51.080Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Graph/</loc>
+        <lastmod>2022-03-28T03:14:51.080Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -514,13 +661,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/PTM/</loc>
-        <lastmod>2022-03-26T10:46:41.961Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://aigonna.com/tags/fine-tuning/</loc>
         <lastmod>2022-03-26T10:46:41.961Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -536,6 +676,13 @@
 
     <url>
         <loc>http://aigonna.com/tags/GPT/</loc>
+        <lastmod>2022-03-26T10:46:41.961Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/PTM/</loc>
         <lastmod>2022-03-26T10:46:41.961Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

@@ -9,8 +9,15 @@
 
 
     <url>
-        <loc>http://aigonna.com/categories/%25E6%25B7%25B1%25E5%25BA%25A6%25E5%25AD%25A6%25E4%25B9%25A0%25E6%258A%2580%25E8%2583%25BD/</loc>
-        <lastmod>2022-03-26T11:13:47.664Z</lastmod>
+        <loc>http://aigonna.com/categories/%25E6%25B7%25B1%25E5%25BA%25A6%25E5%25AD%25A6%25E4%25B9%25A0/</loc>
+        <lastmod>2022-03-28T03:25:51.384Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/categories/GNN/</loc>
+        <lastmod>2022-03-28T03:22:46.749Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -53,13 +60,6 @@
     <url>
         <loc>http://aigonna.com/categories/Python/</loc>
         <lastmod>2022-03-26T09:44:57.818Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/categories/%25E6%25B7%25B1%25E5%25BA%25A6%25E5%25AD%25A6%25E4%25B9%25A0/</loc>
-        <lastmod>2022-03-26T09:40:15.326Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
