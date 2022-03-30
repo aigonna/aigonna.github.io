@@ -3,6 +3,97 @@
 
 
     <url>
+        <loc>http://aigonna.com/tags/Color-Refinement/</loc>
+        <lastmod>2022-03-29T04:57:55.120Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Weisfeiler-Lehman-Kernel/</loc>
+        <lastmod>2022-03-29T04:57:55.120Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Graphlet-Kernel/</loc>
+        <lastmod>2022-03-29T04:57:55.120Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Katz-index/</loc>
+        <lastmod>2022-03-29T04:57:55.120Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Isomorphism/</loc>
+        <lastmod>2022-03-29T04:57:55.120Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Graphlet/</loc>
+        <lastmod>2022-03-29T04:57:55.120Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Cluster-Coefficient/</loc>
+        <lastmod>2022-03-29T04:57:55.120Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/centrality/</loc>
+        <lastmod>2022-03-29T04:57:55.120Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/CS224W/</loc>
+        <lastmod>2022-03-29T04:57:55.120Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Degree/</loc>
+        <lastmod>2022-03-28T03:46:54.919Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Edge/</loc>
+        <lastmod>2022-03-28T03:46:54.919Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Node/</loc>
+        <lastmod>2022-03-28T03:46:54.919Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Graph/</loc>
+        <lastmod>2022-03-28T03:46:54.919Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/plot/</loc>
         <lastmod>2022-03-28T03:25:51.384Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -124,97 +215,6 @@
     <url>
         <loc>http://aigonna.com/tags/Node-embedding/</loc>
         <lastmod>2022-03-28T03:22:46.749Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/CS224W/</loc>
-        <lastmod>2022-03-28T03:22:46.749Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Color-Refinement/</loc>
-        <lastmod>2022-03-28T03:18:54.571Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Weisfeiler-Lehman-Kernel/</loc>
-        <lastmod>2022-03-28T03:18:54.571Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Graphlet-Kernel/</loc>
-        <lastmod>2022-03-28T03:18:54.571Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Katz-index/</loc>
-        <lastmod>2022-03-28T03:18:54.571Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Isomorphism/</loc>
-        <lastmod>2022-03-28T03:18:54.571Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Graphlet/</loc>
-        <lastmod>2022-03-28T03:18:54.571Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Cluster-Coefficient/</loc>
-        <lastmod>2022-03-28T03:18:54.571Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/centrality/</loc>
-        <lastmod>2022-03-28T03:18:54.571Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Degree/</loc>
-        <lastmod>2022-03-28T03:14:51.080Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Edge/</loc>
-        <lastmod>2022-03-28T03:14:51.080Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Node/</loc>
-        <lastmod>2022-03-28T03:14:51.080Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Graph/</loc>
-        <lastmod>2022-03-28T03:14:51.080Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

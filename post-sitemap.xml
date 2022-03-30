@@ -9,6 +9,22 @@
 
 
     <url>
+        <loc>http://aigonna.com/2022/02/27/CS224W_2.%20Traditional%20Methods%20for%20ML%20on%20Graphs/</loc>
+        <lastmod>2022-03-29T04:57:55.120Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2022/02/23/CS224W_1.%20Introduction;%20Machine%20Learning%20for%20Graphs/</loc>
+        <lastmod>2022-03-28T03:46:54.919Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://aigonna.com/2021/11/22/%E6%8A%80%E8%83%BD_3.seaborn%20notes/</loc>
         <lastmod>2022-03-28T03:25:51.384Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -35,22 +51,6 @@
     <url>
         <loc>http://aigonna.com/2022/03/03/CS224W_3.%20Node%20Embeddings/</loc>
         <lastmod>2022-03-28T03:22:46.749Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2022/02/27/CS224W_2.%20Traditional%20Methods%20for%20ML%20on%20Graphs/</loc>
-        <lastmod>2022-03-28T03:18:54.571Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2022/02/23/CS224W_1.%20Introduction;%20Machine%20Learning%20for%20Graphs/</loc>
-        <lastmod>2022-03-28T03:14:51.080Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
