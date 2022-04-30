@@ -2118,7 +2118,7 @@ blockquote footer cite:before {
   display: flex;
   margin: 0 auto;
   padding: 2rem 20px;
-  max-width: 1300px;
+  max-width: 1600px;
 }
 @media screen and (max-width: 900px) {
   .layout {
@@ -2137,7 +2137,7 @@ blockquote footer cite:before {
 }
 @media screen and (min-width: 2000px) {
   .layout {
-    max-width: 1300px;
+    max-width: 1600px;
   }
 }
 .layout > div:first-child:not(.recent-posts) {
