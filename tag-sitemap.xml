@@ -822,13 +822,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/PTM/</loc>
-        <lastmod>2022-03-26T10:46:41.961Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://aigonna.com/tags/fine-tuning/</loc>
         <lastmod>2022-03-26T10:46:41.961Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -844,6 +837,13 @@
 
     <url>
         <loc>http://aigonna.com/tags/GPT/</loc>
+        <lastmod>2022-03-26T10:46:41.961Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/PTM/</loc>
         <lastmod>2022-03-26T10:46:41.961Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
