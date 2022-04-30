@@ -9,16 +9,112 @@
 
 
     <url>
-        <loc>http://aigonna.com/2022/02/27/CS224W_2.%20Traditional%20Methods%20for%20ML%20on%20Graphs/</loc>
-        <lastmod>2022-03-29T04:57:55.120Z</lastmod>
+        <loc>http://aigonna.com/2021/04/21/1.%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA/</loc>
+        <lastmod>2022-04-09T18:49:41.528Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>http://aigonna.com/2022/02/23/CS224W_1.%20Introduction;%20Machine%20Learning%20for%20Graphs/</loc>
-        <lastmod>2022-03-28T03:46:54.919Z</lastmod>
+        <loc>http://aigonna.com/2022/03/03/CS224W_3.%20Node%20Embeddings/</loc>
+        <lastmod>2022-04-09T17:29:28.656Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/06/02/1.VGG%20%E7%BD%91%E7%BB%9C/</loc>
+        <lastmod>2022-04-09T17:01:38.848Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/10/21/1.%20NLP%20%E7%94%A8python%E5%A4%84%E7%90%86/</loc>
+        <lastmod>2022-04-09T04:44:21.708Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/09/21/2.%20skip-gram-ns%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2022-04-09T04:20:21.774Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/12/23/NLP%20Paper%2016.%20Reformer%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2022-04-09T04:14:03.175Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/08/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%2010.%20EM%20%E7%AE%97%E6%B3%95/</loc>
+        <lastmod>2022-04-09T04:13:02.639Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2022/02/27/CS224W_2.%20Traditional%20Methods%20for%20ML%20on%20Graphs/</loc>
+        <lastmod>2022-04-08T08:28:36.369Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2022/02/12/CS224W_1.%20Introduction%20Machine%20Learning%20for%20Graphs/</loc>
+        <lastmod>2022-04-08T08:26:07.751Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/09/04/2.%20%E5%8F%B0%E6%B9%BE%E5%9B%BD%E7%AB%8B%E5%A4%A7%E5%AD%A6%20%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/</loc>
+        <lastmod>2022-04-06T08:07:41.189Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/12/14/CS224N%20Lecture%207%20Machine%20Translation,%20Attention,%20Subword%20Models/</loc>
+        <lastmod>2022-04-06T07:33:43.292Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/10/29/1.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</loc>
+        <lastmod>2022-04-06T07:16:27.531Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/06/05/2.ResNet%20%E7%BD%91%E7%BB%9C/</loc>
+        <lastmod>2022-04-06T07:16:27.531Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2021/08/21/ML_3.lightAutoML/</loc>
+        <lastmod>2022-03-30T07:39:44.745Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -43,14 +139,6 @@
     <url>
         <loc>http://aigonna.com/2021/01/06/%E6%8A%80%E8%83%BD_1.%20%E5%AD%90%E5%9B%BE%E7%BB%98%E5%88%B6/</loc>
         <lastmod>2022-03-28T03:25:25.902Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2022/03/03/CS224W_3.%20Node%20Embeddings/</loc>
-        <lastmod>2022-03-28T03:22:46.749Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -185,14 +273,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/2020/08/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%2010.%20EM%20%E7%AE%97%E6%B3%95/</loc>
-        <lastmod>2022-03-26T10:55:35.096Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://aigonna.com/2020/07/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%99%BD%E6%9D%BF%E6%8E%A8%E5%AF%BC%201%20%E6%A6%82%E7%8E%87%E5%9F%BA%E7%A1%80/</loc>
         <lastmod>2022-03-26T10:48:52.922Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -219,14 +299,6 @@
     <url>
         <loc>http://aigonna.com/2021/03/13/NLP%20Paper%2017.Transformer-XL%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
         <lastmod>2022-03-26T10:47:41.344Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/12/23/NLP%20Paper%2016.%20Reformer%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2022-03-26T10:47:34.387Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -393,14 +465,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/2020/12/14/CS224N%20Lecture%207%20Machine%20Translation,%20Attention,%20Subword%20Models/</loc>
-        <lastmod>2022-03-26T10:17:27.925Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://aigonna.com/2021/08/20/Kaggle%20kaggle%20%20Tabular%20Playground%20Series%20%E6%AF%94%E8%B5%9B/</loc>
         <lastmod>2022-03-26T10:14:06.614Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -475,54 +539,6 @@
     <url>
         <loc>http://aigonna.com/2020/09/20/4.RNN%EF%BC%8C%20LSTM%20%EF%BC%8C%20GRU%20%E7%BB%93%E6%9E%84%E8%A7%A3%E9%87%8A%E5%92%8C%E5%85%B6%E5%9C%A8Pytorch%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
         <lastmod>2022-03-26T09:40:15.326Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/06/05/2.ResNet%20%E7%BD%91%E7%BB%9C/</loc>
-        <lastmod>2022-03-26T09:38:05.130Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/09/04/2.%20%E5%8F%B0%E6%B9%BE%E5%9B%BD%E7%AB%8B%E5%A4%A7%E5%AD%A6%20%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/</loc>
-        <lastmod>2022-03-26T09:36:50.701Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2021/04/21/1.%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA/</loc>
-        <lastmod>2022-03-26T09:29:03.411Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/06/02/1.VGG%20%E7%BD%91%E7%BB%9C/</loc>
-        <lastmod>2022-03-26T09:28:06.012Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/10/21/1.%20NLP%20%E7%94%A8python%E5%A4%84%E7%90%86/</loc>
-        <lastmod>2022-03-26T09:27:02.899Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2021/08/21/ML_3.lightAutoML/</loc>
-        <lastmod>2021-10-26T18:32:08.336Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -609,14 +625,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/2020/09/21/2.%20skip-gram-ns%E4%BB%A3%E7%A0%81%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2021-05-11T05:46:16.066Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://aigonna.com/2020/06/02/5.%20%E6%8C%87%E9%92%88/</loc>
         <lastmod>2021-03-23T09:39:57.873Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -643,14 +651,6 @@
     <url>
         <loc>http://aigonna.com/2020/10/29/2.%E7%B1%BB%E7%9A%84%E6%9E%84%E5%BB%BA/</loc>
         <lastmod>2021-03-23T08:48:59.037Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/10/29/1.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</loc>
-        <lastmod>2021-03-23T08:48:54.191Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

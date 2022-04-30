@@ -1333,8 +1333,8 @@ canvas:not(#ribbon-canvas),
   --global-font-size: 13px;
   --global-bg: #fff;
   --font-color: #4c4948;
-  --hr-border: #dac0dd;
-  --hr-before-color: #cba7cf;
+  --hr-border: #dda9f6;
+  --hr-before-color: #cf86f2;
   --search-bg: #f6f8fa;
   --search-input-color: #4c4948;
   --search-result-title: #4c4948;
@@ -1468,7 +1468,7 @@ table td {
   vertical-align: middle;
 }
 *::selection {
-  background: #92acd1;
+  background: #aa96da;
   color: #f7f7f7;
 }
 button {
@@ -2908,8 +2908,8 @@ blockquote footer cite:before {
   transition: all 0.2s ease-in-out;
 }
 #aside-content #card-toc .toc-content .toc-link.active {
-  border-left-color: #5ea3b0;
-  background: #8bbdc6;
+  border-left-color: #2e006d;
+  background: #3a0088;
   color: #fff;
 }
 #aside-content #card-toc .toc-content:before {
@@ -3725,7 +3725,7 @@ _:future,
   overflow-wrap: break-word;
 }
 #article-container a {
-  color: #99a9bf;
+  color: #5e63b6;
 }
 #article-container a:hover {
   text-decoration: underline;
