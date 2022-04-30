@@ -466,9 +466,9 @@
             
             <tag> code snippet </tag>
             
-            <tag> subplot </tag>
-            
             <tag> seaborn </tag>
+            
+            <tag> subplot </tag>
             
             <tag> pairplot </tag>
             
@@ -526,9 +526,9 @@
       
         <tags>
             
-            <tag> BERT </tag>
-            
             <tag> RoBERTa </tag>
+            
+            <tag> BERT </tag>
             
             <tag> PTMs </tag>
             
@@ -621,13 +621,13 @@
             
             <tag> LSTM </tag>
             
+            <tag> CS224n </tag>
+            
             <tag> BPTT </tag>
             
             <tag> 梯度消失和爆炸 </tag>
             
             <tag> RNNs </tag>
-            
-            <tag> CS224n </tag>
             
         </tags>
       
@@ -751,13 +751,13 @@
       
         <tags>
             
-            <tag> PTM </tag>
-            
             <tag> GPT </tag>
             
             <tag> 无监督学习 </tag>
             
             <tag> fine-tuning </tag>
+            
+            <tag> PTM </tag>
             
         </tags>
       
@@ -784,13 +784,13 @@
             
             <tag> negative sampling </tag>
             
-            <tag> CS224n </tag>
-            
             <tag> Word2vec </tag>
             
             <tag> Skip-Gram </tag>
             
             <tag> Glove </tag>
+            
+            <tag> CS224n </tag>
             
             <tag> 词向量评价 </tag>
             
@@ -817,13 +817,13 @@
       
         <tags>
             
-            <tag> PTM </tag>
-            
             <tag> GPT </tag>
             
             <tag> 无监督学习 </tag>
             
             <tag> fine-tuning </tag>
+            
+            <tag> PTM </tag>
             
         </tags>
       
@@ -848,11 +848,11 @@
       
         <tags>
             
-            <tag> CS224n </tag>
-            
             <tag> Word2vec </tag>
             
             <tag> Skip-Gram </tag>
+            
+            <tag> CS224n </tag>
             
             <tag> CBOW </tag>
             
@@ -879,11 +879,11 @@
       
         <tags>
             
-            <tag> Tansformer </tag>
+            <tag> PTM </tag>
             
             <tag> BERT </tag>
             
-            <tag> PTM </tag>
+            <tag> Tansformer </tag>
             
         </tags>
       
@@ -1896,9 +1896,9 @@
       
         <tags>
             
-            <tag> PCA </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> PCA </tag>
             
             <tag> SVD </tag>
             
@@ -2345,11 +2345,11 @@
             
             <tag> 机器学习 </tag>
             
+            <tag> Mathematic for machine learning 笔记 </tag>
+            
             <tag> 微积分 </tag>
             
             <tag> 矩阵求导 </tag>
-            
-            <tag> Mathematic for machine learning 笔记 </tag>
             
         </tags>
       
@@ -2376,11 +2376,11 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> Mathematic for machine learning 笔记 </tag>
-            
             <tag> 矩阵论 </tag>
             
             <tag> Linear mapping </tag>
+            
+            <tag> Mathematic for machine learning 笔记 </tag>
             
         </tags>
       
