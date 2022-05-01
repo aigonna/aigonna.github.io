@@ -1330,7 +1330,7 @@ canvas:not(#ribbon-canvas),
   }
 }
 :root {
-  --global-font-size: 15px;
+  --global-font-size: 14px;
   --global-bg: #fff;
   --font-color: #4c4948;
   --hr-border: #dda9f6;
@@ -1391,7 +1391,7 @@ input::placeholder {
   z-index: -999;
   width: 100%;
   height: 100%;
-  background: url(https://gitee.com/miller999999/bpic/raw/master/img/blog/20210208223848.jpg);
+  background: url(https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011824608.jpg);
   background-attachment: local;
   background-position: center;
   -webkit-background-size: cover;
@@ -1468,7 +1468,7 @@ table td {
   vertical-align: middle;
 }
 *::selection {
-  background: #aa96da;
+  background: #7effdb;
   color: #f7f7f7;
 }
 button {

@@ -10,63 +10,70 @@
 
     <url>
         <loc>http://aigonna.com/categories/CV/</loc>
-        <lastmod>2022-04-09T18:49:41.528Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/categories/GNN/</loc>
-        <lastmod>2022-04-09T17:29:28.656Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/categories/NLP/</loc>
-        <lastmod>2022-04-09T04:44:21.708Z</lastmod>
+        <lastmod>2022-05-01T12:36:17.193Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/categories/NLP-paper/</loc>
-        <lastmod>2022-04-09T04:14:03.175Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/categories/%25E6%259C%25BA%25E5%2599%25A8%25E5%25AD%25A6%25E4%25B9%25A0/</loc>
-        <lastmod>2022-04-09T04:13:02.639Z</lastmod>
+        <lastmod>2022-05-01T12:34:54.157Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/categories/%25E6%25B7%25B1%25E5%25BA%25A6%25E5%25AD%25A6%25E4%25B9%25A0/</loc>
-        <lastmod>2022-04-06T08:07:41.189Z</lastmod>
+        <lastmod>2022-05-01T12:28:22.539Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/categories/Python/</loc>
-        <lastmod>2022-04-06T07:16:27.531Z</lastmod>
+        <lastmod>2022-05-01T12:08:21.746Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/categories/Cpp/</loc>
+        <lastmod>2022-05-01T12:07:31.922Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/categories/NLP/</loc>
+        <lastmod>2022-05-01T12:01:31.142Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/categories/Competition/</loc>
-        <lastmod>2022-03-26T10:23:35.363Z</lastmod>
+        <lastmod>2022-05-01T11:55:35.079Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/categories/%25E6%259C%25BA%25E5%2599%25A8%25E5%25AD%25A6%25E4%25B9%25A0/</loc>
+        <lastmod>2022-05-01T11:51:55.247Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/categories/%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584%25E4%25B8%258E%25E7%25AE%2597%25E6%25B3%2595/</loc>
-        <lastmod>2022-03-26T10:21:31.617Z</lastmod>
+        <lastmod>2022-05-01T11:44:54.564Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/categories/GNN/</loc>
+        <lastmod>2022-05-01T11:24:25.661Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -74,13 +81,6 @@
     <url>
         <loc>http://aigonna.com/categories/%25E6%259D%2582%25E9%25A1%25B9/</loc>
         <lastmod>2021-08-02T17:58:07.881Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/categories/Cpp/</loc>
-        <lastmod>2021-03-23T09:39:57.873Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
