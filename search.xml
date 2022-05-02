@@ -466,9 +466,9 @@
             
             <tag> code snippet </tag>
             
-            <tag> subplot </tag>
-            
             <tag> seaborn </tag>
+            
+            <tag> subplot </tag>
             
             <tag> pairplot </tag>
             
@@ -1749,9 +1749,9 @@
       
         <tags>
             
-            <tag> MLE </tag>
-            
             <tag> 高斯分布 </tag>
+            
+            <tag> MLE </tag>
             
             <tag> 有偏无偏 </tag>
             
@@ -1896,9 +1896,9 @@
       
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> PCA </tag>
+            
+            <tag> 机器学习 </tag>
             
             <tag> SVD </tag>
             
@@ -2345,11 +2345,11 @@
             
             <tag> 机器学习 </tag>
             
+            <tag> Mathematic for machine learning 笔记 </tag>
+            
             <tag> 微积分 </tag>
             
             <tag> 矩阵求导 </tag>
-            
-            <tag> Mathematic for machine learning 笔记 </tag>
             
         </tags>
       
@@ -2376,11 +2376,11 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> Mathematic for machine learning 笔记 </tag>
-            
             <tag> 矩阵论 </tag>
             
             <tag> Linear mapping </tag>
+            
+            <tag> Mathematic for machine learning 笔记 </tag>
             
         </tags>
       

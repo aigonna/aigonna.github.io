@@ -2118,7 +2118,7 @@ blockquote footer cite:before {
   display: flex;
   margin: 0 auto;
   padding: 2rem 20px;
-  max-width: 1200px;
+  max-width: 1300px;
 }
 @media screen and (max-width: 900px) {
   .layout {
@@ -2137,7 +2137,7 @@ blockquote footer cite:before {
 }
 @media screen and (min-width: 2000px) {
   .layout {
-    max-width: 1200px;
+    max-width: 1300px;
   }
 }
 .layout > div:first-child:not(.recent-posts) {
@@ -2194,7 +2194,7 @@ blockquote footer cite:before {
   width: 100% !important;
 }
 #page h1.page-title {
-  margin-top: 0.4rem;
+  margin-top: 0.5rem;
 }
 .flink#article-container .flink-desc {
   margin: 0.2rem 0 0.5rem;
