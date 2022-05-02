@@ -1102,13 +1102,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/SVD/</loc>
-        <lastmod>2022-05-01T10:32:35.027Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://aigonna.com/tags/PCoA/</loc>
         <lastmod>2022-05-01T10:32:35.027Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1117,6 +1110,13 @@
 
     <url>
         <loc>http://aigonna.com/tags/%E9%99%8D%E7%BB%B4/</loc>
+        <lastmod>2022-05-01T10:32:35.027Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/SVD/</loc>
         <lastmod>2022-05-01T10:32:35.027Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

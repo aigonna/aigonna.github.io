@@ -466,9 +466,9 @@
             
             <tag> code snippet </tag>
             
-            <tag> seaborn </tag>
-            
             <tag> subplot </tag>
+            
+            <tag> seaborn </tag>
             
             <tag> pairplot </tag>
             
@@ -1577,11 +1577,11 @@
             
             <tag> PCA </tag>
             
+            <tag> SVD </tag>
+            
             <tag> 降维 </tag>
             
             <tag> PCoA </tag>
-            
-            <tag> SVD </tag>
             
         </tags>
       
@@ -1749,9 +1749,9 @@
       
         <tags>
             
-            <tag> 高斯分布 </tag>
-            
             <tag> MLE </tag>
+            
+            <tag> 高斯分布 </tag>
             
             <tag> 有偏无偏 </tag>
             
@@ -1896,9 +1896,9 @@
       
         <tags>
             
-            <tag> PCA </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> PCA </tag>
             
             <tag> SVD </tag>
             
