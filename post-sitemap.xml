@@ -9,6 +9,14 @@
 
 
     <url>
+        <loc>http://aigonna.com/2021/03/13/NLP%20Paper%2017.Transformer-XL%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2022-06-02T15:06:30.050Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://aigonna.com/2020/08/19/ML_4.np.convolve/</loc>
         <lastmod>2022-06-02T14:22:37.213Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -155,14 +163,6 @@
     <url>
         <loc>http://aigonna.com/2021/08/23/NLP%20Paper%2025.%20NEZHA%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
         <lastmod>2022-05-01T12:03:14.011Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2021/03/13/NLP%20Paper%2017.Transformer-XL%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2022-05-01T12:01:55.317Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
