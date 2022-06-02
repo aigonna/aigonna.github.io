@@ -4,21 +4,21 @@
 
     <url>
         <loc>http://aigonna.com/tags/%E5%8D%B7%E7%A7%AF/</loc>
-        <lastmod>2022-06-02T12:22:22.432Z</lastmod>
+        <lastmod>2022-06-02T14:22:37.213Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/tags/numpy/</loc>
-        <lastmod>2022-06-02T12:22:22.432Z</lastmod>
+        <lastmod>2022-06-02T14:22:37.213Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/tags/convolve/</loc>
-        <lastmod>2022-06-02T12:22:22.432Z</lastmod>
+        <lastmod>2022-06-02T14:22:37.213Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -59,6 +59,13 @@
     </url>
 
     <url>
+        <loc>http://aigonna.com/tags/PTM/</loc>
+        <lastmod>2022-05-12T16:57:53.074Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/BERT/</loc>
         <lastmod>2022-05-12T16:57:53.074Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -67,13 +74,6 @@
 
     <url>
         <loc>http://aigonna.com/tags/Tansformer/</loc>
-        <lastmod>2022-05-12T16:57:53.074Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/PTM/</loc>
         <lastmod>2022-05-12T16:57:53.074Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
