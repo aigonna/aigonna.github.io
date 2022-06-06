@@ -9,6 +9,54 @@
 
 
     <url>
+        <loc>http://aigonna.com/2022/06/06/py_5.%20python%20time/</loc>
+        <lastmod>2022-06-06T13:35:51.240Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/10/26/py_4.%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF/</loc>
+        <lastmod>2022-06-06T13:32:24.511Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/06/05/2.ResNet%20%E7%BD%91%E7%BB%9C/</loc>
+        <lastmod>2022-06-06T13:24:45.988Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/10/23/py_3.%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/</loc>
+        <lastmod>2022-06-06T13:22:04.545Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/10/21/py_2.%E7%B1%BB%E7%9A%84%E6%9E%84%E5%BB%BA/</loc>
+        <lastmod>2022-06-06T13:21:41.643Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/10/29/py_1.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</loc>
+        <lastmod>2022-06-06T13:20:50.165Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://aigonna.com/2021/03/13/NLP%20Paper%2017.Transformer-XL%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
         <lastmod>2022-06-02T15:06:30.050Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -65,14 +113,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/2020/06/05/2.ResNet%20%E7%BD%91%E7%BB%9C/</loc>
-        <lastmod>2022-05-01T12:30:46.636Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://aigonna.com/2021/04/21/1.%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA/</loc>
         <lastmod>2022-05-01T12:29:52.352Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -115,14 +155,6 @@
     <url>
         <loc>http://aigonna.com/2020/12/19/NLP%20Paper%2015.%20RoBERTa%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
         <lastmod>2022-05-01T12:21:48.773Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/11/01/4.%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF/</loc>
-        <lastmod>2022-05-01T12:08:21.746Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -505,14 +537,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/2020/10/29/1.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</loc>
-        <lastmod>2022-04-06T07:16:27.531Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://aigonna.com/2020/06/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80Lecture6/</loc>
         <lastmod>2022-03-26T11:10:16.251Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -643,22 +667,6 @@
     <url>
         <loc>http://aigonna.com/2020/06/12/6.%20%E5%9F%BA%E6%9C%AC%E5%8F%A5%E6%B3%95/</loc>
         <lastmod>2021-03-23T09:39:53.487Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/10/29/3.%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/</loc>
-        <lastmod>2021-03-23T08:49:03.401Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2020/10/29/2.%E7%B1%BB%E7%9A%84%E6%9E%84%E5%BB%BA/</loc>
-        <lastmod>2021-03-23T08:48:59.037Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

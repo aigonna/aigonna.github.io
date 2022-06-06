@@ -3,6 +3,41 @@
 
 
     <url>
+        <loc>http://aigonna.com/tags/time/</loc>
+        <lastmod>2022-06-06T13:35:51.240Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Python/</loc>
+        <lastmod>2022-06-06T13:35:51.240Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/OOP/</loc>
+        <lastmod>2022-06-06T13:32:24.511Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/ResNet/</loc>
+        <lastmod>2022-06-06T13:24:45.988Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/CNN/</loc>
+        <lastmod>2022-06-06T13:24:45.988Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/Vanilla-Transformer/</loc>
         <lastmod>2022-06-02T15:06:30.050Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -87,6 +122,13 @@
     </url>
 
     <url>
+        <loc>http://aigonna.com/tags/PTM/</loc>
+        <lastmod>2022-05-12T16:57:53.074Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/BERT/</loc>
         <lastmod>2022-05-12T16:57:53.074Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -101,13 +143,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/PTM/</loc>
-        <lastmod>2022-05-12T16:57:53.074Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://aigonna.com/tags/pairplot/</loc>
         <lastmod>2022-05-04T12:18:08.790Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -115,14 +150,14 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/subplot/</loc>
+        <loc>http://aigonna.com/tags/seaborn/</loc>
         <lastmod>2022-05-04T12:18:08.790Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/seaborn/</loc>
+        <loc>http://aigonna.com/tags/subplot/</loc>
         <lastmod>2022-05-04T12:18:08.790Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -144,13 +179,6 @@
 
     <url>
         <loc>http://aigonna.com/tags/VGG/</loc>
-        <lastmod>2022-05-01T12:36:17.193Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/CNN/</loc>
         <lastmod>2022-05-01T12:36:17.193Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -180,13 +208,6 @@
     <url>
         <loc>http://aigonna.com/tags/Reformer/</loc>
         <lastmod>2022-05-01T12:34:54.157Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/ResNet/</loc>
-        <lastmod>2022-05-01T12:30:46.636Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -285,20 +306,6 @@
     <url>
         <loc>http://aigonna.com/tags/RoBERTa/</loc>
         <lastmod>2022-05-01T12:21:48.773Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/OOP/</loc>
-        <lastmod>2022-05-01T12:08:21.746Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Python/</loc>
-        <lastmod>2022-05-01T12:08:21.746Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
