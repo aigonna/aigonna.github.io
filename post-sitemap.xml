@@ -9,8 +9,16 @@
 
 
     <url>
-        <loc>http://aigonna.com/2022/06/06/py_5.%20python%20time/</loc>
-        <lastmod>2022-06-06T13:35:51.240Z</lastmod>
+        <loc>http://aigonna.com/2021/03/13/NLP%20Paper%2017.Transformer-XL%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2022-06-27T15:24:00.042Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2020/12/06/py_5.%20python%20time/</loc>
+        <lastmod>2022-06-09T12:31:24.358Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -51,14 +59,6 @@
     <url>
         <loc>http://aigonna.com/2020/10/29/py_1.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</loc>
         <lastmod>2022-06-06T13:20:50.165Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2021/03/13/NLP%20Paper%2017.Transformer-XL%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2022-06-02T15:06:30.050Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
