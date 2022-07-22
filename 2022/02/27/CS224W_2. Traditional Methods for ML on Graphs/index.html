@@ -1,11 +1,11 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CS224W 2. Traditional Methods for ML on Graphs | aigonna</title><meta name="keywords" content="CS224W,centrality,Cluster Coefficient,Graphlet,Isomorphism,Katz index,Graphlet Kernel,Weisfeiler-Lehman Kernel,Color Refinement"><meta name="author" content="aigonna"><meta name="copyright" content="aigonna"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="1. 机器学习任务 传统机器学习在图网络中的任务分为:  节点级别预测 边级别预测 图级别预测   传统机器学习中的Pipeline:  设计节点&#x2F;边&#x2F;图相应特征 从训练数据中获取特征   具体来说，就是用：  随机森林 SVM NN等等  模型在给定新的节点&#x2F;边&#x2F;图的情况下用获得的特征来做预测。  在图上使用有效特征是模型取得好的表现的关键。传统ML pipeline使用手工设计的特征。本节，我">
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CS224W 2. Traditional Methods for ML on Graphs | aigonna</title><meta name="keywords" content="CS224W,centrality,Cluster Coefficient,Graphlet,Isomorphism,Katz index,Graphlet Kernel,Weisfeiler-Lehman Kernel,Color Refinement"><meta name="author" content="aigonna"><meta name="copyright" content="aigonna"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="1. 机器学习任务  传统机器学习在图网络中的任务分为:  节点级别预测 边级别预测 图级别预测   传统机器学习中的Pipeline:  设计节点&#x2F;边&#x2F;图相应特征 从训练数据中获取特征   具体来说，就是用：  随机森林 SVM NN等等  模型在给定新的节点&#x2F;边&#x2F;图的情况下用获得的特征来做预测。  在图上使用有效特征是模型取得好的表现的关键。传统ML pipeline使用手工设计的特征。本节">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS224W 2. Traditional Methods for ML on Graphs">
 <meta property="og:url" content="http://aigonna.com/2022/02/27/CS224W_2.%20Traditional%20Methods%20for%20ML%20on%20Graphs/index.html">
 <meta property="og:site_name" content="aigonna">
-<meta property="og:description" content="1. 机器学习任务 传统机器学习在图网络中的任务分为:  节点级别预测 边级别预测 图级别预测   传统机器学习中的Pipeline:  设计节点&#x2F;边&#x2F;图相应特征 从训练数据中获取特征   具体来说，就是用：  随机森林 SVM NN等等  模型在给定新的节点&#x2F;边&#x2F;图的情况下用获得的特征来做预测。  在图上使用有效特征是模型取得好的表现的关键。传统ML pipeline使用手工设计的特征。本节，我">
+<meta property="og:description" content="1. 机器学习任务  传统机器学习在图网络中的任务分为:  节点级别预测 边级别预测 图级别预测   传统机器学习中的Pipeline:  设计节点&#x2F;边&#x2F;图相应特征 从训练数据中获取特征   具体来说，就是用：  随机森林 SVM NN等等  模型在给定新的节点&#x2F;边&#x2F;图的情况下用获得的特征来做预测。  在图上使用有效特征是模型取得好的表现的关键。传统ML pipeline使用手工设计的特征。本节">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://aigonna.com/img/imgs/5.jpg">
+<meta property="og:image" content="http://aigonna.com/img/imgs/15.jpg">
 <meta property="article:published_time" content="2022-02-27T13:49:39.000Z">
 <meta property="article:modified_time" content="2022-05-01T11:16:35.905Z">
 <meta property="article:author" content="aigonna">
@@ -19,7 +19,7 @@
 <meta property="article:tag" content="Weisfeiler-Lehman Kernel">
 <meta property="article:tag" content="Color Refinement">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://aigonna.com/img/imgs/5.jpg"><link rel="shortcut icon" href="/img/AI.png"><link rel="canonical" href="http://aigonna.com/2022/02/27/CS224W_2.%20Traditional%20Methods%20for%20ML%20on%20Graphs/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-RMGH8E0YEQ"></script><script>window.dataLayer = window.dataLayer || [];
+<meta name="twitter:image" content="http://aigonna.com/img/imgs/15.jpg"><link rel="shortcut icon" href="/img/AI.png"><link rel="canonical" href="http://aigonna.com/2022/02/27/CS224W_2.%20Traditional%20Methods%20for%20ML%20on%20Graphs/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-RMGH8E0YEQ"></script><script>window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-RMGH8E0YEQ');
@@ -177,20 +177,21 @@ if (asideStatus !== undefined) {
    } else {
      document.documentElement.classList.remove('hide-aside')
    }
-}})()</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/AI.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">83</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">211</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/imgs/5.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">aigonna</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">CS224W 2. Traditional Methods for ML on Graphs</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2022-02-27T13:49:39.000Z" title="undefined 2022-02-27 21:49:39">2022-02-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/GNN/">GNN</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h4 id="1-机器学习任务"><a href="#1-机器学习任务" class="headerlink" title="1. 机器学习任务"></a>1. 机器学习任务</h4><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913198.png" alt="image-20220317152027098" style="zoom:25%;" /></p>
+}})()</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/AI.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">83</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">211</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/imgs/15.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">aigonna</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">CS224W 2. Traditional Methods for ML on Graphs</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2022-02-27T13:49:39.000Z" title="undefined 2022-02-27 21:49:39">2022-02-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/GNN/">GNN</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>17分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h4 id="1-机器学习任务"><a class="markdownIt-Anchor" href="#1-机器学习任务"></a> 1. 机器学习任务</h4>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913198.png" alt="image-20220317152027098" style="zoom:25%;" />
 <p>传统机器学习在图网络中的任务分为:</p>
 <ol>
 <li>节点级别预测</li>
 <li>边级别预测</li>
 <li>图级别预测</li>
 </ol>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913234.png" alt="image-20220317152323487" style="zoom:25%;" /></p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913234.png" alt="image-20220317152323487" style="zoom:25%;" />
 <p>传统机器学习中的Pipeline:</p>
 <ul>
 <li>设计节点/边/图相应特征</li>
 <li>从训练数据中获取特征</li>
 </ul>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913079.png" alt="image-20220317152528358" style="zoom:25%;" /></p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913079.png" alt="image-20220317152528358" style="zoom:25%;" />
 <p>具体来说，就是用：</p>
 <ul>
 <li>随机森林</li>
@@ -198,7 +199,7 @@ if (asideStatus !== undefined) {
 <li>NN等等</li>
 </ul>
 <p>模型在给定新的节点/边/图的情况下用获得的特征来做预测。</p>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913032.png" alt="image-20220317152808839" style="zoom:25%;" /></p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913032.png" alt="image-20220317152808839" style="zoom:25%;" />
 <p>在图上使用有效特征是模型取得好的表现的关键。传统ML pipeline使用手工设计的特征。本节，我们会回顾传统特征用来:</p>
 <ul>
 <li>节点级别预测</li>
@@ -206,7 +207,8 @@ if (asideStatus !== undefined) {
 <li>图级别预测</li>
 </ul>
 <p>简单来说，本节聚焦于无向图。</p>
-<h4 id="2-图机器学习"><a href="#2-图机器学习" class="headerlink" title="2. 图机器学习"></a>2. 图机器学习</h4><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913534.png" alt="image-20220317154234084" style="zoom:25%;" /></p>
+<h4 id="2-图机器学习"><a class="markdownIt-Anchor" href="#2-图机器学习"></a> 2. 图机器学习</h4>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913534.png" alt="image-20220317154234084" style="zoom:25%;" />
 <p>目标是:对一系列对象做预测。</p>
 <p>设计方案:</p>
 <ul>
@@ -214,16 +216,17 @@ if (asideStatus !== undefined) {
 <li>对象: 节点、边、一系列节点、整张图</li>
 <li>对象函数: 我们要解决什么任务?</li>
 </ul>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913452.png" alt="image-20220317154600149" style="zoom:25%;" /></p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913452.png" alt="image-20220317154600149" style="zoom:25%;" />
 <p>例如，节点级别预测，</p>
 <ul>
-<li>给定<script type="math/tex">G = (V, E)</script></li>
-<li>学习一个函数<script type="math/tex">f: V \to \mathbb{R}</script></li>
+<li>给定$$G = (V, E)$$</li>
+<li>学习一个函数$$f: V \to \mathbb{R}$$</li>
 </ul>
 <p>这样我们的问题就是怎样学到这个函数了,接下来会逐步阐述这个问题。</p>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913440.png" alt="image-20220317154943092" style="zoom:25%;" /></p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913440.png" alt="image-20220317154943092" style="zoom:25%;" />
 <p>例如上面例子中，绿色的度为2，红色为1，那么我们就可以拿节点的度来做分类，这就是一个节点分类任务。这样我们可以看出<strong>机器学习需要特征</strong>。接下来我们看看到底有哪些节点特征?</p>
-<h4 id="3-节点级别特征概述"><a href="#3-节点级别特征概述" class="headerlink" title="3.节点级别特征概述"></a>3.节点级别特征概述</h4><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913131.png" alt="image-20220317155203008" style="zoom:25%;" /></p>
+<h4 id="3节点级别特征概述"><a class="markdownIt-Anchor" href="#3节点级别特征概述"></a> 3.节点级别特征概述</h4>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913131.png" alt="image-20220317155203008" style="zoom:25%;" />
 <p>目标:特征化结构与节点在网络中的位置,</p>
 <ul>
 <li>节点的度</li>
@@ -231,10 +234,11 @@ if (asideStatus !== undefined) {
 <li>聚类系数</li>
 <li><strong>graphlets</strong>，不同构子图。</li>
 </ul>
-<h5 id="1-节点特征-节点中心性-centrality"><a href="#1-节点特征-节点中心性-centrality" class="headerlink" title="1. 节点特征: 节点中心性 centrality"></a>1. 节点特征: 节点中心性 centrality</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011916954.png" alt="image-20220317160611241" style="zoom:25%;" /></p>
+<h5 id="1-节点特征-节点中心性-centrality"><a class="markdownIt-Anchor" href="#1-节点特征-节点中心性-centrality"></a> 1. 节点特征: 节点中心性 centrality</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011916954.png" alt="image-20220317160611241" style="zoom:25%;" />
 <ul>
 <li>节点度不能衡量邻近节点的<strong>重要性</strong>。</li>
-<li>节点中心性<script type="math/tex">c_v</script>：考虑节点在图中的<strong>重要性</strong>。</li>
+<li>节点中心性$$c_v$$：考虑节点在图中的<strong>重要性</strong>。</li>
 </ul>
 <p>例如，A微博粉丝100个，B微博粉丝30个，但B微博粉丝有10个大V，A微博没有。我们考虑节点重要性，在微博粉丝关系图谱中，B节点要重要些。</p>
 <p>建模重要性的不同衡量指标:</p>
@@ -244,58 +248,74 @@ if (asideStatus !== undefined) {
 <li>接近中心性 Closeness centrality</li>
 </ul>
 <p>注: <a target="_blank" rel="noopener" href="https://web.stanford.edu/~jacksonm/netbook.pdf">Social and Economical Networks</a> 中第二章Centrality部分更详细地介绍了中心性。</p>
-<h5 id="2-特征值中心性-Eigenvector-centrality"><a href="#2-特征值中心性-Eigenvector-centrality" class="headerlink" title="2. 特征值中心性 Eigenvector centrality"></a>2. 特征值中心性 Eigenvector centrality</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913305.png" alt="image-20220317175244195" style="zoom:25%;" /></p>
+<h5 id="2-特征值中心性-eigenvector-centrality"><a class="markdownIt-Anchor" href="#2-特征值中心性-eigenvector-centrality"></a> 2. 特征值中心性 Eigenvector centrality</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913305.png" alt="image-20220317175244195" style="zoom:25%;" />
 <p><strong>Eigenvector centrality</strong> :</p>
 <ul>
-<li><p>节点<script type="math/tex">v</script>的中心性由其周围的邻近节点<script type="math/tex">u</script>的重要性决定<script type="math/tex">u \in N(v)</script>。</p>
+<li>
+<p>节点$$v$$的中心性由其周围的邻近节点$$u$$的重要性决定$$u \in N(v)$$。</p>
 </li>
-<li><p>对节点<script type="math/tex">v</script>的中心性，就是对周围邻近节点的中心性求和，即</p>
-<script type="math/tex; mode=display">
-c_v = \frac{1}{\lambda} \sum_{u \in N(v)} c_u \tag{1}</script><p>式1是用递归的方法构建公式对中心性衡量。那么怎么求解呢?</p>
-<p>注: <script type="math/tex">\lambda</script>是归一化因子。</p>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913870.png" alt="image-20220317181332150" style="zoom:25%;" /></p>
+<li>
+<p>对节点$$v$$的中心性，就是对周围邻近节点的中心性求和，即</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><msub><mi>c</mi><mi>v</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>λ</mi></mfrac><munder><mo>∑</mo><mrow><mi>u</mi><mo>∈</mo><mi>N</mi><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow></munder><msub><mi>c</mi><mi>u</mi></msub></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(1)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">c_v = \frac{1}{\lambda} \sum_{u \in N(v)} c_u \tag{1}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.8374449999999998em;vertical-align:-1.516005em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">λ</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.050005em;"><span style="top:-1.808995em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">u</span><span class="mrel mtight">∈</span><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.0500049999999996em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.516005em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span><span class="tag"><span class="strut" style="height:2.8374449999999998em;vertical-align:-1.516005em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">1</span></span><span class="mord">)</span></span></span></span></span></span></p>
+<p>式1是用递归的方法构建公式对中心性衡量。那么怎么求解呢?</p>
+<p>注: $$\lambda$$是归一化因子。</p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913870.png" alt="image-20220317181332150" style="zoom:25%;" />
 <p>改写式1易得:</p>
-<script type="math/tex; mode=display">
-\lambda \mathbf{c} = \mathbf{A}\mathbf{c} \tag{2}</script><p>其中：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mi>λ</mi><mi mathvariant="bold">c</mi><mo>=</mo><mi mathvariant="bold">A</mi><mi mathvariant="bold">c</mi></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(2)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">\lambda \mathbf{c} = \mathbf{A}\mathbf{c} \tag{2}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">λ</span><span class="mord"><span class="mord mathbf">c</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbf">A</span></span><span class="mord"><span class="mord mathbf">c</span></span></span><span class="tag"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">2</span></span><span class="mord">)</span></span></span></span></span></span></p>
+<p>其中：</p>
 <ul>
-<li><script type="math/tex">A</script>是邻接矩阵, 表示节点之间的邻居关系</li>
-<li><script type="math/tex">\mathbf{c}</script>是中心性向量</li>
-<li><script type="math/tex">\lambda</script>是特征值</li>
+<li>
+A$$是邻接矩阵, 表示节点之间的邻居关系
+
+</li>
+<li>
+\lambda $$是特征值
+
+
+</li>
 </ul>
-<p>式2表明中心性<script type="math/tex">\mathbf{c}</script>就是<script type="math/tex">\mathbf{A}</script>的特征向量，特征值最大<script type="math/tex">\lambda_{max}</script>总是正的并且唯一，最大的特征向量<script type="math/tex">\mathbf{c}_{max}</script>对应最大的特征值<script type="math/tex">\lambda_{max}</script>，这个<script type="math/tex">\lambda</script>作为特征中心性来使用。</p>
 <blockquote>
-<p>若一个<script type="math/tex">n \times n</script>的矩阵各个元素非负，那它有一个非负特征值<script type="math/tex">\lambda</script>严格大于其他所有特征值，其对应的特征向量也非负。特别的，如果该矩阵是不可约的，那么有<script type="math/tex">\lambda</script>的重数(multiplicity)为1，且对应特征向量为正的。</p>
+<p>若一个$$n \times n$$的矩阵各个元素非负，那它有一个非负特征值$$\lambda$$严格大于其他所有特征值，其对应的特征向量也非负。特别的，如果该矩阵是不可约的，那么有$$\lambda$$的重数(multiplicity)为1，且对应特征向量为正的。</p>
 </blockquote>
 </li>
 </ul>
-<h5 id="3-介数中心性-Betweenness-centrality"><a href="#3-介数中心性-Betweenness-centrality" class="headerlink" title="3. 介数中心性 Betweenness centrality"></a>3. 介数中心性 Betweenness centrality</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913186.png" alt="image-20220317182958823" style="zoom:25%;" /></p>
+<h5 id="3-介数中心性-betweenness-centrality"><a class="markdownIt-Anchor" href="#3-介数中心性-betweenness-centrality"></a> 3. 介数中心性 Betweenness centrality</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913186.png" alt="image-20220317182958823" style="zoom:25%;" />
 <p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%BB%8B%E6%95%B0%E4%B8%AD%E5%BF%83%E6%80%A7">介数中心性</a>：</p>
 <p>被计算节点处在在任意节点对最短路径的比例，可以理解为对于计算节点，作为被经过的节点组成最短路径的数目与所有路径的比。代表最短路径是否经过该节点。</p>
-<h5 id="4-接近中心性-Closeness-centrality"><a href="#4-接近中心性-Closeness-centrality" class="headerlink" title="4. 接近中心性 Closeness centrality"></a>4. 接近中心性 Closeness centrality</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913726.png" alt="image-20220317213625370" style="zoom:25%;" /></p>
+<h5 id="4-接近中心性-closeness-centrality"><a class="markdownIt-Anchor" href="#4-接近中心性-closeness-centrality"></a> 4. 接近中心性 Closeness centrality</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913726.png" alt="image-20220317213625370" style="zoom:25%;" />
 <p>Closeness centrality：如果一个节点是重要的话，那么它到达其它节点的最短路径的总和长度应该是够小的。即:</p>
-<script type="math/tex; mode=display">
-c_{v} = \frac{1}{\sum_{u \neq v} \text{v到u的最短路径}} \tag{3}</script><p>如上图例子中,<script type="math/tex">c_A = 1 / (A到C最短路径+ A到B最短路径+...)=1/(1+2+2+3)=1/8</script></p>
-<h5 id="5-节点特征-聚类系数-Cluster-Coefficient"><a href="#5-节点特征-聚类系数-Cluster-Coefficient" class="headerlink" title="5. 节点特征: 聚类系数 Cluster Coefficient"></a>5. 节点特征: 聚类系数 Cluster Coefficient</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913465.png" alt="image-20220317214710121" style="zoom:25%;" /></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><msub><mi>c</mi><mi>v</mi></msub><mo>=</mo><mfrac><mn>1</mn><mrow><munder><mo>∑</mo><mrow><mi>u</mi><mi mathvariant="normal">≠</mi><mi>v</mi></mrow></munder><mtext>v到u的最短路径</mtext></mrow></mfrac></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(3)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">c_{v} = \frac{1}{\sum_{u \neq v} \text{v到u的最短路径}} \tag{3}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.443258em;vertical-align:-1.1218180000000002em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.18639799999999984em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">u</span><span class="mrel mtight"><span class="mrel mtight"><span class="mord mtight"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span class="rlap mtight"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel mtight"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span><span class="mrel mtight">=</span></span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.43581800000000004em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord text"><span class="mord">v</span><span class="mord cjk_fallback">到</span><span class="mord">u</span><span class="mord cjk_fallback">的最短路径</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.1218180000000002em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="tag"><span class="strut" style="height:2.443258em;vertical-align:-1.1218180000000002em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">3</span></span><span class="mord">)</span></span></span></span></span></span></p>
+<p>如上图例子中,$$c_A = 1 / (A到C最短路径+ A到B最短路径+…)=1/(1+2+2+3)=1/8$$</p>
+<h5 id="5-节点特征-聚类系数-cluster-coefficient"><a class="markdownIt-Anchor" href="#5-节点特征-聚类系数-cluster-coefficient"></a> 5. 节点特征: 聚类系数 Cluster Coefficient</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913465.png" alt="image-20220317214710121" style="zoom:25%;" />
 <p>聚类系数: 表示邻居的聚集程度，这个可以一定程度表示图的稀疏程度。</p>
 <p><strong>实际上就是算节点v与邻居构成实际组成的三角形数除上最大可能三角形个数</strong>。</p>
 <ul>
 <li>邻居连接多少边就是多少三角形，这条边连上个自身节点v，就是一个三角形。</li>
 <li>随机取两点加上一个不共线的的自身节点v，就是所有可能的三角形。</li>
 </ul>
-<script type="math/tex; mode=display">
-e_v = \frac{邻居节点连接边的数目}{C^2_{\text{节点v的邻居数目}}}= \frac{2邻居节点连接边的数目}{\text{节点v的邻居数目}*(\text{节点v的邻居数目}-1)}\tag{4}</script><p>根据式4，</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><msub><mi>e</mi><mi>v</mi></msub><mo>=</mo><mfrac><mrow><mi mathvariant="normal">邻</mi><mi mathvariant="normal">居</mi><mi mathvariant="normal">节</mi><mi mathvariant="normal">点</mi><mi mathvariant="normal">连</mi><mi mathvariant="normal">接</mi><mi mathvariant="normal">边</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">目</mi></mrow><msubsup><mi>C</mi><mtext>节点v的邻居数目</mtext><mn>2</mn></msubsup></mfrac><mo>=</mo><mfrac><mrow><mn>2</mn><mi mathvariant="normal">邻</mi><mi mathvariant="normal">居</mi><mi mathvariant="normal">节</mi><mi mathvariant="normal">点</mi><mi mathvariant="normal">连</mi><mi mathvariant="normal">接</mi><mi mathvariant="normal">边</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">目</mi></mrow><mrow><mtext>节点v的邻居数目</mtext><mo>∗</mo><mo stretchy="false">(</mo><mtext>节点v的邻居数目</mtext><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mfrac></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(4)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">e_v = \frac{邻居节点连接边的数目}{C^2_{\text{节点v的邻居数目}}}= \frac{2邻居节点连接边的数目}{\text{节点v的邻居数目}*(\text{节点v的邻居数目}-1)}\tag{4}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.656531em;vertical-align:-0.9795309999999999em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.677em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7959080000000001em;"><span style="top:-2.4064690000000004em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord cjk_fallback mtight">节点</span><span class="mord mtight">v</span><span class="mord cjk_fallback mtight">的邻居数目</span></span></span></span></span><span style="top:-3.0448000000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29353099999999993em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord cjk_fallback">邻</span><span class="mord cjk_fallback">居</span><span class="mord cjk_fallback">节</span><span class="mord cjk_fallback">点</span><span class="mord cjk_fallback">连</span><span class="mord cjk_fallback">接</span><span class="mord cjk_fallback">边</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">目</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9795309999999999em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.25744em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord cjk_fallback">节点</span><span class="mord">v</span><span class="mord cjk_fallback">的邻居数目</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mopen">(</span><span class="mord text"><span class="mord cjk_fallback">节点</span><span class="mord">v</span><span class="mord cjk_fallback">的邻居数目</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord cjk_fallback">邻</span><span class="mord cjk_fallback">居</span><span class="mord cjk_fallback">节</span><span class="mord cjk_fallback">点</span><span class="mord cjk_fallback">连</span><span class="mord cjk_fallback">接</span><span class="mord cjk_fallback">边</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">目</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="tag"><span class="strut" style="height:2.3009709999999997em;vertical-align:-0.9795309999999999em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">4</span></span><span class="mord">)</span></span></span></span></span></span></p>
+<p>根据式4，</p>
 <ul>
-<li>上图中左图<script type="math/tex">e_v = \frac{2\times6}{4\times(4-1)}=1</script>. 节点v的邻居们连接用了6条边，邻居个数为4. 注意，节点v底下两条边，少了这两条计算结果就是2/3。</li>
+<li>上图中左图$$e_v = \frac{2\times6}{4\times(4-1)}=1$$. 节点v的邻居们连接用了6条边，邻居个数为4. 注意，节点v底下两条边，少了这两条计算结果就是2/3。</li>
 </ul>
 <p>下面有一些计算例子，可以试着计算下。</p>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913035.png" alt="image-20220318152846057" style="zoom:25%;" /></p>
-<h5 id="6-Graphlets-图元"><a href="#6-Graphlets-图元" class="headerlink" title="6. Graphlets 图元"></a>6. Graphlets 图元</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011914494.png" alt="image-20220318154301233" style="zoom:25%;" /></p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913035.png" alt="image-20220318152846057" style="zoom:25%;" />
+<h5 id="6-graphlets-图元"><a class="markdownIt-Anchor" href="#6-graphlets-图元"></a> 6. Graphlets 图元</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011914494.png" alt="image-20220318154301233" style="zoom:25%;" />
 <p><strong>Graphlets</strong>: 聚类系数是对ego-network 中三角网络的计算。(这就是为什么解释聚类系数本质在计算实际三角形数目与所有三角形之比。)</p>
 <blockquote>
 <p>所谓的ego network，它的节点是由唯一的一个中心节点(ego)，以及这个节点的邻居(alters)组成的，它的边只包括了ego和alter之间，以及alter与alter之间的边。</p>
 </blockquote>
 <p>我们就可以用一些预指定的子图来替换三角形来计算，聚类系数计算的是三角形网络，我们拓展为图元。</p>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011914971.png" alt="image-20220318163100647" style="zoom:25%;" /></p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011914971.png" alt="image-20220318163100647" style="zoom:25%;" />
 <p>目标: 描述节点u周围的网络结构。</p>
 <ul>
 <li>图元是小的子图，描述节点u的邻居节点的结构。</li>
@@ -306,149 +326,179 @@ e_v = \frac{邻居节点连接边的数目}{C^2_{\text{节点v的邻居数目}}}
 <li>聚类系数： 衡量一个节点接触多少三角形网络</li>
 <li>Graphlet Degree Vector(GDV)：节点的基于图元特征。GDV是衡量节点接触的图元数目。</li>
 </ol>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011914483.png" alt="image-20220318182348051" style="zoom:25%;" /></p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011914483.png" alt="image-20220318182348051" style="zoom:25%;" />
 <ul>
 <li>考虑2-5个节点的图元可以获得73个坐标向量: 就是节点记号来描述邻居节点的拓扑</li>
-<li>GDV图元度向量可用来一种衡量节点局部网络拓扑结构。<ul>
+<li>GDV图元度向量可用来一种衡量节点局部网络拓扑结构。
+<ul>
 <li>相比节点度或聚类系数，比较两个节点的向量(GDV)是一种更详细衡量局部拓扑结构相似度的方法。</li>
 </ul>
 </li>
 </ul>
-<h5 id="7-导出子图和同构"><a href="#7-导出子图和同构" class="headerlink" title="7. 导出子图和同构"></a>7. 导出子图和同构</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011914995.png" alt="image-20220318184042399" style="zoom:25%;" /></p>
+<h5 id="7-导出子图和同构"><a class="markdownIt-Anchor" href="#7-导出子图和同构"></a> 7. 导出子图和同构</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011914995.png" alt="image-20220318184042399" style="zoom:25%;" />
 <p><strong>Induced subgraph</strong>: 导出子图是另外一种图，由<strong>顶点子集和连接该子集中顶点的所有边</strong>组成。</p>
 <p>上图左边是导出子图，右边不是。是因为左边不包含子集中顶点的所有的边。</p>
 <p><strong>Graph Isomorphism</strong>，图的同构。同构这个概念来自于群论(主要有个双射概念难理解)，这里定义为<strong>两个图包含同样数量的节点，连接方式也一样就说是同构</strong>。</p>
 <p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/326620873/answer/1063169941">知乎回答——怎么理解图的同构?怎么判断两个图是否同构？</a></p>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011914937.png" alt="image-20220318230007472" style="zoom:25%;" /></p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011914937.png" alt="image-20220318230007472" style="zoom:25%;" />
 <p>图元是一个有根连接的异构子图。图中标的数字代表根节点可能的位置。例如对于G0，两个节点是等价，这样就一个标号。</p>
 <p>到5个节点一共能产生如图所示73种graphlet。</p>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011915662.png" alt="image-20220318232019780" style="zoom:25%;" /></p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011915662.png" alt="image-20220318232019780" style="zoom:25%;" />
 <p><strong>Graphlet Degree Vector (GDV)</strong>:  以给定节点为根的图元计数向量。</p>
 <p>如上图，给定u节点的可能有图元a， b, c, d.拿到原图(红色u节点图)去匹配得出，a有2，b有1，c有0，d有2.这样节点u的GDV就是[2, 1, 0, 2].</p>
-<h5 id="8-节点级别特征总结"><a href="#8-节点级别特征总结" class="headerlink" title="8.节点级别特征总结"></a>8.节点级别特征总结</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011915041.png" alt="image-20220319163520125" style="zoom:25%;" /></p>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011915299.png" alt="image-20220319164217665" style="zoom:25%;" /></p>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011915683.png" alt="image-20220319164620273" style="zoom:25%;" /></p>
+<h5 id="8节点级别特征总结"><a class="markdownIt-Anchor" href="#8节点级别特征总结"></a> 8.节点级别特征总结</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011915041.png" alt="image-20220319163520125" style="zoom:25%;" />
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011915299.png" alt="image-20220319164217665" style="zoom:25%;" />
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011915683.png" alt="image-20220319164620273" style="zoom:25%;" />
 <ul>
-<li>基于重要性的特征: 获取图中节点的重要性<ul>
+<li>基于重要性的特征: 获取图中节点的重要性
+<ul>
 <li>节点度: 简单统计邻居节点数目</li>
-<li>不同节点中心性衡量: <ul>
+<li>不同节点中心性衡量:
+<ul>
 <li>衡量图中<strong>邻居节点重要性</strong></li>
 <li>不同衡量选择：特征值中心性，中介中心性，接近中心性</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>基于结构的特征<ul>
+<li>基于结构的特征
+<ul>
 <li>节点度: 简单统计邻居节点数目</li>
 <li>聚类系数: 衡量跟邻居节点怎么连接</li>
 <li>图元计数向量：统计不同图元出现的频率</li>
 </ul>
 </li>
 </ul>
-<h4 id="4-Link-level-prediction"><a href="#4-Link-level-prediction" class="headerlink" title="4. Link-level prediction"></a>4. Link-level prediction</h4><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011914106.png" alt="image-20220319173332975" style="zoom:25%;" /></p>
+<h4 id="4-link-level-prediction"><a class="markdownIt-Anchor" href="#4-link-level-prediction"></a> 4. Link-level prediction</h4>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011914106.png" alt="image-20220319173332975" style="zoom:25%;" />
 <p>边预测任务两种公式化：</p>
 <ol>
-<li>随机缺失边<ul>
+<li>随机缺失边
+<ul>
 <li>随机覆盖一些边，然后预测两个节点间是否会连接，2分类问题。</li>
 </ul>
 </li>
-<li>边随时间演化<ul>
-<li>给定<script type="math/tex">G[t_0, t^{\prime}_0]</script>, 即给定<script type="math/tex">t_0 \ 到 \ t^{\prime}_0</script>的边连接确定的图，预测未来<script type="math/tex">G[t_1, t^{\prime}_1]</script>边连接情况，输出即一个排序的list L. 如推荐中，我们用1月份用户A关注的数据预测2月份关注情况，来进行推荐。</li>
-<li>评估：<ul>
-<li><script type="math/tex">n=|E_{\text{new}}|</script>: 测试时期<script type="math/tex">[t_1, t^{\prime}_1]</script>新边出现的次数。</li>
-<li>取输出list L 的前n个元素，并对正确预测的边计数。</li>
+<li>边随时间演化
+<ul>
+<li>给定$$G[t_0, t^{\prime}_0]$$, 即给定$$t_0 \ 到 \ t^{\prime}_0$$的边连接确定的图，预测未来$$G[t_1, t^{\prime}_1]$$边连接情况，输出即一个排序的list L. 如推荐中，我们用1月份用户A关注的数据预测2月份关注情况，来进行推荐。</li>
+<li>评估：
+<ul>
+<li>
+n=|E_{\text{new}}|$$: 测试时期$$[t_1, t^{\prime}_1]$$新边出现的次数。
+
+</li>
 </ul>
 </li>
 </ul>
 </li>
 </ol>
-<h5 id="1-Link-Prediction-via-Proximity"><a href="#1-Link-Prediction-via-Proximity" class="headerlink" title="1. Link Prediction via Proximity"></a>1. Link Prediction via Proximity</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011914293.png" alt="image-20220319213930151" style="zoom:25%;" /></p>
+<h5 id="1-link-prediction-via-proximity"><a class="markdownIt-Anchor" href="#1-link-prediction-via-proximity"></a> 1. Link Prediction via Proximity</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011914293.png" alt="image-20220319213930151" style="zoom:25%;" />
 <ul>
-<li>方法<ul>
-<li>对于每个节点对<script type="math/tex">(x, y)</script> 就是那分数<script type="math/tex">c(x, y)</script><ul>
-<li>例如， <script type="math/tex">c(x, y)</script> 是<script type="math/tex">x , \ y</script> 共同的邻居数目</li>
-<li>按照<script type="math/tex">c(x, y)</script>分数来对<script type="math/tex">(x, y)</script>对排序</li>
+<li>方法
+<ul>
+<li>对于每个节点对$$(x, y)$$ 就是那分数$$c(x, y)$$
+<ul>
+<li>例如， $$c(x, y)$$ 是$$x , \ y$$ 共同的邻居数目</li>
+<li>按照$$c(x, y)$$分数来对$$(x, y)$$对排序</li>
 <li>预测前n对作为新的连接</li>
-<li>评估时看哪些边真正在<script type="math/tex">G[t_1, t_1^{\prime}]</script>时出现。</li>
+<li>评估时看哪些边真正在$$G[t_1, t_1^{\prime}]$$时出现。</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h5 id="2-边级别特征：概述"><a href="#2-边级别特征：概述" class="headerlink" title="2. 边级别特征：概述"></a>2. 边级别特征：概述</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912094.png" alt="image-20220319230231743" style="zoom:25%;" /></p>
+<h5 id="2-边级别特征概述"><a class="markdownIt-Anchor" href="#2-边级别特征概述"></a> 2. 边级别特征：概述</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912094.png" alt="image-20220319230231743" style="zoom:25%;" />
 <ul>
 <li>基于距离的特征</li>
 <li>局部邻居重叠</li>
 <li>全局邻居重叠</li>
 </ul>
 <p><strong>基于距离特征的不合理之处：</strong></p>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912564.png" alt="image-20220319230748558" style="zoom:25%;" /></p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912564.png" alt="image-20220319230748558" style="zoom:25%;" />
 <p>如上图中，BH直接最短距离为2，BE也为2.但BH有2个共享的邻居节点，BE只有一个。不能表现图结构的具体信息。因此我们就引入neighborhood overlap。</p>
-<h5 id="3-局部邻居节点重叠"><a href="#3-局部邻居节点重叠" class="headerlink" title="3. 局部邻居节点重叠"></a>3. 局部邻居节点重叠</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912538.png" alt="image-20220320002454324" style="zoom:25%;" /></p>
+<h5 id="3-局部邻居节点重叠"><a class="markdownIt-Anchor" href="#3-局部邻居节点重叠"></a> 3. 局部邻居节点重叠</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912538.png" alt="image-20220320002454324" style="zoom:25%;" />
 <ol>
 <li>直接看共同邻居节点:</li>
 </ol>
-<script type="math/tex; mode=display">
-f(v_1, v_2) = |N(v_1)\cap N(v_2)| \tag{5}</script><ol>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mi>f</mi><mo stretchy="false">(</mo><msub><mi>v</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>v</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">∣</mi><mi>N</mi><mo stretchy="false">(</mo><msub><mi>v</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo>∩</mo><mi>N</mi><mo stretchy="false">(</mo><msub><mi>v</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mi mathvariant="normal">∣</mi></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(5)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">f(v_1, v_2) = |N(v_1)\cap N(v_2)| \tag{5}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∩</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">∣</span></span><span class="tag"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">5</span></span><span class="mord">)</span></span></span></span></span></span></p>
+<ol start="2">
 <li>Jaccard’s coefficient</li>
 </ol>
-<script type="math/tex; mode=display">
-f(v_1, v_2) = \frac{ |N(v_1)\cap N(v_2)|}{ |N(v_1)\cup N(v_2)|} \tag{6}</script><ol>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mi>f</mi><mo stretchy="false">(</mo><msub><mi>v</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>v</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi mathvariant="normal">∣</mi><mi>N</mi><mo stretchy="false">(</mo><msub><mi>v</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo>∩</mo><mi>N</mi><mo stretchy="false">(</mo><msub><mi>v</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mi mathvariant="normal">∣</mi></mrow><mrow><mi mathvariant="normal">∣</mi><mi>N</mi><mo stretchy="false">(</mo><msub><mi>v</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo>∪</mo><mi>N</mi><mo stretchy="false">(</mo><msub><mi>v</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mi mathvariant="normal">∣</mi></mrow></mfrac></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(6)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">f(v_1, v_2) = \frac{ |N(v_1)\cap N(v_2)|}{ |N(v_1)\cup N(v_2)|} \tag{6}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∪</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">∣</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∩</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">∣</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="tag"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">6</span></span><span class="mord">)</span></span></span></span></span></span></p>
+<ol start="3">
 <li>Adamic-Adar index：</li>
 </ol>
-<script type="math/tex; mode=display">
-   \sum_{u\in N(v_1) \cap N(v_2)} \frac{1}{\log(k_u)} \tag{7}</script><p>   其中<script type="math/tex">\log(k_u) 表示\ v1, \ v_2</script>公共的邻居节点的度，即所有邻居节点的度的对数的倒数的和。</p>
-<h5 id="4-全局邻居节点重叠"><a href="#4-全局邻居节点重叠" class="headerlink" title="4. 全局邻居节点重叠"></a>4. 全局邻居节点重叠</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011914086.png" alt="image-20220320140601515" style="zoom:25%;" /></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><munder><mo>∑</mo><mrow><mi>u</mi><mo>∈</mo><mi>N</mi><mo stretchy="false">(</mo><msub><mi>v</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo>∩</mo><mi>N</mi><mo stretchy="false">(</mo><msub><mi>v</mi><mn>2</mn></msub><mo stretchy="false">)</mo></mrow></munder><mfrac><mn>1</mn><mrow><mi>log</mi><mo>⁡</mo><mo stretchy="false">(</mo><msub><mi>k</mi><mi>u</mi></msub><mo stretchy="false">)</mo></mrow></mfrac></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(7)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">   \sum_{u\in N(v_1) \cap N(v_2)} \frac{1}{\log(k_u)} \tag{7}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.8374449999999998em;vertical-align:-1.516005em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.050005em;"><span style="top:-1.808995em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">u</span><span class="mrel mtight">∈</span><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span><span class="mopen mtight">(</span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mclose mtight">)</span><span class="mbin mtight">∩</span><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span><span class="mopen mtight">(</span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.0500049999999996em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.516005em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="tag"><span class="strut" style="height:2.8374449999999998em;vertical-align:-1.516005em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">7</span></span><span class="mord">)</span></span></span></span></span></span></p>
+<p>其中$$\log(k_u) 表示\ v1, \ v_2$$公共的邻居节点的度，即所有邻居节点的度的对数的倒数的和。</p>
+<h5 id="4-全局邻居节点重叠"><a class="markdownIt-Anchor" href="#4-全局邻居节点重叠"></a> 4. 全局邻居节点重叠</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011914086.png" alt="image-20220320140601515" style="zoom:25%;" />
 <ul>
-<li><strong>Local neighborhood features</strong> 的限制<ul>
+<li><strong>Local neighborhood features</strong> 的限制
+<ul>
 <li>评价指标总是0如果两个节点没有任何共同的邻居节点</li>
 <li>然而，两个节点可能在将来会连接</li>
 </ul>
 </li>
 <li><strong>Global neighborhood overlap</strong> 评价指标考虑整个图能解决这个限制</li>
 </ul>
-<h5 id="5-全局邻居节点重叠指标"><a href="#5-全局邻居节点重叠指标" class="headerlink" title="5.全局邻居节点重叠指标"></a>5.全局邻居节点重叠指标</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912248.png" alt="image-20220320143201799" style="zoom:25%;" /></p>
+<h5 id="5全局邻居节点重叠指标"><a class="markdownIt-Anchor" href="#5全局邻居节点重叠指标"></a> 5.全局邻居节点重叠指标</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912248.png" alt="image-20220320143201799" style="zoom:25%;" />
 <ul>
-<li><p><strong>Katz index</strong>: 最基本的全局指标，给定一对节点，对其走过的所有路径长度计算，即计算节点对的各个路径长度下的路径数量。<strong>katz指标易受到节点度数的影响，度数越高的节点，其路径越多，取值越大</strong>。</p>
+<li>
+<p><strong>Katz index</strong>: 最基本的全局指标，给定一对节点，对其走过的所有路径长度计算，即计算节点对的各个路径长度下的路径数量。<strong>katz指标易受到节点度数的影响，度数越高的节点，其路径越多，取值越大</strong>。</p>
 </li>
-<li><p>那么怎么计算？——使用邻接矩阵计算。</p>
+<li>
+<p>那么怎么计算？——使用邻接矩阵计算。</p>
 </li>
 </ul>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011915904.png" alt="image-20220320144810016" style="zoom:25%;" /></p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011915904.png" alt="image-20220320144810016" style="zoom:25%;" />
 <p><strong>直觉</strong>：利用邻接矩阵的幂。</p>
 <ul>
-<li>Recall: 对应<script type="math/tex">\mathbf{A}_{uv}=1, \ 其中 \mathbf{u} 是 \mathbf{v}的邻居节点, 即\text{if} \ \mathbf{u}\in N(\mathbf{v})</script>。相连为1嘛。</li>
-<li>记<script type="math/tex">\mathbf{P}_{uv}^{(K)}</script>为u和v直接的路径长度。</li>
-<li>接下来我们证明<script type="math/tex">\mathbf{P}^{(K)}_{uv} = \mathbf{A}^k</script>。</li>
-<li>因为<script type="math/tex">\mathbf{P}^1_{uv}</script>表示u和v之间的路径长度为1，即直接的邻居节点。这时候，就变成了<script type="math/tex">\mathbf{P}^1_{uv}=\mathbf{A}_{uv}</script>,简单来说就是对应的邻接矩阵。</li>
+<li>Recall: 对应$$\mathbf{A}_{uv}=1, \ 其中 \mathbf{u} 是 \mathbf{v}的邻居节点, 即\text{if} \ \mathbf{u}\in N(\mathbf{v})$$。相连为1嘛。</li>
+<li>记$$\mathbf{P}_{uv}^{(K)}$$为u和v直接的路径长度。</li>
+<li>接下来我们证明$$\mathbf{P}^{(K)}_{uv} = \mathbf{A}^k$$。</li>
+<li>因为$$\mathbf{P}<sup>1_{uv}$$表示u和v之间的路径长度为1，即直接的邻居节点。这时候，就变成了$$\mathbf{P}</sup>1_{uv}=\mathbf{A}_{uv}$$,简单来说就是对应的邻接矩阵。</li>
 </ul>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011915170.png" alt="image-20220320182053717" style="zoom:25%;" /></p>
-<p>那么怎么计算<script type="math/tex">P^{(2)}_{\mathbf{u}\mathbf{v}}</script> ?（我们要计算2步从u跳到v的所有路径，先跳1步再怎么1步跳到v。）</p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011915170.png" alt="image-20220320182053717" style="zoom:25%;" />
+<p>那么怎么计算$$P^{(2)}_{\mathbf{u}\mathbf{v}}$$ ?（我们要计算2步从u跳到v的所有路径，先跳1步再怎么1步跳到v。）</p>
 <ol>
-<li><strong>Step 1</strong>: 计算每个<script type="math/tex">\mathbf{u}的邻居节点和\ \mathbf{v}</script>之间的所有长度为1的路径数</li>
-<li><strong>Step 2</strong>: 对经过<script type="math/tex">\mathbf{u}</script>的邻居节点路径求和</li>
-<li>写成公式就是<script type="math/tex">P^{(2)}_{\mathbf{u}\mathbf{v}} = \sum_i \mathbf{A}_{ui} * \mathbf{P}^{(1)}_{iv}</script>，这里i代表u的邻居节点，再回过去看1,2步公式。最后可得就是邻接矩阵的幂次运算，其中幂次代表长度。</li>
+<li><strong>Step 1</strong>: 计算每个$$\mathbf{u}的邻居节点和\ \mathbf{v}$$之间的所有长度为1的路径数</li>
+<li><strong>Step 2</strong>: 对经过$$\mathbf{u}$$的邻居节点路径求和</li>
+<li>写成公式就是$$P^{(2)}<em>{\mathbf{u}\mathbf{v}} = \sum_i \mathbf{A}</em>{ui} * \mathbf{P}^{(1)}_{iv}$$，这里i代表u的邻居节点，再回过去看1,2步公式。最后可得就是邻接矩阵的幂次运算，其中幂次代表长度。</li>
 </ol>
-<h5 id="6-Katz-index"><a href="#6-Katz-index" class="headerlink" title="6. Katz index"></a>6. Katz index</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912914.png" alt="image-20220320232921148" style="zoom:25%;" /></p>
+<h5 id="6-katz-index"><a class="markdownIt-Anchor" href="#6-katz-index"></a> 6. Katz index</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912914.png" alt="image-20220320232921148" style="zoom:25%;" />
 <p><strong>Katz index</strong>：对节点对之间所有长度的路径数量进行了统计计数。</p>
 <p>那么怎么计算两个节点间路径?</p>
 <ul>
-<li><p>邻接矩阵的幂</p>
+<li>
+<p>邻接矩阵的幂</p>
 <ul>
-<li><script type="math/tex">\mathbf{A}_{uv}</script>表示u和v之间长度为1的路径，直接的邻居节点。(跳1步)</li>
-<li><script type="math/tex">\mathbf{A}_{uv}^2</script> 表示 u和v之间长度为2的路径，邻居的邻居。(跳2步)</li>
-<li>那么<script type="math/tex">\mathbf{A}_{uv}^l</script>就是长度为l的路径。(跳l步)</li>
+<li>
+\mathbf{A}_{uv}$$表示u和v之间长度为1的路径，直接的邻居节点。(跳1步)
+
+</li>
+<li>那么$$\mathbf{A}_{uv}^l$$就是长度为l的路径。(跳l步)</li>
 </ul>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912194.png" alt="image-20220321001117436" style="zoom:25%;" /></p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912194.png" alt="image-20220321001117436" style="zoom:25%;" />
 </li>
 </ul>
-<p>公式: <script type="math/tex">v_1 \ 和 v_2</script>之间所有长度的路径求和。</p>
-<script type="math/tex; mode=display">
-S_{v_1v_2} = \sum_{l=1}^{\infty} \beta^l \mathbf{A}_{v_1v_2}^l \ \ \ 其中, 0 \lt \beta \lt 1\tag{8}</script><p>其中<script type="math/tex">0 \lt \beta \lt 1</script>为自定义权重衰减因子，邻居节点赋予不同的权重, 对于短路径赋予较大的权重, 而长路径赋予较小的权重。</p>
+<p>公式: $$v_1 \ 和 v_2$$之间所有长度的路径求和。</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><msub><mi>S</mi><mrow><msub><mi>v</mi><mn>1</mn></msub><msub><mi>v</mi><mn>2</mn></msub></mrow></msub><mo>=</mo><munderover><mo>∑</mo><mrow><mi>l</mi><mo>=</mo><mn>1</mn></mrow><mi mathvariant="normal">∞</mi></munderover><msup><mi>β</mi><mi>l</mi></msup><msubsup><mi mathvariant="bold">A</mi><mrow><msub><mi>v</mi><mn>1</mn></msub><msub><mi>v</mi><mn>2</mn></msub></mrow><mi>l</mi></msubsup><mtext>   </mtext><mi mathvariant="normal">其</mi><mi mathvariant="normal">中</mi><mo separator="true">,</mo><mn>0</mn><mo>&lt;</mo><mi>β</mi><mo>&lt;</mo><mn>1</mn></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(8)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">S_{v_1v_2} = \sum_{l=1}^{\infty} \beta^l \mathbf{A}_{v_1v_2}^l \ \ \ 其中, 0 \lt \beta \lt 1\tag{8}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.93343em;vertical-align:-0.2501em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139199999999997em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2501em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.9535100000000005em;vertical-align:-1.302113em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6513970000000002em;"><span style="top:-1.8478869999999998em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.0500049999999996em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.300005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∞</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.302113em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span></span></span></span></span></span></span></span><span class="mord"><span class="mord"><span class="mord mathbf">A</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.899108em;"><span style="top:-2.453em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.1130000000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.34709999999999996em;"><span></span></span></span></span></span></span><span class="mspace"> </span><span class="mspace"> </span><span class="mspace"> </span><span class="mord cjk_fallback">其</span><span class="mord cjk_fallback">中</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span><span class="tag"><span class="strut" style="height:2.9535100000000005em;vertical-align:-1.302113em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">8</span></span><span class="mord">)</span></span></span></span></span></span></p>
+<p>其中$$ 0 \lt \beta \lt 1$$为自定义权重衰减因子，邻居节点赋予不同的权重, 对于短路径赋予较大的权重, 而长路径赋予较小的权重。</p>
 <p>证明: 简单地展开有:</p>
-<script type="math/tex; mode=display">
-S=\beta A + \beta^2 A^2 + \cdots + \beta^n A^n \tag{9}</script><p>转换下形式推导:</p>
-<script type="math/tex; mode=display">
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mi>S</mi><mo>=</mo><mi>β</mi><mi>A</mi><mo>+</mo><msup><mi>β</mi><mn>2</mn></msup><msup><mi>A</mi><mn>2</mn></msup><mo>+</mo><mo>⋯</mo><mo>+</mo><msup><mi>β</mi><mi>n</mi></msup><msup><mi>A</mi><mi>n</mi></msup></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(9)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">S=\beta A + \beta^2 A^2 + \cdots + \beta^n A^n \tag{9}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.0585479999999998em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.9088319999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span><span class="tag"><span class="strut" style="height:1.1141079999999999em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">9</span></span><span class="mord">)</span></span></span></span></span></span></p>
+<p>转换下形式推导:</p>
 \begin{align}
 &(I-\beta A)(I+S)\\
 &=(I-\beta A)(I + (\beta A + \beta^2 A^2 + \cdots + \beta^n A^n ))\\
@@ -456,80 +506,94 @@ S=\beta A + \beta^2 A^2 + \cdots + \beta^n A^n \tag{9}</script><p>转换下形�
 &= I +(\beta^2 A^2 + \cdots + \beta^n A^n) -(\beta^2 A^2 + \cdots + \beta^n A^n + \beta^{n+1} A^{n+1})\\
 &= I 
 \end{align}
-\tag{10}</script><p>由式10易得:</p>
-<script type="math/tex; mode=display">
-S = (I-\beta A) ^{-1} - I \tag{11}</script><h5 id="7-边级别特征：总结"><a href="#7-边级别特征：总结" class="headerlink" title="7. 边级别特征：总结"></a>7. 边级别特征：总结</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912565.png" alt="image-20220321002807322" style="zoom:25%;" /></p>
+\tag{10}
+
+<p>由式10易得:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mi>S</mi><mo>=</mo><mo stretchy="false">(</mo><mi>I</mi><mo>−</mo><mi>β</mi><mi>A</mi><msup><mo stretchy="false">)</mo><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>−</mo><mi>I</mi></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(11)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">S = (I-\beta A) ^{-1} - I \tag{11}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.1141079999999999em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="mord mathdefault">A</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.864108em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span></span><span class="tag"><span class="strut" style="height:1.1141079999999999em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">1</span><span class="mord">1</span></span><span class="mord">)</span></span></span></span></span></span></p>
+<h5 id="7-边级别特征总结"><a class="markdownIt-Anchor" href="#7-边级别特征总结"></a> 7. 边级别特征：总结</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912565.png" alt="image-20220321002807322" style="zoom:25%;" />
 <ul>
-<li>基于距离的特征<ul>
+<li>基于距离的特征
+<ul>
 <li>用两个节点间最短的路径，但不能获取邻居节点是怎么重叠</li>
 </ul>
 </li>
-<li>局部邻居节点重叠<ul>
+<li>局部邻居节点重叠
+<ul>
 <li>获取两个节点间多少公共的邻居节点</li>
 <li>容易变成0，没有公共邻居节点共享</li>
 </ul>
 </li>
-<li>全局邻居节点重叠<ul>
+<li>全局邻居节点重叠
+<ul>
 <li>用全局图结构来对两个节点打分</li>
 <li>Katz index: 对两个节点间所有路径长度计数(就把所有路径长度一起求和)</li>
 </ul>
 </li>
 </ul>
-<h4 id="5-图级别特征"><a href="#5-图级别特征" class="headerlink" title="5. 图级别特征"></a>5. 图级别特征</h4><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912508.png" alt="image-20220321110728476" style="zoom:25%;" /></p>
+<h4 id="5-图级别特征"><a class="markdownIt-Anchor" href="#5-图级别特征"></a> 5. 图级别特征</h4>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912508.png" alt="image-20220321110728476" style="zoom:25%;" />
 <ul>
 <li>目标: 表征整个图结构</li>
 </ul>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912987.png" alt="image-20220321112557118" style="zoom:25%;" /></p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912987.png" alt="image-20220321112557118" style="zoom:25%;" />
 <p><strong>背景: Kernel Methods</strong></p>
 <ul>
 <li>Kernel method 在图级别预测的传统机器学习中广发运用</li>
 <li><strong>Idea</strong>: 设计kernel来替换掉特征向量，跟机器学习中的核方法作用一样，比如SVM中核技巧</li>
-<li>Kernel简介:<ul>
-<li>Kernel <script type="math/tex">K(G, G’) \in \mathbb{R}</script> 衡量 b/w 数据的相似性</li>
-<li>Kernel matrix <script type="math/tex">K = (K(G, G^\prime))_{G, G^{\prime}}</script>, 必须是半正定, 要其有正的特征值。</li>
-<li>存在特征表达式<script type="math/tex">\phi(\cdot)</script>，使得<script type="math/tex">K(G, G^\prime) = \phi(G)^T \phi(G^{\prime})</script></li>
+<li>Kernel简介:
+<ul>
+<li>Kernel $$ K(G, G’) \in \mathbb{R}$$ 衡量 b/w 数据的相似性</li>
+<li>Kernel matrix $$K = (K(G, G^\prime))_{G, G^{\prime}}$$, 必须是半正定, 要其有正的特征值。</li>
+<li>存在特征表达式$$\phi(\cdot)$$，使得$$K(G, G^\prime) = \phi(G)^T \phi(G^{\prime})$$</li>
 <li>kernel 一旦定义，就可以使用现成的ML模型如核SVM，进行预测。</li>
 </ul>
 </li>
 </ul>
-<h5 id="1-图级别特征：概述"><a href="#1-图级别特征：概述" class="headerlink" title="1. 图级别特征：概述"></a>1. 图级别特征：概述</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912032.png" alt="image-20220321141154532" style="zoom:25%;" /></p>
+<h5 id="1-图级别特征概述"><a class="markdownIt-Anchor" href="#1-图级别特征概述"></a> 1. 图级别特征：概述</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912032.png" alt="image-20220321141154532" style="zoom:25%;" />
 <ul>
-<li>Graph Kernels： 衡量两个图的相似度<ul>
+<li>Graph Kernels： 衡量两个图的相似度
+<ul>
 <li>Graphlet Kernel</li>
 <li>Weisfeiler-Lehman Kernel</li>
 <li>其它的kernel: Random-walk kernel, Shortest-path graph kernel…</li>
 </ul>
 </li>
 </ul>
-<h5 id="2-Graph-Kernel-Key-Idea"><a href="#2-Graph-Kernel-Key-Idea" class="headerlink" title="2. Graph Kernel : Key Idea"></a>2. Graph Kernel : Key Idea</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912369.png" alt="image-20220321142245206" style="zoom:25%;" /></p>
+<h5 id="2-graph-kernel-key-idea"><a class="markdownIt-Anchor" href="#2-graph-kernel-key-idea"></a> 2. Graph Kernel : Key Idea</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912369.png" alt="image-20220321142245206" style="zoom:25%;" />
 <ul>
-<li><strong>目标</strong>：设计图特征向量<script type="math/tex">\phi(G)</script>.</li>
-<li><strong>Key idea</strong>： 图的Bag-of-Words(BoW) <ul>
+<li><strong>目标</strong>：设计图特征向量$$\phi(G)$$.</li>
+<li><strong>Key idea</strong>： 图的Bag-of-Words(BoW)
+<ul>
 <li><strong>Recall</strong>: BoW简单利用词的数目作为文档特征(不考虑顺序)。</li>
 <li>简单拓展到图: 将每个节点看作BoW中的词。</li>
-<li>像如果两个4红色节点的图，经过同一<script type="math/tex">\phi</script>处理后提取的特征向量一样。</li>
+<li>像如果两个4红色节点的图，经过同一$$\phi$$处理后提取的特征向量一样。</li>
 </ul>
 </li>
 </ul>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912300.png" alt="image-20220321170109031" style="zoom:25%;" /></p>
-<p>上面已经说到用指定数目的节点的图过核函数<script type="math/tex">\phi</script>来获取特征向量，再进一步将其转换为节点的度。就变成了：我们使用<strong>节点度的“Bag”</strong>.</p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912300.png" alt="image-20220321170109031" style="zoom:25%;" />
+<p>上面已经说到用指定数目的节点的图过核函数$$\phi$$来获取特征向量，再进一步将其转换为节点的度。就变成了：我们使用<strong>节点度的“Bag”</strong>.</p>
 <p>向上图中，我们得到的两个4节点的图经过核函数后得到的不同特征向量。这样是不行的。</p>
 <ul>
-<li>所有的<strong>Graphlet Kernel</strong> 和 <strong>Weisfeiler-Lehman(WL)</strong> 使用<strong>图的Bag-of- *</strong>表征，这里星号是比节点度更广泛的东西。</li>
+<li>所有的<strong>Graphlet Kernel</strong> 和 <strong>Weisfeiler-Lehman(WL)</strong> 使用**图的Bag-of- ***表征，这里星号是比节点度更广泛的东西。</li>
 </ul>
-<h5 id="3-Graphlet-feature"><a href="#3-Graphlet-feature" class="headerlink" title="3. Graphlet feature"></a>3. Graphlet feature</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912595.png" alt="image-20220321171525867" style="zoom:25%;" /></p>
+<h5 id="3-graphlet-feature"><a class="markdownIt-Anchor" href="#3-graphlet-feature"></a> 3. Graphlet feature</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912595.png" alt="image-20220321171525867" style="zoom:25%;" />
 <p><strong>关键点</strong>：就是拿图元作为模板(pattern),去匹配图中出现对应图元对应数目。</p>
 <p>注：这里定义的图元跟节点级别的特征有2点区别。</p>
 <ol>
 <li>这里图元中节点不需要被连接，可以是孤立的点</li>
 <li>这里的图元没有根</li>
 </ol>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912224.png" alt="image-20220321174121813" style="zoom:25%;" /></p>
-<p>令<script type="math/tex">G_k = (g_1, \cdots, g_{n_k})</script>，表示k个节点内的图元的列表。</p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912224.png" alt="image-20220321174121813" style="zoom:25%;" />
+<p>令$$G_k = (g_1, \cdots, g_{n_k})$$，表示k个节点内的图元的列表。</p>
 <p>例如，k=3，就因为可以是孤立的点，图元数目比节点图元数多。同样也没有根这个概念了。</p>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912010.png" alt="image-20220321174858994" style="zoom:25%;" /></p>
-<p>那么就有如下定义：给定图<script type="math/tex">G</script>,以及图元列表<script type="math/tex">\mathcal{G}_k = (g_1, g_2, \cdots, g_{n_k})</script>.那么图元数目向量<script type="math/tex">\mathcal{f}_G \ \mathbb{R}^{n_k}</script>如上图所示, 表示：</p>
-<script type="math/tex; mode=display">(\mathcal{f}_G)_i$$等于属于G的图元$$g_i$$的数目，这样就构成一个向量。
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912010.png" alt="image-20220321174858994" style="zoom:25%;" />
+<p>那么就有如下定义：给定图$$G$$,以及图元列表$$\mathcal{G}<em>k = (g_1, g_2, \cdots, g</em>{n_k})$$.那么图元数目向量$$\mathcal{f}_G \ \mathbb{R}^{n_k}$$如上图所示, 表示：</p>
+(\mathcal{f}_G)_i$$等于属于G的图元$$g_i$$的数目，这样就构成一个向量。
 
 <img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011912512.png" alt="image-20220321180458265" style="zoom:25%;" />
 
@@ -541,11 +605,12 @@ S = (I-\beta A) ^{-1} - I \tag{11}</script><h5 id="7-边级别特征：总结"><
 
 
 
-- 给定两个图$$G, \ G^\prime$$，graphlet kernel 计算为:</script><p>  K(G, G^{\prime}) = \mathbf{f}<em>G\ ^T \mathbf{f}</em>{G^\prime}\tag{12}</p>
-<script type="math/tex; mode=display">
+- 给定两个图$$G, \ G^\prime$$，graphlet kernel 计算为:
 
-  - 问题:如果两个图size差非常多，那么将会导致乘积也非常大。
-  - **Solution**：归一化所有向量。
+<p>K(G, G^{\prime}) = \mathbf{f}<em>G\ ^T \mathbf{f}</em>{G^\prime}\tag{12}</p>
+
+- 问题:如果两个图size差非常多，那么将会导致乘积也非常大。
+- **Solution**：归一化所有向量。
 
 <img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913100.png" alt="image-20220321223918765" style="zoom:25%;" />
 
@@ -567,9 +632,9 @@ S = (I-\beta A) ^{-1} - I \tag{11}</script><h5 id="7-边级别特征：总结"><
 
 - **想法**: 利用邻居节点结构来迭代丰富节点词汇表
 
-  - **Bag of node degrees**的广义版本，因为节点度只是one-hop邻居信息，这可以包括更多跳(路径长度更长)信息。
+- **Bag of node degrees**的广义版本，因为节点度只是one-hop邻居信息，这可以包括更多跳(路径长度更长)信息。
 
-
+  
 
 - 算法的实现**颜色细化(Color refinement)**。算法也称为**Weisfeiler-Lehman graph isomorphism test(Weisfeiler-Lehman图同构检验)。**
 
@@ -579,16 +644,19 @@ S = (I-\beta A) ^{-1} - I \tag{11}</script><h5 id="7-边级别特征：总结"><
 
 - 给定一个图G，其有一系列节点V。
 
-  1. 分配每个节点v一个初始颜色$$c^{(0)}(v)</script><ol>
+1. 分配每个节点v一个初始颜色$$c^{(0)}(v)
+<ol start="2">
 <li>按以下公式迭代改进节点颜色</li>
 </ol>
-<script type="math/tex; mode=display">
-     c^{(k+1)}(v) = \text{HASH}( \{c^{k}(v), \{c^{(k)}(u)\}\}_{u \in N(v)}) \tag{13}</script><p>HASH表示哈希函数，将不同输入映射到不同颜色。</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo><mo>=</mo><mtext>HASH</mtext><mo stretchy="false">(</mo><mo stretchy="false">{</mo><msup><mi>c</mi><mi>k</mi></msup><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mo stretchy="false">{</mo><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>u</mi><mo stretchy="false">)</mo><mo stretchy="false">}</mo><msub><mo stretchy="false">}</mo><mrow><mi>u</mi><mo>∈</mo><mi>N</mi><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow></msub><mo stretchy="false">)</mo></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(13)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">     c^{(k+1)}(v) = \text{HASH}( \{c^{k}(v), \{c^{(k)}(u)\}\}_{u \in N(v)}) \tag{13}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.188em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span><span class="mbin mtight">+</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.2932em;vertical-align:-0.3551999999999999em;"></span><span class="mord text"><span class="mord">HASH</span></span><span class="mopen">(</span><span class="mopen">{</span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">{</span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">u</span><span class="mclose">)</span><span class="mclose">}</span><span class="mclose"><span class="mclose">}</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34480000000000005em;"><span style="top:-2.5198em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">u</span><span class="mrel mtight">∈</span><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3551999999999999em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span><span class="tag"><span class="strut" style="height:1.2932em;vertical-align:-0.3551999999999999em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">1</span><span class="mord">3</span></span><span class="mord">)</span></span></span></span></span></span></p>
+<p>HASH表示哈希函数，将不同输入映射到不同颜色。</p>
 <pre><code>3. 在K步后，分配的颜色包含了$$c^&#123;(K)&#125;(v)$$ K阶近邻的信息。
-</code></pre><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913643.png" alt="image-20220322002055956" style="zoom:25%;" /></p>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011916469.png" alt="image-20220322002203246" style="zoom:25%;" /></p>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011916493.png" alt="image-20220322002229317" style="zoom:25%;" /></p>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913937.png" alt="image-20220322002301971" style="zoom:25%;" /></p>
+</code></pre>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913643.png" alt="image-20220322002055956" style="zoom:25%;" />
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011916469.png" alt="image-20220322002203246" style="zoom:25%;" />
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011916493.png" alt="image-20220322002229317" style="zoom:25%;" />
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913937.png" alt="image-20220322002301971" style="zoom:25%;" />
 <p><strong>给定两个图来进行color refinement：</strong></p>
 <ol>
 <li>先开始对所有节点赋值为1,</li>
@@ -597,33 +665,37 @@ S = (I-\beta A) ^{-1} - I \tag{11}</script><h5 id="7-边级别特征：总结"><
 <li>然后在对其聚合邻居信息, ，第一个G的左上角节点，变成(4, 345)</li>
 <li>再按第二个hash表赋值，就行成了最后的节点信息。</li>
 </ol>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011915310.png" alt="image-20220322003506905" style="zoom:25%;" /></p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011915310.png" alt="image-20220322003506905" style="zoom:25%;" />
 <p>经过<strong>color refinement</strong> 3次后， WL kernel 如上所示。</p>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913202.png" alt="image-20220322003803894" style="zoom:25%;" /></p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913202.png" alt="image-20220322003803894" style="zoom:25%;" />
 <p>对其进行内积运算后得到36+4+1+4+1+2+1=49.</p>
-<p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913632.png" alt="image-20220322003951695" style="zoom:25%;" /></p>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011913632.png" alt="image-20220322003951695" style="zoom:25%;" />
 <p><strong>Weisferiler-Lehman Kernel</strong></p>
 <ul>
-<li>WL 核计算高效<ul>
+<li>WL 核计算高效
+<ul>
 <li>color refinement的时间复杂度每步都是线性的，因为其包含聚合邻居颜色</li>
 </ul>
 </li>
-<li>当计算kernel值时，仅仅只有出现在两个图中的颜色需要记录<ul>
+<li>当计算kernel值时，仅仅只有出现在两个图中的颜色需要记录
+<ul>
 <li>因此，颜色最多只能是所有节点数目</li>
 </ul>
 </li>
 <li>统计颜色的复杂度跟节点数成线性关系</li>
 <li>总之，时间复杂度更变的数目呈线性关系</li>
 </ul>
-<h5 id="7-图级别特征：总结"><a href="#7-图级别特征：总结" class="headerlink" title="7. 图级别特征：总结"></a>7. 图级别特征：总结</h5><p><img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011916247.png" alt="image-20220322004406444" style="zoom:25%;" /></p>
-<h4 id="Inference"><a href="#Inference" class="headerlink" title="Inference"></a>Inference</h4><p> [1] <a target="_blank" rel="noopener" href="https://blog.csdn.net/PolarisRisingWar/article/details/117336622">cs224w（图机器学习）2021冬季课程学习笔记2</a></p>
-<p> [2] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/459473365">【CS224W学习笔记 day01】 图传统机器学习</a></p>
-<p> [3] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/57544108">图神经网络的数学基础 一: 线性代数和矩阵</a></p>
-<p> [4] <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/22610633/answer/155958595">如何简单地理解中心度</a></p>
-<p> [5] <a target="_blank" rel="noopener" href="https://jmlr.csail.mit.edu/papers/v12/shervashidze11a.html">Weisfeiler-Lehman Graph Kernels</a></p>
-<p> [6] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/415174490">传统图机器学习特征提取方法 — 基于链接水平的特征</a></p>
-<p> [7] [A Comparison of Community Clustering Techniques: Fruchterman-Reingold and Wakita-Tsurumi </p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">aigonna</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://aigonna.com/2022/02/27/CS224W_2.%20Traditional%20Methods%20for%20ML%20on%20Graphs/">http://aigonna.com/2022/02/27/CS224W_2. Traditional Methods for ML on Graphs/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://aigonna.com" target="_blank">aigonna</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CS224W/">CS224W</a><a class="post-meta__tags" href="/tags/centrality/">centrality</a><a class="post-meta__tags" href="/tags/Cluster-Coefficient/">Cluster Coefficient</a><a class="post-meta__tags" href="/tags/Graphlet/">Graphlet</a><a class="post-meta__tags" href="/tags/Isomorphism/">Isomorphism</a><a class="post-meta__tags" href="/tags/Katz-index/">Katz index</a><a class="post-meta__tags" href="/tags/Graphlet-Kernel/">Graphlet Kernel</a><a class="post-meta__tags" href="/tags/Weisfeiler-Lehman-Kernel/">Weisfeiler-Lehman Kernel</a><a class="post-meta__tags" href="/tags/Color-Refinement/">Color Refinement</a></div><div class="post_share"><div class="social-share" data-image="/img/imgs/5.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://fastly.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/03/03/CS224W_3.%20Node%20Embeddings/"><img class="prev-cover" src="/img/imgs/7.jpg" onerror="onerror=null;src='/img/imgs/0.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CS224W  3. Node Embeddings</div></div></a></div><div class="next-post pull-right"><a href="/2022/02/12/CS224W_1.%20Introduction%20Machine%20Learning%20for%20Graphs/"><img class="next-cover" src="/img/imgs/6.jpg" onerror="onerror=null;src='/img/imgs/0.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">1. Introduction Machine Learning for Graphs</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/03/03/CS224W_3. Node Embeddings/" title="CS224W  3. Node Embeddings"><img class="cover" src="/img/imgs/7.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-03</div><div class="title">CS224W  3. Node Embeddings</div></div></a></div><div><a href="/2022/02/12/CS224W_1. Introduction Machine Learning for Graphs/" title="1. Introduction Machine Learning for Graphs"><img class="cover" src="/img/imgs/6.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-12</div><div class="title">1. Introduction Machine Learning for Graphs</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81MDc2My8yNzI0NQ"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%BB%E5%8A%A1"><span class="toc-text">1. 机器学习任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-text">2. 图机器学习</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%8A%82%E7%82%B9%E7%BA%A7%E5%88%AB%E7%89%B9%E5%BE%81%E6%A6%82%E8%BF%B0"><span class="toc-text">3.节点级别特征概述</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E8%8A%82%E7%82%B9%E7%89%B9%E5%BE%81-%E8%8A%82%E7%82%B9%E4%B8%AD%E5%BF%83%E6%80%A7-centrality"><span class="toc-text">1. 节点特征: 节点中心性 centrality</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%AD%E5%BF%83%E6%80%A7-Eigenvector-centrality"><span class="toc-text">2. 特征值中心性 Eigenvector centrality</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E4%BB%8B%E6%95%B0%E4%B8%AD%E5%BF%83%E6%80%A7-Betweenness-centrality"><span class="toc-text">3. 介数中心性 Betweenness centrality</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E6%8E%A5%E8%BF%91%E4%B8%AD%E5%BF%83%E6%80%A7-Closeness-centrality"><span class="toc-text">4. 接近中心性 Closeness centrality</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E8%8A%82%E7%82%B9%E7%89%B9%E5%BE%81-%E8%81%9A%E7%B1%BB%E7%B3%BB%E6%95%B0-Cluster-Coefficient"><span class="toc-text">5. 节点特征: 聚类系数 Cluster Coefficient</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-Graphlets-%E5%9B%BE%E5%85%83"><span class="toc-text">6. Graphlets 图元</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E5%AF%BC%E5%87%BA%E5%AD%90%E5%9B%BE%E5%92%8C%E5%90%8C%E6%9E%84"><span class="toc-text">7. 导出子图和同构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-%E8%8A%82%E7%82%B9%E7%BA%A7%E5%88%AB%E7%89%B9%E5%BE%81%E6%80%BB%E7%BB%93"><span class="toc-text">8.节点级别特征总结</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Link-level-prediction"><span class="toc-text">4. Link-level prediction</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-Link-Prediction-via-Proximity"><span class="toc-text">1. Link Prediction via Proximity</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E8%BE%B9%E7%BA%A7%E5%88%AB%E7%89%B9%E5%BE%81%EF%BC%9A%E6%A6%82%E8%BF%B0"><span class="toc-text">2. 边级别特征：概述</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%B1%80%E9%83%A8%E9%82%BB%E5%B1%85%E8%8A%82%E7%82%B9%E9%87%8D%E5%8F%A0"><span class="toc-text">3. 局部邻居节点重叠</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E5%85%A8%E5%B1%80%E9%82%BB%E5%B1%85%E8%8A%82%E7%82%B9%E9%87%8D%E5%8F%A0"><span class="toc-text">4. 全局邻居节点重叠</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E5%85%A8%E5%B1%80%E9%82%BB%E5%B1%85%E8%8A%82%E7%82%B9%E9%87%8D%E5%8F%A0%E6%8C%87%E6%A0%87"><span class="toc-text">5.全局邻居节点重叠指标</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-Katz-index"><span class="toc-text">6. Katz index</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E8%BE%B9%E7%BA%A7%E5%88%AB%E7%89%B9%E5%BE%81%EF%BC%9A%E6%80%BB%E7%BB%93"><span class="toc-text">7. 边级别特征：总结</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%9B%BE%E7%BA%A7%E5%88%AB%E7%89%B9%E5%BE%81"><span class="toc-text">5. 图级别特征</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%9B%BE%E7%BA%A7%E5%88%AB%E7%89%B9%E5%BE%81%EF%BC%9A%E6%A6%82%E8%BF%B0"><span class="toc-text">1. 图级别特征：概述</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-Graph-Kernel-Key-Idea"><span class="toc-text">2. Graph Kernel : Key Idea</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-Graphlet-feature"><span class="toc-text">3. Graphlet feature</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E5%9B%BE%E7%BA%A7%E5%88%AB%E7%89%B9%E5%BE%81%EF%BC%9A%E6%80%BB%E7%BB%93"><span class="toc-text">7. 图级别特征：总结</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inference"><span class="toc-text">Inference</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022&nbsp;<i style="color:#FF6A6A;animation: announ_animation 0.8s linear infinite;"class="fas fa-heart"></i> By aigonna</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://fastly.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+<h5 id="7-图级别特征总结"><a class="markdownIt-Anchor" href="#7-图级别特征总结"></a> 7. 图级别特征：总结</h5>
+<img src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205011916247.png" alt="image-20220322004406444" style="zoom:25%;" />
+<h4 id="inference"><a class="markdownIt-Anchor" href="#inference"></a> Inference</h4>
+<p>[1] <a target="_blank" rel="noopener" href="https://blog.csdn.net/PolarisRisingWar/article/details/117336622">cs224w（图机器学习）2021冬季课程学习笔记2</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/459473365">【CS224W学习笔记 day01】 图传统机器学习</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/57544108">图神经网络的数学基础 一: 线性代数和矩阵</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/22610633/answer/155958595">如何简单地理解中心度</a></p>
+<p>[5] <a target="_blank" rel="noopener" href="https://jmlr.csail.mit.edu/papers/v12/shervashidze11a.html">Weisfeiler-Lehman Graph Kernels</a></p>
+<p>[6] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/415174490">传统图机器学习特征提取方法 – 基于链接水平的特征</a></p>
+<p>[7] [A Comparison of Community Clustering Techniques: Fruchterman-Reingold and Wakita-Tsurumi</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">aigonna</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://aigonna.com/2022/02/27/CS224W_2.%20Traditional%20Methods%20for%20ML%20on%20Graphs/">http://aigonna.com/2022/02/27/CS224W_2. Traditional Methods for ML on Graphs/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://aigonna.com" target="_blank">aigonna</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CS224W/">CS224W</a><a class="post-meta__tags" href="/tags/centrality/">centrality</a><a class="post-meta__tags" href="/tags/Cluster-Coefficient/">Cluster Coefficient</a><a class="post-meta__tags" href="/tags/Graphlet/">Graphlet</a><a class="post-meta__tags" href="/tags/Isomorphism/">Isomorphism</a><a class="post-meta__tags" href="/tags/Katz-index/">Katz index</a><a class="post-meta__tags" href="/tags/Graphlet-Kernel/">Graphlet Kernel</a><a class="post-meta__tags" href="/tags/Weisfeiler-Lehman-Kernel/">Weisfeiler-Lehman Kernel</a><a class="post-meta__tags" href="/tags/Color-Refinement/">Color Refinement</a></div><div class="post_share"><div class="social-share" data-image="/img/imgs/15.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://fastly.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/03/03/CS224W_3.%20Node%20Embeddings/"><img class="prev-cover" src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205021846601.jpg" onerror="onerror=null;src='/img/imgs/0.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CS224W  3. Node Embeddings</div></div></a></div><div class="next-post pull-right"><a href="/2022/02/12/CS224W_1.%20Introduction%20Machine%20Learning%20for%20Graphs/"><img class="next-cover" src="/img/imgs/16.jpg" onerror="onerror=null;src='/img/imgs/0.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">1. Introduction Machine Learning for Graphs</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/03/03/CS224W_3. Node Embeddings/" title="CS224W  3. Node Embeddings"><img class="cover" src="https://aigonna.oss-cn-shenzhen.aliyuncs.com/blog/202205021846601.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-03</div><div class="title">CS224W  3. Node Embeddings</div></div></a></div><div><a href="/2022/02/12/CS224W_1. Introduction Machine Learning for Graphs/" title="1. Introduction Machine Learning for Graphs"><img class="cover" src="/img/imgs/16.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-12</div><div class="title">1. Introduction Machine Learning for Graphs</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81MDc2My8yNzI0NQ"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%BB%E5%8A%A1"><span class="toc-text"> 1. 机器学习任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%9B%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-text"> 2. 图机器学习</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E8%8A%82%E7%82%B9%E7%BA%A7%E5%88%AB%E7%89%B9%E5%BE%81%E6%A6%82%E8%BF%B0"><span class="toc-text"> 3.节点级别特征概述</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E8%8A%82%E7%82%B9%E7%89%B9%E5%BE%81-%E8%8A%82%E7%82%B9%E4%B8%AD%E5%BF%83%E6%80%A7-centrality"><span class="toc-text"> 1. 节点特征: 节点中心性 centrality</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%AD%E5%BF%83%E6%80%A7-eigenvector-centrality"><span class="toc-text"> 2. 特征值中心性 Eigenvector centrality</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E4%BB%8B%E6%95%B0%E4%B8%AD%E5%BF%83%E6%80%A7-betweenness-centrality"><span class="toc-text"> 3. 介数中心性 Betweenness centrality</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E6%8E%A5%E8%BF%91%E4%B8%AD%E5%BF%83%E6%80%A7-closeness-centrality"><span class="toc-text"> 4. 接近中心性 Closeness centrality</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E8%8A%82%E7%82%B9%E7%89%B9%E5%BE%81-%E8%81%9A%E7%B1%BB%E7%B3%BB%E6%95%B0-cluster-coefficient"><span class="toc-text"> 5. 节点特征: 聚类系数 Cluster Coefficient</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-graphlets-%E5%9B%BE%E5%85%83"><span class="toc-text"> 6. Graphlets 图元</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E5%AF%BC%E5%87%BA%E5%AD%90%E5%9B%BE%E5%92%8C%E5%90%8C%E6%9E%84"><span class="toc-text"> 7. 导出子图和同构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8%E8%8A%82%E7%82%B9%E7%BA%A7%E5%88%AB%E7%89%B9%E5%BE%81%E6%80%BB%E7%BB%93"><span class="toc-text"> 8.节点级别特征总结</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-link-level-prediction"><span class="toc-text"> 4. Link-level prediction</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-link-prediction-via-proximity"><span class="toc-text"> 1. Link Prediction via Proximity</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E8%BE%B9%E7%BA%A7%E5%88%AB%E7%89%B9%E5%BE%81%E6%A6%82%E8%BF%B0"><span class="toc-text"> 2. 边级别特征：概述</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%B1%80%E9%83%A8%E9%82%BB%E5%B1%85%E8%8A%82%E7%82%B9%E9%87%8D%E5%8F%A0"><span class="toc-text"> 3. 局部邻居节点重叠</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E5%85%A8%E5%B1%80%E9%82%BB%E5%B1%85%E8%8A%82%E7%82%B9%E9%87%8D%E5%8F%A0"><span class="toc-text"> 4. 全局邻居节点重叠</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5%E5%85%A8%E5%B1%80%E9%82%BB%E5%B1%85%E8%8A%82%E7%82%B9%E9%87%8D%E5%8F%A0%E6%8C%87%E6%A0%87"><span class="toc-text"> 5.全局邻居节点重叠指标</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-katz-index"><span class="toc-text"> 6. Katz index</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E8%BE%B9%E7%BA%A7%E5%88%AB%E7%89%B9%E5%BE%81%E6%80%BB%E7%BB%93"><span class="toc-text"> 7. 边级别特征：总结</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%9B%BE%E7%BA%A7%E5%88%AB%E7%89%B9%E5%BE%81"><span class="toc-text"> 5. 图级别特征</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%9B%BE%E7%BA%A7%E5%88%AB%E7%89%B9%E5%BE%81%E6%A6%82%E8%BF%B0"><span class="toc-text"> 1. 图级别特征：概述</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-graph-kernel-key-idea"><span class="toc-text"> 2. Graph Kernel : Key Idea</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-graphlet-feature"><span class="toc-text"> 3. Graphlet feature</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E5%9B%BE%E7%BA%A7%E5%88%AB%E7%89%B9%E5%BE%81%E6%80%BB%E7%BB%93"><span class="toc-text"> 7. 图级别特征：总结</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#inference"><span class="toc-text"> Inference</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022&nbsp;<i style="color:#FF6A6A;animation: announ_animation 0.8s linear infinite;"class="fas fa-heart"></i> By aigonna</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://fastly.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
   window.MathJax = {
     loader: {
       source: {

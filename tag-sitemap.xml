@@ -122,13 +122,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/PTM/</loc>
-        <lastmod>2022-05-12T16:57:53.074Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://aigonna.com/tags/BERT/</loc>
         <lastmod>2022-05-12T16:57:53.074Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -137,6 +130,13 @@
 
     <url>
         <loc>http://aigonna.com/tags/Tansformer/</loc>
+        <lastmod>2022-05-12T16:57:53.074Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/PTM/</loc>
         <lastmod>2022-05-12T16:57:53.074Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -745,6 +745,13 @@
     </url>
 
     <url>
+        <loc>http://aigonna.com/tags/CS224n/</loc>
+        <lastmod>2022-05-01T11:43:22.295Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/Glove/</loc>
         <lastmod>2022-05-01T11:43:22.295Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -760,13 +767,6 @@
 
     <url>
         <loc>http://aigonna.com/tags/Word2vec/</loc>
-        <lastmod>2022-05-01T11:43:22.295Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/CS224n/</loc>
         <lastmod>2022-05-01T11:43:22.295Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
