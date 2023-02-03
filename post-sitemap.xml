@@ -9,6 +9,22 @@
 
 
     <url>
+        <loc>http://aigonna.com/2021/08/11/ML_1.%20%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%20bagging%EF%BC%8Cboosting%E5%92%8Cstacking/</loc>
+        <lastmod>2023-02-03T10:52:57.159Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/2021/08/19/ML_2.XGboost%20%E4%B8%8A%E5%8E%9F%E7%90%86/</loc>
+        <lastmod>2023-02-03T10:52:43.995Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://aigonna.com/2021/08/23/NLP%20Paper%2025.NEZHA%20%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
         <lastmod>2022-10-26T15:06:10.060Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -35,14 +51,6 @@
     <url>
         <loc>http://aigonna.com/2020/08/19/ML_F1%20AUC%20ROC%E8%A7%A3%E9%87%8A/</loc>
         <lastmod>2022-08-26T14:17:04.704Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/2021/08/19/ML_1.%20XGboost%20%E4%B8%8A%E5%8E%9F%E7%90%86/</loc>
-        <lastmod>2022-08-07T12:11:24.345Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

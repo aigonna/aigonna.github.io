@@ -9,6 +9,13 @@
 
 
     <url>
+        <loc>http://aigonna.com/categories/%25E6%259C%25BA%25E5%2599%25A8%25E5%25AD%25A6%25E4%25B9%25A0/</loc>
+        <lastmod>2023-02-03T10:52:57.159Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/categories/NLP-paper/</loc>
         <lastmod>2022-10-26T15:06:10.060Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -18,13 +25,6 @@
     <url>
         <loc>http://aigonna.com/categories/CV/</loc>
         <lastmod>2022-08-26T15:54:56.524Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/categories/%25E6%259C%25BA%25E5%2599%25A8%25E5%25AD%25A6%25E4%25B9%25A0/</loc>
-        <lastmod>2022-08-26T14:17:04.704Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
