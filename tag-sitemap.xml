@@ -3,22 +3,50 @@
 
 
     <url>
+        <loc>http://aigonna.com/tags/Few-Shot-Learning/</loc>
+        <lastmod>2023-02-03T11:47:17.205Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/verbalizer/</loc>
+        <lastmod>2023-02-03T11:47:17.205Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/iPET/</loc>
+        <lastmod>2023-02-03T11:47:17.205Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/PET/</loc>
+        <lastmod>2023-02-03T11:47:17.205Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/%E5%90%8E%E5%89%AA%E6%9E%9D/</loc>
-        <lastmod>2023-02-03T10:52:57.159Z</lastmod>
+        <lastmod>2023-02-03T11:10:12.208Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/tags/booster/</loc>
-        <lastmod>2023-02-03T10:52:57.159Z</lastmod>
+        <lastmod>2023-02-03T11:10:12.208Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/tags/XGboost/</loc>
-        <lastmod>2023-02-03T10:52:57.159Z</lastmod>
+        <lastmod>2023-02-03T11:10:12.208Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -199,6 +227,13 @@
     </url>
 
     <url>
+        <loc>http://aigonna.com/tags/PTM/</loc>
+        <lastmod>2022-05-12T16:57:53.074Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/BERT/</loc>
         <lastmod>2022-05-12T16:57:53.074Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -207,13 +242,6 @@
 
     <url>
         <loc>http://aigonna.com/tags/Tansformer/</loc>
-        <lastmod>2022-05-12T16:57:53.074Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/PTM/</loc>
         <lastmod>2022-05-12T16:57:53.074Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
