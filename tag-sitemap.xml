@@ -3,6 +3,153 @@
 
 
     <url>
+        <loc>http://aigonna.com/tags/B%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
+        <lastmod>2023-05-04T07:44:30.915Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/</loc>
+        <lastmod>2023-05-04T07:44:30.915Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
+        <lastmod>2023-05-04T07:44:30.915Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/AUC/</loc>
+        <lastmod>2023-04-26T08:20:18.195Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/ROC/</loc>
+        <lastmod>2023-04-26T08:20:18.195Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/F1/</loc>
+        <lastmod>2023-04-26T08:20:18.195Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Recall/</loc>
+        <lastmod>2023-04-26T08:20:18.195Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Precision/</loc>
+        <lastmod>2023-04-26T08:20:18.195Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/PTM/</loc>
+        <lastmod>2023-04-23T09:04:51.444Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/BERT/</loc>
+        <lastmod>2023-04-23T09:04:51.444Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Tansformer/</loc>
+        <lastmod>2023-04-23T09:04:51.444Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Self-Attention/</loc>
+        <lastmod>2023-03-30T03:01:52.107Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Tansfromer/</loc>
+        <lastmod>2023-03-30T03:01:52.107Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/Pytorch/</loc>
+        <lastmod>2023-03-21T07:23:59.715Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/RNN/</loc>
+        <lastmod>2023-03-21T07:23:59.715Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/LSTM/</loc>
+        <lastmod>2023-03-21T07:23:59.715Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/GRU/</loc>
+        <lastmod>2023-03-21T07:23:59.715Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/VGG/</loc>
+        <lastmod>2023-02-14T06:13:33.838Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/CNN/</loc>
+        <lastmod>2023-02-14T06:13:33.838Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/</loc>
+        <lastmod>2023-02-10T12:24:12.853Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/kaggle/</loc>
+        <lastmod>2023-02-10T12:24:12.853Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/Few-Shot-Learning/</loc>
         <lastmod>2023-02-03T11:54:12.970Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -87,69 +234,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/Self-Attention/</loc>
-        <lastmod>2022-09-14T16:56:50.231Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Tansfromer/</loc>
-        <lastmod>2022-09-14T16:56:50.231Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/VGG/</loc>
-        <lastmod>2022-08-26T15:54:56.524Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/CNN/</loc>
-        <lastmod>2022-08-26T15:54:56.524Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/AUC/</loc>
-        <lastmod>2022-08-26T14:17:04.704Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/ROC/</loc>
-        <lastmod>2022-08-26T14:17:04.704Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/F1/</loc>
-        <lastmod>2022-08-26T14:17:04.704Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Recall/</loc>
-        <lastmod>2022-08-26T14:17:04.704Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Precision/</loc>
-        <lastmod>2022-08-26T14:17:04.704Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://aigonna.com/tags/Vanilla-Transformer/</loc>
         <lastmod>2022-06-27T15:24:00.042Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -222,27 +306,6 @@
     <url>
         <loc>http://aigonna.com/tags/convolve/</loc>
         <lastmod>2022-06-02T14:22:37.213Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/PTM/</loc>
-        <lastmod>2022-05-12T16:57:53.074Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/BERT/</loc>
-        <lastmod>2022-05-12T16:57:53.074Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/Tansformer/</loc>
-        <lastmod>2022-05-12T16:57:53.074Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -409,34 +472,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/Pytorch/</loc>
-        <lastmod>2022-05-01T12:08:03.311Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/RNN/</loc>
-        <lastmod>2022-05-01T12:08:03.311Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/LSTM/</loc>
-        <lastmod>2022-05-01T12:08:03.311Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/GRU/</loc>
-        <lastmod>2022-05-01T12:08:03.311Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://aigonna.com/tags/%E6%8C%87%E9%92%88/</loc>
         <lastmod>2022-05-01T12:07:31.922Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -565,20 +600,6 @@
     <url>
         <loc>http://aigonna.com/tags/CBOW/</loc>
         <lastmod>2022-05-01T11:59:38.149Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/</loc>
-        <lastmod>2022-05-01T11:55:35.079Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/kaggle/</loc>
-        <lastmod>2022-05-01T11:55:35.079Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -787,6 +808,13 @@
     </url>
 
     <url>
+        <loc>http://aigonna.com/tags/CS224n/</loc>
+        <lastmod>2022-05-01T11:43:22.295Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/Glove/</loc>
         <lastmod>2022-05-01T11:43:22.295Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -802,13 +830,6 @@
 
     <url>
         <loc>http://aigonna.com/tags/Word2vec/</loc>
-        <lastmod>2022-05-01T11:43:22.295Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/CS224n/</loc>
         <lastmod>2022-05-01T11:43:22.295Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -866,27 +887,6 @@
     <url>
         <loc>http://aigonna.com/tags/%E6%9C%BA%E7%BF%BB/</loc>
         <lastmod>2022-05-01T11:36:00.299Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/B%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
-        <lastmod>2022-05-01T11:26:36.195Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/</loc>
-        <lastmod>2022-05-01T11:26:36.195Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
-        <lastmod>2022-05-01T11:26:36.195Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -1130,14 +1130,14 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/CMSC35300-Mathematics-Foundations-of-ML/</loc>
+        <loc>http://aigonna.com/tags/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95/</loc>
         <lastmod>2022-05-01T10:35:17.998Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95/</loc>
+        <loc>http://aigonna.com/tags/CMSC35300-Mathematics-Foundations-of-ML/</loc>
         <lastmod>2022-05-01T10:35:17.998Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
