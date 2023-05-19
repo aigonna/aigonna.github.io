@@ -3,22 +3,43 @@
 
 
     <url>
+        <loc>http://aigonna.com/tags/%E5%90%8E%E5%89%AA%E6%9E%9D/</loc>
+        <lastmod>2023-05-19T13:30:26.503Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/booster/</loc>
+        <lastmod>2023-05-19T13:30:26.503Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/XGboost/</loc>
+        <lastmod>2023-05-19T13:30:26.503Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://aigonna.com/tags/B%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
-        <lastmod>2023-05-04T07:44:30.915Z</lastmod>
+        <lastmod>2023-05-06T08:25:37.432Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/</loc>
-        <lastmod>2023-05-04T07:44:30.915Z</lastmod>
+        <lastmod>2023-05-06T08:25:37.432Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://aigonna.com/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
-        <lastmod>2023-05-04T07:44:30.915Z</lastmod>
+        <lastmod>2023-05-06T08:25:37.432Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -59,13 +80,6 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/PTM/</loc>
-        <lastmod>2023-04-23T09:04:51.444Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://aigonna.com/tags/BERT/</loc>
         <lastmod>2023-04-23T09:04:51.444Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -74,6 +88,13 @@
 
     <url>
         <loc>http://aigonna.com/tags/Tansformer/</loc>
+        <lastmod>2023-04-23T09:04:51.444Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://aigonna.com/tags/PTM/</loc>
         <lastmod>2023-04-23T09:04:51.444Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -173,27 +194,6 @@
     <url>
         <loc>http://aigonna.com/tags/PET/</loc>
         <lastmod>2023-02-03T11:54:12.970Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/%E5%90%8E%E5%89%AA%E6%9E%9D/</loc>
-        <lastmod>2023-02-03T11:10:12.208Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/booster/</loc>
-        <lastmod>2023-02-03T11:10:12.208Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aigonna.com/tags/XGboost/</loc>
-        <lastmod>2023-02-03T11:10:12.208Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -1130,14 +1130,14 @@
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95/</loc>
+        <loc>http://aigonna.com/tags/CMSC35300-Mathematics-Foundations-of-ML/</loc>
         <lastmod>2022-05-01T10:35:17.998Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://aigonna.com/tags/CMSC35300-Mathematics-Foundations-of-ML/</loc>
+        <loc>http://aigonna.com/tags/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95/</loc>
         <lastmod>2022-05-01T10:35:17.998Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
